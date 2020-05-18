@@ -1,13 +1,34 @@
-{/* <div class="page-container">
-        <div class="content-container">
-            <form class="form-registration" action="">
-                <p class="form-registration__title">Sign in</p>
-                <input class="form-registration__username form-elem" type="text" name="username" placeholder="Username" required>
-                <input class="form-registration__email form-elem" type="text" name="email" placeholder="Email" required>
-                <input class="form-registration__password form-elem" type="password" name="password" placeholder="Password" required>
-                <input class="form-registration__btn-save button" type="submit" value="Save">
-                <!-- <input class="form-registration__btn-registration button" type="submit" value="Sign up"> -->
-        </div>
-        </form>
-    </div>
-    </div> */}
+import Component from '../component.js';
+
+class SignUp extends Component {
+  render() {
+    return new Promise(resolve => {
+      resolve(`
+      <div class="form-signup-container">
+          <form class="form-signup" action="">
+              <p class="form-signup__title">Регистрация</p>
+              <div class="form-signup__item">
+                  <label for="file">Фото для профиля</label>
+                  <input type="file" name="file" id="file" class="inputfile form-signup-avatar" />
+                </div>
+              <div class="form-signup__item">
+                  <label for="name">Имя</label>
+                  <input type="text" name="name" placeholder="Name" required>
+              </div>
+              <div class="form-signup__item">
+                  <label for="email">E-mail</label>
+                  <input type="email" name="email" placeholder="Email" required>
+              </div>
+              <div class="form-signup__item">
+                  <label for="password">Пароль</label>
+                  <input type="password" name="password" placeholder="Password" required>
+              </div>
+              <button class="form-signup__item btn-signup button" type="submit">Отправить</button>
+          </form>
+      </div>
+            `);
+    });
+  }
+}
+
+export default SignUp;

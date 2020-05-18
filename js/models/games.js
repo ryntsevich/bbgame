@@ -1,45 +1,57 @@
-import { generateID } from '../helpers/utils.js';
-
 class Games {
-    constructor() {
-        this.defaultGames = [
-            {
-                id: generateID(),
-                img: 'https://i.ibb.co/xJkHbnc/photo1-200.jpg',
-                title: 'Серп'
-            },
-            {
-                id: generateID(),
-                img: 'https://i.ibb.co/6n63mzK/photo2-200.png',
-                title: 'Крестный отец. Империя Корлеоне'
-            },
-            {
-                id: generateID(),
-                img: 'https://i.ibb.co/VBWcBBq/photo3-200.jpg',
-                title: 'Пандемия'
-            },
-            {
-                id: generateID(),
-                img: 'https://i.ibb.co/8794HWq/photo4-200.jpg',
-                title: 'Кодовые имена'
-            },
-            {
-                id: generateID(),
-                img: 'https://i.ibb.co/4Ppr1dy/photo5-200.jpg',
-                title: 'Дикие джунгли'
-            },
-            {
-                id: generateID(),
-                img: 'https://i.ibb.co/gR8Q9jJ/photo6-200.png',
-                title: 'Кланы Каледонии'
-            }
-        ];
-        this.gamesLS = localStorage.setItem('games', JSON.stringify(this.defaultGames));
-    }
+	getGamesList() {
+		return new Promise(resolve => {
+			const xhr = new XMLHttpRequest();
 
-    getGamesFromLS() {
-        return JSON.parse(localStorage.getItem('games'));
-    }
+			xhr.open('GET', 'http://localhost:3000/api/games');
+
+			xhr.onload = () => resolve(JSON.parse(xhr.response));
+
+			xhr.send();
+		});
+	}
+
+	getGame(id) {
+		return new Promise(resolve => {
+			const xhr = new XMLHttpRequest();
+
+			xhr.open('GET', `http://localhost:3000/api/game/${id}`);
+
+			xhr.onload = () => resolve(JSON.parse(xhr.response));
+
+			xhr.send();
+		});
+	}
+
+
+
+	// addTask(newTask) {
+	// 	return new Promise(resolve => {
+	// 		const xhr = new XMLHttpRequest();
+
+	// 		xhr.open('POST', 'http://localhost:3000/api/task');
+	// 		xhr.setRequestHeader('Content-Type', 'application/json');
+
+	// 		xhr.onload = () => resolve(JSON.parse(xhr.response));
+
+	// 		xhr.send(JSON.stringify(newTask));
+	// 	});
+	// }
+
+
+
+	// editTask(updatedTask) {
+	// 	return new Promise(resolve => {
+	// 		const xhr = new XMLHttpRequest();
+
+	// 		xhr.open('PUT', `http://localhost:3000/api/task/${updatedTask.id}`);
+	// 		xhr.setRequestHeader('Content-Type', 'application/json');
+
+	// 		xhr.onload = () => resolve();
+
+	// 		xhr.send(JSON.stringify(updatedTask));
+	// 	});
+	// }
 }
 
 export default Games;

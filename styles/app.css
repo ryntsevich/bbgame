@@ -131,6 +131,7 @@ body {
 .content-container {
   display: flex;
   flex-direction: column;
+  align-items: center;
   min-height: 100vh;
 }
 .page-title {
@@ -197,6 +198,56 @@ body {
   cursor: pointer;
   color: white;
 }
+.form-signup-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex: 1;
+}
+.form-signup-container .form-signup {
+  display: flex;
+  flex-direction: column;
+  max-width: 300px;
+  padding: 10px;
+}
+.form-signup-container .form-signup__title {
+  margin-bottom: 14px;
+  font-size: 18px;
+  color: #0ca39e;
+  font-weight: bold;
+}
+.form-signup-container .form-signup__item input {
+  width: 100%;
+  height: 35px;
+  margin-top: 5px;
+  margin-bottom: 14px;
+  outline: none;
+  border-radius: 4px;
+  border: solid black 1px;
+  padding-left: 7px;
+}
+.form-signup-container .form-signup__item .form-signup-avatar {
+  width: 100%;
+  border: none;
+  height: 20px;
+}
+.form-signup-container .form-signup__item .inputfile .inputfile {
+  width: 0.1px;
+  height: 0.1px;
+  opacity: 0;
+  overflow: hidden;
+  position: absolute;
+  z-index: -1;
+}
+.form-signup-container .form-signup .btn-signup {
+  height: 35px;
+  font-size: 16px;
+  border-radius: 4px;
+  background: #0ca39e;
+  cursor: pointer;
+  color: white;
+}
 .games {
   max-width: 800px;
   margin: 20px auto 0;
@@ -205,7 +256,7 @@ body {
 .games-list {
   display: grid;
   grid-template-columns: repeat(3, 30%);
-  grid-template-rows: repeat(3, 18em);
+  grid-template-rows: repeat(2, 18em);
   gap: 1em;
 }
 .game {
@@ -222,6 +273,50 @@ body {
 .game__title {
   text-align: center;
   font-size: 18px;
+}
+.game-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  max-width: 800px;
+}
+.game-info__properties {
+  display: flex;
+}
+.game-info__properties .properties__img {
+  text-align: center;
+  width: 400px;
+  padding: 0 40px;
+}
+.game-info__properties .properties {
+  width: 400px;
+  padding-right: 40px;
+  padding-top: 20px;
+}
+.game-info__properties .properties__title {
+  padding-bottom: 20px;
+  font-size: 20px;
+  font-weight: bold;
+}
+.game-info__properties .properties__name {
+  margin-bottom: 15px;
+}
+.game-info__properties .properties__name .value {
+  padding-top: 5px;
+  font-weight: bold;
+}
+.game-info__description {
+  padding: 0 40px;
+  padding-bottom: 20px;
+}
+.game-info__description .description-title {
+  font-size: 20px;
+  padding: 10px 0;
+  font-weight: bold;
+}
+.game-info__description .description-content p {
+  margin-top: 10px;
 }
 .button {
   border: none;

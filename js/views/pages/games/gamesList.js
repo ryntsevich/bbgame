@@ -2,16 +2,25 @@ import Component from '../../component.js';
 
 // import Error404 from '../../../views/pages/error404.js';
 
-// import Games from '../../../models/games.js';
+import Games from '../../../models/games.js';
 
 class GamesList extends Component {
-    render() {
+    constructor() {
+		super();
+		
+		this.model = new Games();
+	}
+	
+	getData() {
+		return new Promise(resolve => this.model.getGamesList().then(games => resolve(games)));
+	}
+    render(games) {
         return new Promise(resolve => {
             resolve(`
                 <h1 class="page-title">Список всех игр</h1>
                 <div class="games">
                     <div class="games-list">
-                    ${this.games.map(game => this.getGameHTML(game)).join('\n ')}
+                    ${games.map(game => this.getGameHTML(game)).join('\n ')}
                     </div>
                 </div>
             `);
@@ -24,7 +33,7 @@ class GamesList extends Component {
                 <div class="game__img" data-id="${game.id}">
                     <img data-id="${game.id}" src="${game.img}" alt="">
                 </div>
-            <div class="game__title" data-id="${game.id}">${game.title}</div>
+            <a class="game__title" data-id="${game.id}" href="#/games/${game.id}">${game.title}</a>
             </div>
         `;
     }

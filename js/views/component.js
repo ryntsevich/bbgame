@@ -1,14 +1,18 @@
-import {parseRequestURL} from '../helpers/utils.js';
+import { parseRequestURL } from '../helpers/utils.js';
 
-import Games from '../models/games.js';
+// import Games from '../models/games.js';
 
 class Component {
     constructor() {
         this.request = parseRequestURL();
-        this.games = new Games().getGamesFromLS();
+
+    }
+    getData() {
+        return new Promise(resolve => resolve());
     }
 
-    afterRender() {}
+
+    afterRender() { }
 }
 
 export default Component;

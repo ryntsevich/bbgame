@@ -5,19 +5,22 @@ import Footer from './views/partials/footer.js';
 
 // import About from './views/pages/about.js';
 import Login from './views/pages/login.js';
+import SignUp from './views/pages/join.js';
+
 import GamesList from './views/pages/games/gamesList.js';
 import Error404 from './views/pages/error404.js';
 
 // import AddAndList from './views/pages/tasks/add-list.js';
-// import Info from './views/pages/tasks/info.js';
+import GameInfo from './views/pages/games/gameInfo.js';
 // import Edit from './views/pages/tasks/edit.js';
 
 
 const Routes = {
     '/': Login,
-    '/games': GamesList
+    '/join': SignUp,
+    '/games': GamesList,
+    '/games/:id': GameInfo
     // '/tasks': AddAndList
-    // '/game/:id': GameInfo,
     // '/game/:id/edit': GameEdit
 };
 
@@ -36,10 +39,13 @@ function router() {
         parsedURL = `/${request.resource || ''}${request.id ? '/:id' : ''}${request.action ? `/${request.action}` : ''}`,
         page = Routes[parsedURL] ? new Routes[parsedURL]() : new Error404();
 
-    page.render().then(html => {
-        contentContainer.innerHTML = html;
-        page.afterRender();
+    page.getData().then(data => {
+        page.render(data).then(html => {
+            contentContainer.innerHTML = html;
+            page.afterRender();
+        });
     });
+
     if (footerContainer) {
         footer.render().then(html => footerContainer.innerHTML = html);
     }
