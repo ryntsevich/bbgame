@@ -7,11 +7,13 @@ import Footer from './views/partials/footer.js';
 import Login from './views/pages/login.js';
 import SignUp from './views/pages/join.js';
 
-import GamesList from './views/pages/games/gamesList.js';
 import Error404 from './views/pages/error404.js';
 
 // import AddAndList from './views/pages/tasks/add-list.js';
 import GameInfo from './views/pages/games/gameInfo.js';
+import GamesList from './views/pages/games/gamesList.js';
+import UserInfo from './views/pages/users/userInfo.js';
+import UsersList from './views/pages/users/usersList.js';
 // import Edit from './views/pages/tasks/edit.js';
 
 
@@ -19,7 +21,9 @@ const Routes = {
     '/': Login,
     '/join': SignUp,
     '/games': GamesList,
-    '/games/:id': GameInfo
+    '/games/:id': GameInfo,
+    '/users': UsersList,
+    '/users/:id': UserInfo
     // '/tasks': AddAndList
     // '/game/:id/edit': GameEdit
 };

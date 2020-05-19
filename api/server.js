@@ -1,12 +1,13 @@
 const express = require('express'),
-      bodyParser = require('body-parser'),
-      morgan = require('morgan'),
-	  fs = require('file-system'),
-	  shortId = require('shortid'),
-	  dbFilePath = 'games.json',
-      app = express();
+	bodyParser = require('body-parser'),
+	morgan = require('morgan'),
+	fs = require('file-system'),
+	shortId = require('shortid'),
+	dbFilePath = 'games.json',
+	dbFileRathUsers = 'users.json',
+	app = express();
 
-app.use(bodyParser.urlencoded({extended: false}));
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(morgan('common'));
 app.use((req, res, next) => {
@@ -27,37 +28,40 @@ app.get('/api/game/:id', (req, res) => {
 	game ? res.send(game) : res.send({});
 });
 
-app.post('/api/task', (req, res) => {
-	const tasksData = getTasksFromDB(),
-		task = req.body;
 
-	task.id = shortId.generate();
-	task.description = task.description || 'No Description';
-	task.status = 'In Progress';
-
-    tasksData.push(task);
-    setTasksToDB(tasksData);
-
-	res.send(task);
+app.get('/api/users', (req, res) => {
+	res.send(getUsersFromDB());
 });
 
+app.get('/api/user/:id', (req, res) => {
+	const usersData = getUsersFromDB(),
+		user = usersData.find(user => user.id === req.params.id);
 
+	user ? res.send(user) : res.send({});
+});
 
-app.put('/api/task/:id', (req, res) => {
-	const tasksData = getTasksFromDB(),
-		task = tasksData.find(task => task.id === req.params.id),
-		updatedTask = req.body;
+app.post('/api/games/list', (req, res) => {
+	const gamesData = getGamesFromDB(),
+		gamesIds = req.body,
+		games = [];
 
-	task.title = updatedTask.title;
-	task.description = updatedTask.description || 'No Description';
+	for (let i = 0; i < gamesIds.length; i++) {
+		for (let j = 0; j < gamesData.length; j++) {
+			if (gamesData[j].id === gamesIds[i]) {
+				games.push(gamesData[j]);
+			}
+		}
+	}
 
-    setTasksToDB(tasksData);
-
-	res.sendStatus(204);
+	res.send(games);
 });
 
 function getGamesFromDB() {
-    return JSON.parse(fs.readFileSync(dbFilePath, 'utf8'));
+	return JSON.parse(fs.readFileSync(dbFilePath, 'utf8'));
+}
+
+function getUsersFromDB() {
+	return JSON.parse(fs.readFileSync(dbFileRathUsers, 'utf8'));
 }
 
 // function setTasksToDB(tasksData) {
@@ -65,3 +69,4 @@ function getGamesFromDB() {
 // }
 
 app.listen(3000, () => console.log('Server has been started...'));
+

@@ -227,19 +227,6 @@ body {
   border: solid black 1px;
   padding-left: 7px;
 }
-.form-signup-container .form-signup__item .form-signup-avatar {
-  width: 100%;
-  border: none;
-  height: 20px;
-}
-.form-signup-container .form-signup__item .inputfile .inputfile {
-  width: 0.1px;
-  height: 0.1px;
-  opacity: 0;
-  overflow: hidden;
-  position: absolute;
-  z-index: -1;
-}
 .form-signup-container .form-signup .btn-signup {
   height: 35px;
   font-size: 16px;
@@ -256,8 +243,7 @@ body {
 .games-list {
   display: grid;
   grid-template-columns: repeat(3, 30%);
-  grid-template-rows: repeat(2, 18em);
-  gap: 1em;
+  justify-content: space-around;
 }
 .game {
   display: flex;
@@ -317,6 +303,35 @@ body {
 }
 .game-info__description .description-content p {
   margin-top: 10px;
+}
+.user-info {
+  display: flex;
+  justify-content: center;
+  max-width: 800px;
+  border: 1px solid black;
+}
+.user-info__img {
+  text-align: center;
+  padding: 0 40px;
+}
+.user-info__about {
+  padding: 10px 40px;
+}
+.user-info__about .item {
+  margin-bottom: 15px;
+}
+.user-info-games {
+  max-width: 800px;
+  border: 1px solid black;
+  margin-bottom: 30px;
+}
+.users-list {
+  width: 600px;
+}
+.users-list .user {
+  border: 1px solid black;
+  padding: 10px;
+  margin-bottom: 5px;
 }
 .button {
   border: none;

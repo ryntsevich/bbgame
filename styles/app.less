@@ -98,6 +98,7 @@ body {
   }
 }
 
+
 .form-signup-container {
   display: flex;
   flex-direction: column;
@@ -119,8 +120,6 @@ body {
     }
 
     &__item {
-
-
       input {
         // width: 252px;
         width: 100%;
@@ -132,15 +131,8 @@ body {
         border: solid black 1px;
         padding-left: 7px;        
       }
-
-      // .form-signup-avatar{
-      //   width: 100%;
-      //   border: none;
-      //   height: 20px;
-      // }
-
       }
-    }
+    
     .btn-signup{
       height: 35px;
       font-size: 16px;
@@ -149,29 +141,26 @@ body {
       cursor: pointer;
       color: white;
     }
-
   }
-
-
 }
 
 
 .games {
   max-width: 800px;
   margin: 20px auto 0;
-  margin-bottom: 30px;
-
- 
+  margin-bottom: 30px; 
 }
+
 
 .games-list {
   display: grid;
   grid-template-columns: repeat(3, 30%);
-  grid-template-rows: repeat(2, 18em);
-  gap: 1em;
-
-  
+  // grid-template-rows: repeat(2, 18em);
+  // gap: 1em;  
+  justify-content: space-around;
 }
+
+
 .game {
   display: flex;
   flex-direction: column;
@@ -239,15 +228,51 @@ body {
     font-size: 20px;
     padding: 10px 0;
     font-weight: bold;
-
   }
 
   .description-content p{
     margin-top: 10px;
   }
 }
-
 }
+
+  .user-info{
+    display: flex;
+    justify-content: center;
+    max-width: 800px;
+    border: 1px solid black;
+
+    &__img {
+      text-align: center;
+      padding: 0 40px;
+    }
+
+    &__about {
+      padding: 10px 40px;
+
+      .item {
+        margin-bottom: 15px;
+      }
+
+    }
+  }
+
+  .user-info-games {
+    max-width: 800px;
+    border: 1px solid black;
+    margin-bottom: 30px;
+
+  }
+
+  .users-list {
+    width: 600px;
+
+    .user{
+      border: 1px solid black;
+      padding: 10px;
+      margin-bottom: 5px;
+    }
+  }
 
 
 
