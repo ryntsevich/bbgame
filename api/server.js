@@ -3,8 +3,9 @@ const express = require('express'),
 	morgan = require('morgan'),
 	fs = require('file-system'),
 	shortId = require('shortid'),
-	dbFilePath = 'games.json',
-	dbFileRathUsers = 'users.json',
+	dbFilePathGames = 'games.json',
+	dbFilePathUsers = 'users.json',
+	dbFilePathMeetings = 'meetings.json',
 	app = express();
 
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -78,16 +79,33 @@ app.get('/api/user/:id', (req, res) => {
 	user ? res.send(user) : res.send({});
 });
 
+app.get('/api/meetings', (req, res) => {
+	res.send(getMeetingsFromDB());
+});
+
+app.get('/api/meeting/:id', (req, res) => {
+	const meetingsData = getMeetingsFromDB(),
+	meeting = meetingsData.find(meeting => meeting.id === req.params.id);
+
+	meeting ? res.send(meeting) : res.send({});
+});
+
+
+
 function getGamesFromDB() {
-	return JSON.parse(fs.readFileSync(dbFilePath, 'utf8'));
+	return JSON.parse(fs.readFileSync(dbFilePathGames, 'utf8'));
 }
 
 function getUsersFromDB() {
-	return JSON.parse(fs.readFileSync(dbFileRathUsers, 'utf8'));
+	return JSON.parse(fs.readFileSync(dbFilePathUsers, 'utf8'));
+}
+
+function getMeetingsFromDB() {
+	return JSON.parse(fs.readFileSync(dbFilePathMeetings, 'utf8'));
 }
 
 function setUsersToDB(usersData) {
-	fs.writeFileSync(dbFileRathUsers, JSON.stringify(usersData));
+	fs.writeFileSync(dbFilePathUsers, JSON.stringify(usersData));
 }
 
 app.listen(3000, () => console.log('Server has been started...'));

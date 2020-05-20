@@ -8,14 +8,17 @@ class Header extends Component {
             resolve(`
                  <header class="header">                    
                      <a class="header__link ${!resource ? 'active' : ''}" href="/#/">
-                         About
+                         Sign In
                      </a>
                      <a class="header__link ${resource === 'games' ? 'active' : ''}" href="/#/games">
                          Games List
                      </a>     
                      <a class="header__link ${resource === 'users' ? 'active' : ''}" href="/#/users">
                      Users List
-                 </a>                                         
+                 </a>   
+                 <a class="header__link ${resource === 'meetings' ? 'active' : ''}" href="/#/meetings">
+                 Meetings List
+             </a>                                       
                 </header>
             `);
         });
