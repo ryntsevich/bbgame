@@ -90,6 +90,19 @@ app.get('/api/meeting/:id', (req, res) => {
 	meeting ? res.send(meeting) : res.send({});
 });
 
+app.post('/api/meeting', (req, res) => {
+	const meetingsData = getMeetingsFromDB(),
+		meeting = req.body;
+
+		meeting.id = shortId.generate();
+		meeting.players = 'user 01';
+
+		meetingsData .push(meeting);
+		setMeetingsToDB(meetingsData);
+
+	res.send(meeting);
+});
+
 
 
 function getGamesFromDB() {
@@ -106,6 +119,10 @@ function getMeetingsFromDB() {
 
 function setUsersToDB(usersData) {
 	fs.writeFileSync(dbFilePathUsers, JSON.stringify(usersData));
+}
+
+function setMeetingsToDB(meetingsData) {
+	fs.writeFileSync(dbFilePathMeetings, JSON.stringify(meetingsData));
 }
 
 app.listen(3000, () => console.log('Server has been started...'));
