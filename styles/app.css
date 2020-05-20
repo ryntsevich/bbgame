@@ -147,7 +147,17 @@ body {
   justify-content: center;
   align-items: center;
   height: 20px;
-  background: black;
+  background: #033025;
+}
+input {
+  width: 100%;
+  height: 35px;
+  margin-top: 5px;
+  margin-bottom: 14px;
+  outline: none;
+  border-radius: 4px;
+  border: solid black 1px;
+  padding-left: 7px;
 }
 .form-login-container {
   display: flex;
@@ -216,16 +226,6 @@ body {
   font-size: 18px;
   color: #0ca39e;
   font-weight: bold;
-}
-.form-signup-container .form-signup__item input {
-  width: 100%;
-  height: 35px;
-  margin-top: 5px;
-  margin-bottom: 14px;
-  outline: none;
-  border-radius: 4px;
-  border: solid black 1px;
-  padding-left: 7px;
 }
 .form-signup-container .form-signup .btn-signup {
   height: 35px;
@@ -334,9 +334,23 @@ body {
   margin-bottom: 5px;
 }
 .meet {
-  width: 800px;
+  width: 600px;
   padding: 10px;
   margin-bottom: 30px;
+}
+.meet .meet-propertis {
+  margin-bottom: 20px;
+  padding: 0 60px;
+}
+.meet .meet-propertis__title {
+  font-size: 18px;
+  font-weight: bold;
+}
+.meet .meet-propertis__content {
+  margin: 5px;
+}
+.meet .meet-propertis-btn {
+  text-align: center;
 }
 .meet-list {
   width: 600px;

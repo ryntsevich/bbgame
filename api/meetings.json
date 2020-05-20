@@ -1,8 +1,8 @@
 [
     {
         "id": "001",
-        "game": "Серп",
-        "party": "Li",
+        "gameName": "Серп",
+        "players": "Li",
         "description": "bla-bla..."
     }
 ]

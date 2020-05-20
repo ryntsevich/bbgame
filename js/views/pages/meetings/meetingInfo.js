@@ -22,23 +22,35 @@ class MeetingInfo extends Component {
             let html;
 
             if (meeting) {
-                // const { id, title, img, age, numberPlayers, time } = game;
+                const { id, gameName, description, players} = meeting;
 
                 html = `
-                <h1 class="page-title">Встреча</h1>
+                <h1 class="page-title">Создание встречи</h1>
                 <div class="meet">
-                    <p>
-                        <b>Игра:</b>
-                        Серп
-                    </p>
-                    <p>
-                        <b>Участники:</b>
-                        Серп
-                    </p>
-                    <p>
-                        <b>Описание:</b>
-                        Серп
-                    </p>
+                    <div class="meet-propertis">
+                        <div class="meet-propertis__title">Игра:</div>
+                        <div class="meet-propertis__content">${gameName}</div>
+                    </div>
+                    <div class="meet-propertis">
+                        <div class="meet-propertis__title">Дата:</div>
+                        <div class="meet-propertis__content">${players}</div>
+                    </div>
+                    <div class="meet-propertis">
+                        <div class="meet-propertis__title">Время:</div>
+                        <div class="meet-propertis__content">${players}</div>
+                    </div>
+                    <div class="meet-propertis">
+                        <div class="meet-propertis__title">Место:</div>
+                        <div class="meet-propertis__content">${players}</div>
+                    </div>
+                    <div class="meet-propertis">
+                        <div class="meet-propertis__title">Участники:</div>
+                        <div class="meet-propertis__content">${players}</div>
+                    </div>
+                    <div class="meet-propertis">
+                        <div class="meet-propertis__title">Описание:</div>
+                        <div class="meet-propertis__content">${description}</div>
+                    </div>
                 </div>
 `;
             } else {
@@ -48,7 +60,7 @@ class MeetingInfo extends Component {
         });
     }
 
-    
+
 }
 
 export default MeetingInfo;

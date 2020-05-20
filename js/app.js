@@ -16,6 +16,8 @@ import UserInfo from './views/pages/users/userInfo.js';
 import UsersList from './views/pages/users/usersList.js';
 import MeetingInfo from './views/pages/meetings/meetingInfo.js';
 import MeetingsList from './views/pages/meetings/meetingsList.js';
+import MeetingAdd from './views/pages/meetings/meetingAdd.js';
+
 
 // import Edit from './views/pages/tasks/edit.js';
 
@@ -28,7 +30,8 @@ const Routes = {
     '/users': UsersList,
     '/users/:id': UserInfo,
     '/meetings/:id': MeetingInfo,
-    '/meetings': MeetingsList
+    '/meetings': MeetingsList,
+    '/create': MeetingAdd
     // '/tasks': AddAndList
     // '/game/:id/edit': GameEdit
 };
