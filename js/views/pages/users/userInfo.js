@@ -13,13 +13,15 @@ class UserInfo extends Component {
     }
     getData() {
         return new Promise(resolve => this.model.getUser(this.request.id).then(user => {
-            this.modelGames.getGamesByIds(user.usersCollectionGames).then(games => {
-                user.usersCollectionGames = games;
+            this.modelGames.getGamesByIds(user.collectionGames).then(games => {
+                user['renderGames'] = games;
+                console.log(games);
                 this.user = user;
                 resolve(user);
             })
         }));
     }
+
 
     render(user) {
 
@@ -27,8 +29,6 @@ class UserInfo extends Component {
             let html;
 
             if (user) {
-                // const { id, name, img, age, city, male, collection } = user;
-                // console.log(user);
 
                 html = `
                 <h1 class="page-title">${user.name}</h1>
@@ -52,14 +52,14 @@ class UserInfo extends Component {
                     </div>
                 </div>
                 <div class="user-info-games">
-                    <div class="buttons">
-                        <button class="buttons__btn-usersGames">Моя коллекция</button>
-                        <button class="buttons__btn-wishGames">Хочу поиграть</button>
-                        <button class="buttons__btn-playedGames">Играл</button>
+                    <div class="user-info-buttons">
+                        <button class="user-info-buttons__btn-usersGames">Моя коллекция</button>
+                        <button class="user-info-buttons__btn-wishGames">Хочу поиграть</button>
+                        <button class="user-info-buttons__btn-playedGames">Играл</button>
                     </div>
                     <div class="games">
                         <div class="games-list">
-                            ${user.usersCollectionGames.map(game => this.getUsersGames(game)).join('\n ')}
+                                ${user.renderGames.length != 0 ? user.renderGames.map(game => this.getUsersGames(game)).join('\n ') : 'Список пуст'}
                         </div>
                     </div>
                 </div>
@@ -76,41 +76,40 @@ class UserInfo extends Component {
     }
 
     setActions() {
-        // const buttonUsersGames = document.getElementsByClassName('buttons__btn-usersGames')[0],
-        //     buttonWishGames = document.getElementsByClassName('buttons__btn-wishGames')[0],
-        //     buttonPlayedGames = document.getElementsByClassName('buttons__btn-playedGames')[0],
-        const buttonsContainer = document.getElementsByClassName('buttons')[0],
+        const buttonsContainer = document.getElementsByClassName('user-info-buttons')[0],
             gamesList = document.getElementsByClassName('games-list')[0];
 
         buttonsContainer.addEventListener('click', event => {
             const target = event.target,
                 targetClassList = target.classList;
 
-
             switch (true) {
-                case targetClassList.contains('buttons__btn-usersGames'):
-
-                    this.modelGames.getGamesByIds(this).then(games => {
-                        this.user.usersCollectionGames = games;
-                        gamesList.innerHTML = `
-                        ${this.user.usersCollectionGames.map(game => this.getUsersGames(game)).join('\n ')}
-                        `;
-                        // resolve(user);
-                    });
+                case targetClassList.contains('user-info-buttons__btn-usersGames'):
+                    this.renderUserGames(this.user.collectionGames, gamesList);
                     break;
 
-                case targetClassList.contains('buttons__btn-wishGames'):
-                    this.redirectToTaskInfo(target.dataset.id);
+                case targetClassList.contains('user-info-buttons__btn-wishGames'):
+                    this.renderUserGames(this.user.wishGames, gamesList);
                     break;
 
-                case targetClassList.contains('buttons__btn-playedGames'):
-                    this.changeTaskStatus(target.parentNode.parentNode, target.previousElementSibling, target);
+                case targetClassList.contains('user-info-buttons__btn-playedGames'):
+                    this.renderUserGames(this.user.playedGames, gamesList);
                     break;
             }
         });
     }
 
+    renderUserGames(gameIds, gamesList) {
+        this.modelGames.getGamesByIds(gameIds).then(games => {
+            if (gameIds.length != 0) {
+                this.user.renderGames = games;
+                gamesList.innerHTML = `${this.user.renderGames.map(game => this.getUsersGames(game)).join('\n ')}`;
+            } else {
+                gamesList.innerHTML = '<p>Список пуст</p>';
+            }
 
+        });
+    }
 
     getUsersGames(game) {
         return `

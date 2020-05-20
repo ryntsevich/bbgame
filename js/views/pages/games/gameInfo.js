@@ -1,4 +1,5 @@
 import Component from '../../component.js';
+import Users from '../../../models/users.js';
 import Games from '../../../models/games.js';
 import Error404 from '../../../views/pages/error404.js';
 
@@ -7,10 +8,15 @@ class GameInfo extends Component {
     constructor() {
         super();
 
-        this.model = new Games();
+        this.modelUsers = new Users();
+        this.modelGames = new Games();
     }
     getData() {
-        return new Promise(resolve => this.model.getGame(this.request.id).then(game => resolve(game)));
+        return new Promise(resolve => this.modelGames.getGame(this.request.id).then(game => {
+            this.game = game;
+            resolve(game);
+        }
+        ));
     }
 
     render(game) {
@@ -18,7 +24,7 @@ class GameInfo extends Component {
             let html;
 
             if (game) {
-                const { id, title, img, age, numberPlayers, time, description } = game;
+                const { id, title, img, age, numberPlayers, time } = game;
 
                 html = `
                 <h1 class="page-title">${title}</h1>
@@ -43,6 +49,11 @@ class GameInfo extends Component {
                             </div>
                         </div>
                     </div>
+                    <div class="game-info__buttons">
+                        <button class="game-info-buttons__btn-usersGames" data-collection="usersGames">В мою коллекцию</button>
+                        <button class="game-info-buttons__btn-wishGames" data-collection="wishGames">Хочу поиграть</button>
+                        <button class="game-info-buttons__btn-playedGames" data-collection="playedGames">Играл</button>
+                    </div>
                     <div class="game-info__description" data-id="id">
                         <div class="description-title">Описание</div>
                         <div class="description-content">
@@ -57,6 +68,51 @@ class GameInfo extends Component {
             resolve(html);
         });
     }
+
+    afterRender() {
+        this.setActions();
+
+        this.getParagraphHTML();
+    }
+
+
+    setActions() {
+        const buttonsGameInfoContainer = document.getElementsByClassName('game-info__buttons')[0],
+            btnToUsersGame = document.getElementsByClassName('game-info-buttons__btn-usersGames')[0],
+            btnToWishGames = document.getElementsByClassName('game-info-buttons__btn-wishGames')[0],
+            btnToPlayedGames = document.getElementsByClassName('game-info-buttons__btn-playedGames')[0];
+
+        buttonsGameInfoContainer.addEventListener('click', () => {
+            const target = event.target,
+                targetClassList = target.classList;
+
+            switch (true) {
+                case targetClassList.contains('game-info-buttons__btn-usersGames'):
+                    this.addGameToUserCollection('01', this.game.id, target.dataset.collection, btnToUsersGame);
+                    console.log(btnToUsersGame);
+                    break;
+
+                case targetClassList.contains('game-info-buttons__btn-wishGames'):
+                    this.addGameToUserCollection('01', this.game.id, target.dataset.collection, btnToWishGames);
+
+                    break;
+
+                case targetClassList.contains('game-info-buttons__btn-playedGames'):
+                    this.addGameToUserCollection('01', this.game.id, target.dataset.collection, btnToPlayedGames);
+                    break;
+            }
+
+        });
+    }
+
+    addGameToUserCollection(userId, gameID, typeCollection, buttonName) {
+
+        this.modelUsers.addToCollection(userId, gameID, typeCollection).then(button => {
+            buttonName.setAttribute('disabled', 'true');
+            buttonName.textContent = 'Добавленно в коллекцию';
+        })
+    }
+
     getParagraphHTML(paragraph) {
         return `<p>${paragraph}</p>`;
     }

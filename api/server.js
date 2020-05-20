@@ -29,17 +29,6 @@ app.get('/api/game/:id', (req, res) => {
 });
 
 
-app.get('/api/users', (req, res) => {
-	res.send(getUsersFromDB());
-});
-
-app.get('/api/user/:id', (req, res) => {
-	const usersData = getUsersFromDB(),
-		user = usersData.find(user => user.id === req.params.id);
-
-	user ? res.send(user) : res.send({});
-});
-
 app.post('/api/games/list', (req, res) => {
 	const gamesData = getGamesFromDB(),
 		gamesIds = req.body,
@@ -56,6 +45,39 @@ app.post('/api/games/list', (req, res) => {
 	res.send(games);
 });
 
+app.put('/api/user/:userId/games/:gameId', (req, res) => {
+	const usersData = getUsersFromDB(),
+		gameId = req.params.gameId,
+		user = usersData.find(user => user.id === req.params.userId);
+
+	switch (req.query.typeCollection) {
+		case 'usersGames':
+			user.collectionGames.includes(gameId) || user.collectionGames.push(gameId);
+			break;
+
+		case 'wishGames':
+			user.wishGames.includes(gameId) || user.wishGames.push(gameId);
+			break;
+
+		case 'playedGames':
+			user.playedGames.includes(gameId) || user.playedGames.push(gameId);
+			break;
+	}
+	setUsersToDB(usersData);
+	res.sendStatus(204);
+});
+
+app.get('/api/users', (req, res) => {
+	res.send(getUsersFromDB());
+});
+
+app.get('/api/user/:id', (req, res) => {
+	const usersData = getUsersFromDB(),
+		user = usersData.find(user => user.id === req.params.id);
+
+	user ? res.send(user) : res.send({});
+});
+
 function getGamesFromDB() {
 	return JSON.parse(fs.readFileSync(dbFilePath, 'utf8'));
 }
@@ -64,9 +86,9 @@ function getUsersFromDB() {
 	return JSON.parse(fs.readFileSync(dbFileRathUsers, 'utf8'));
 }
 
-// function setTasksToDB(tasksData) {
-//     fs.writeFileSync(dbFilePath, JSON.stringify(tasksData));
-// }
+function setUsersToDB(usersData) {
+	fs.writeFileSync(dbFileRathUsers, JSON.stringify(usersData));
+}
 
 app.listen(3000, () => console.log('Server has been started...'));
 

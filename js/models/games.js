@@ -23,7 +23,7 @@ class Games {
 		});
 	}
 
-	getGamesByIds(gameIds) {
+	getGamesByIds(games) {
 		return new Promise(resolve => {
 			const xhr = new XMLHttpRequest();
 			
@@ -32,9 +32,11 @@ class Games {
 			xhr.onload = () => resolve(JSON.parse(xhr.response));
 			xhr.setRequestHeader('Content-Type', 'application/json');
 			
-			xhr.send(JSON.stringify(gameIds));
+			xhr.send(JSON.stringify(games));
 		});
 	}
+
+
 }
 
 export default Games;

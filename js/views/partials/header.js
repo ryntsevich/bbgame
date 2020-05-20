@@ -12,7 +12,10 @@ class Header extends Component {
                      </a>
                      <a class="header__link ${resource === 'games' ? 'active' : ''}" href="/#/games">
                          Games List
-                     </a>                                            
+                     </a>     
+                     <a class="header__link ${resource === 'users' ? 'active' : ''}" href="/#/users">
+                     Users List
+                 </a>                                         
                 </header>
             `);
         });

@@ -23,7 +23,21 @@ class Users {
 		});
 	}
 
-	
+	addToCollection(userId, gameId, typeCollection) {
+		return new Promise(resolve => {
+			const xhr = new XMLHttpRequest();
+
+			xhr.open('PUT', `http://localhost:3000/api/user/${userId}/games/${gameId}?typeCollection=${typeCollection}`);
+			xhr.setRequestHeader('Content-Type', 'application/json');
+
+			xhr.onload = () => resolve();
+
+			xhr.send();
+		});
+	}
+
+
+
 
 
 
