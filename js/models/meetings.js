@@ -23,15 +23,40 @@ class Meetings {
     }
 
     addMeeting(newMeeting) {
+        return new Promise(resolve => {
+            const xhr = new XMLHttpRequest();
+
+            xhr.open('POST', 'http://localhost:3000/api/meeting');
+            xhr.setRequestHeader('Content-Type', 'application/json');
+
+            xhr.onload = () => resolve(JSON.parse(xhr.response));
+
+            xhr.send(JSON.stringify(newMeeting));
+        });
+    }
+
+    closeMeeting(id) {
+        return new Promise(resolve => {
+            const xhr = new XMLHttpRequest();
+
+            xhr.open('DELETE', `http://localhost:3000/api/meeting/${id}`);
+            xhr.setRequestHeader('Content-Type', 'application/json');
+
+            xhr.onload = () => resolve();
+
+            xhr.send();
+        });
+    }
+    editMeeting(updatedMeeting) {
 		return new Promise(resolve => {
 			const xhr = new XMLHttpRequest();
 
-			xhr.open('POST', 'http://localhost:3000/api/meeting');
+			xhr.open('PUT', `http://localhost:3000/api/meeting/${updatedMeeting.id}`);
 			xhr.setRequestHeader('Content-Type', 'application/json');
 
-			xhr.onload = () => resolve(JSON.parse(xhr.response));
+			xhr.onload = () => resolve();
 
-			xhr.send(JSON.stringify(newMeeting));
+			xhr.send(JSON.stringify(updatedMeeting));
 		});
 	}
 

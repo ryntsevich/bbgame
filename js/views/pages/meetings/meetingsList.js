@@ -27,7 +27,7 @@ class MeetingsList extends Component {
     getMeetingHTML(meeting) {
         return `
             <div class="meeting">
-                <a class="meeting__title" data-id="${meeting.id}" href="#/meetings/${meeting.id}">${meeting.id}</a>
+                <a class="meeting__title" data-id="${meeting.id}" href="#/meeting/${meeting.id}">${meeting.id}</a>
             </div>
         `;
     }

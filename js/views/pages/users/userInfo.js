@@ -51,6 +51,10 @@ class UserInfo extends Component {
                         </div>
                     </div>
                 </div>
+                <div class="user-info__buttons">
+                <button class="user-info-buttons__btn-createMeeting">Создать встречу</button>
+                <button class="user-info-buttons__btn-usersMeetings">Мои встречи</button>
+                </div>
                 <div class="user-info-games">
                     <div class="user-info-buttons">
                         <button class="user-info-buttons__btn-usersGames">Моя коллекция</button>
@@ -77,7 +81,8 @@ class UserInfo extends Component {
 
     setActions() {
         const buttonsContainer = document.getElementsByClassName('user-info-buttons')[0],
-            gamesList = document.getElementsByClassName('games-list')[0];
+            gamesList = document.getElementsByClassName('games-list')[0],
+            btnCreateMeeting = document.getElementsByClassName('user-info-buttons__btn-createMeeting')[0];
 
         buttonsContainer.addEventListener('click', event => {
             const target = event.target,
@@ -96,6 +101,10 @@ class UserInfo extends Component {
                     this.renderUserGames(this.user.playedGames, gamesList);
                     break;
             }
+        });
+        
+        btnCreateMeeting.addEventListener('click', () => {
+            this.redirectToMeetingAdd();
         });
     }
 
@@ -121,6 +130,10 @@ class UserInfo extends Component {
             </div>        
         `
     }
+    redirectToMeetingAdd() {
+        location.hash = `#/create`;
+    }
+
 }
 
 export default UserInfo;

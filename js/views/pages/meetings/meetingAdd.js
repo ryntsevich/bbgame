@@ -18,26 +18,26 @@ class MeetingAdd extends Component {
             <div class="meet">
                 <div class="meet-propertis">
                     <div class="meet-propertis__title">Игра:</div>
-                    <input class="meet-propertis__content meet-add-gameName">
+                    <input class="meet-propertis__content meet-add-gameName" type="text" >
                 </div>
                 <div class="meet-propertis">
                     <div class="meet-propertis__title">Дата:</div>
-                    <input class="meet-propertis__content meet-add-day">
+                    <input class="meet-propertis__content meet-add-day" type="text">
                 </div>
                 <div class="meet-propertis">
                     <div class="meet-propertis__title">Время:</div>
-                    <input class="meet-propertis__content meet-add-time">
+                    <input class="meet-propertis__content meet-add-time" type="text">
                 </div>
                 <div class="meet-propertis">
                     <div class="meet-propertis__title">Место:</div>
-                    <input class="meet-propertis__content meet-add-place">
+                    <input class="meet-propertis__content meet-add-place" type="text">
                 </div>
                 <div class="meet-propertis">
                     <div class="meet-propertis__title">Описание:</div>
-                    <input class="meet-propertis__content meet-add-description">
+                    <input class="meet-propertis__content meet-add-description" type="text">
                 </div>
                 <div class="meet-propertis-btn">
-                    <button class="btn-create-meet">Создать встречу</button>
+                    <button class="btn-create-meet" disabled>Создать встречу</button>
                 </div>
             </div>
             `);
@@ -55,9 +55,12 @@ class MeetingAdd extends Component {
             addDay = document.getElementsByClassName('meet-add-day')[0],
             addTime = document.getElementsByClassName('meet-add-time')[0],
             addPlace = document.getElementsByClassName('meet-add-place')[0],
-            addDescription = document.getElementsByClassName('meet-add-place')[0];
+            addDescription = document.getElementsByClassName('meet-add-description')[0],
+            listContainer = document.getElementsByClassName('meet')[0];
 
-
+        listContainer.addEventListener('keyup', () => {
+            this.changeButtonStatus(addGameName, addDay, addTime, addPlace, btnCreateMeeting);
+        });
         btnCreateMeeting.addEventListener('click', () => this.addNewMeeting(addGameName, addDay, addTime, addPlace, addDescription));
 
     }
@@ -70,18 +73,29 @@ class MeetingAdd extends Component {
             description: addDescription.value.trim()
         };
 
+
         this.modelMeetings.addMeeting(newMeeting).then(meeting => {
-            this.clearAddNewMeeting(addGameName, addDay, addTime, addPlace, addDescription);
-        })
+            // this.clearAddNewMeeting(addGameName, addDay, addTime, addPlace, addDescription);
+            this.redirectToMeetingInfo(meeting.id);
+        });
 
     }
 
-    clearAddNewMeeting(addGameName, addDay, addTime, addPlace, addDescription) {
-        addGameName.value = '';
-        addDay.value = '';
-        addTime.value = '';
-        addPlace.value = '';
-        addDescription.value = '';
+    changeButtonStatus(addGameName, addDay, addTime, addPlace, btnCreateMeeting) {
+        const obj = [addGameName, addDay, addTime, addPlace];
+        btnCreateMeeting.disabled = !obj.every(elem => elem.value.trim());
+    }
+
+    // clearAddNewMeeting(addGameName, addDay, addTime, addPlace, addDescription) {
+    //     addGameName.value = '';
+    //     addDay.value = '';
+    //     addTime.value = '';
+    //     addPlace.value = '';
+    //     addDescription.value = '';
+    // }
+
+    redirectToMeetingInfo(id) {
+        location.hash = `#/meeting/${id}`;
     }
 
 

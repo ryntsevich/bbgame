@@ -3,9 +3,9 @@ const express = require('express'),
 	morgan = require('morgan'),
 	fs = require('file-system'),
 	shortId = require('shortid'),
-	dbFilePathGames = 'games.json',
-	dbFilePathUsers = 'users.json',
-	dbFilePathMeetings = 'meetings.json',
+	dbFilePathGames = '../db/games.json',
+	dbFilePathUsers = '../db/users.json',
+	dbFilePathMeetings = '../db/meetings.json',
 	app = express();
 
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -85,7 +85,7 @@ app.get('/api/meetings', (req, res) => {
 
 app.get('/api/meeting/:id', (req, res) => {
 	const meetingsData = getMeetingsFromDB(),
-	meeting = meetingsData.find(meeting => meeting.id === req.params.id);
+		meeting = meetingsData.find(meeting => meeting.id === req.params.id);
 
 	meeting ? res.send(meeting) : res.send({});
 });
@@ -94,13 +94,37 @@ app.post('/api/meeting', (req, res) => {
 	const meetingsData = getMeetingsFromDB(),
 		meeting = req.body;
 
-		meeting.id = shortId.generate();
-		meeting.players = 'user 01';
+	meeting.id = shortId.generate();
+	meeting.players = 'user 01';
+	meeting.description = meeting.description || '-';
 
-		meetingsData .push(meeting);
-		setMeetingsToDB(meetingsData);
+	meetingsData.push(meeting);
+	setMeetingsToDB(meetingsData);
 
 	res.send(meeting);
+});
+
+app.delete('/api/meeting/:id', (req, res) => {
+	const meetingsData = getMeetingsFromDB(),
+		meetings = meetingsData.filter(meeting => meeting.id != req.params.id);
+
+	setMeetingsToDB(meetings);
+	res.sendStatus(204);
+});
+
+app.put('/api/meeting/:id', (req, res) => {
+	const meetingsData = getMeetingsFromDB(),
+		meeting = meetingsData.find(meeting => meeting.id === req.params.id),
+		updatedMeeting = req.body;
+
+		meeting.day = updatedMeeting.day;
+		meeting.time = updatedMeeting.time;
+		meeting.place = updatedMeeting.place;
+		meeting.description = updatedMeeting.description || '-';
+
+	setMeetingsToDB(meetingsData);
+
+	res.sendStatus(204);
 });
 
 
