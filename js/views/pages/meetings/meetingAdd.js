@@ -1,5 +1,4 @@
 import Component from '../../component.js';
-// import Meetings from '../../../models/meetings.js';
 import Error404 from '../../../views/pages/error404.js';
 import Meetings from '../../../models/meetings.js';
 
@@ -9,6 +8,7 @@ class MeetingAdd extends Component {
         super();
 
         this.modelMeetings = new Meetings();
+        this.gameNameLS = localStorage.getItem('nameGame');
     }
 
     render() {
@@ -18,7 +18,7 @@ class MeetingAdd extends Component {
             <div class="meet">
                 <div class="meet-propertis">
                     <div class="meet-propertis__title">Игра:</div>
-                    <input class="meet-propertis__content meet-add-gameName" type="text" >
+                    <input class="meet-propertis__content meet-add-gameName" disabled type="text" value ="${this.gameNameLS}">
                 </div>
                 <div class="meet-propertis">
                     <div class="meet-propertis__title">Дата:</div>
@@ -59,9 +59,12 @@ class MeetingAdd extends Component {
             listContainer = document.getElementsByClassName('meet')[0];
 
         listContainer.addEventListener('keyup', () => {
-            this.changeButtonStatus(addGameName, addDay, addTime, addPlace, btnCreateMeeting);
+            this.changeButtonStatus(addDay, addTime, addPlace, btnCreateMeeting);
         });
-        btnCreateMeeting.addEventListener('click', () => this.addNewMeeting(addGameName, addDay, addTime, addPlace, addDescription));
+        btnCreateMeeting.addEventListener('click', () => {
+            this.addNewMeeting(addGameName, addDay, addTime, addPlace, addDescription);
+            localStorage.clear();
+        });
 
     }
     addNewMeeting(addGameName, addDay, addTime, addPlace, addDescription) {
@@ -81,8 +84,8 @@ class MeetingAdd extends Component {
 
     }
 
-    changeButtonStatus(addGameName, addDay, addTime, addPlace, btnCreateMeeting) {
-        const obj = [addGameName, addDay, addTime, addPlace];
+    changeButtonStatus(addDay, addTime, addPlace, btnCreateMeeting) {
+        const obj = [addDay, addTime, addPlace];
         btnCreateMeeting.disabled = !obj.every(elem => elem.value.trim());
     }
 

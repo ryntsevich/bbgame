@@ -28,7 +28,7 @@ class UsersList extends Component {
     getUserHTML(user) {
         return `
             <div class="user">
-                <a class="user__title" data-id="${user.id}" href="#/users/${user.id}">${user.name}</a>
+                <a class="user__title" data-id="${user.id}" href="#/user/${user.id}">${user.name}</a>
             </div>
         `;
     }

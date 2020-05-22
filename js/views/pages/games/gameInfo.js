@@ -53,6 +53,7 @@ class GameInfo extends Component {
                         <button class="game-info-buttons__btn-usersGames" data-collection="usersGames">В мою коллекцию</button>
                         <button class="game-info-buttons__btn-wishGames" data-collection="wishGames">Хочу поиграть</button>
                         <button class="game-info-buttons__btn-playedGames" data-collection="playedGames">Играл</button>
+                        <button class="user-info-buttons__btn-createMeeting">Создать встречу</button>
                     </div>
                     <div class="game-info__description" data-id="id">
                         <div class="description-title">Описание</div>
@@ -80,7 +81,9 @@ class GameInfo extends Component {
         const buttonsGameInfoContainer = document.getElementsByClassName('game-info__buttons')[0],
             btnToUsersGame = document.getElementsByClassName('game-info-buttons__btn-usersGames')[0],
             btnToWishGames = document.getElementsByClassName('game-info-buttons__btn-wishGames')[0],
-            btnToPlayedGames = document.getElementsByClassName('game-info-buttons__btn-playedGames')[0];
+            btnToPlayedGames = document.getElementsByClassName('game-info-buttons__btn-playedGames')[0],
+            btnCreateMeeting = document.getElementsByClassName('user-info-buttons__btn-createMeeting')[0];
+
 
         buttonsGameInfoContainer.addEventListener('click', () => {
             const target = event.target,
@@ -103,6 +106,12 @@ class GameInfo extends Component {
             }
 
         });
+
+        btnCreateMeeting.addEventListener('click', () => {
+            console.log(this.game.title);
+            localStorage.setItem('nameGame', this.game.title);
+            this.redirectToMeetingAdd();
+        });
     }
 
     addGameToUserCollection(userId, gameID, typeCollection, buttonName) {
@@ -115,6 +124,10 @@ class GameInfo extends Component {
 
     getParagraphHTML(paragraph) {
         return `<p>${paragraph}</p>`;
+    }
+
+    redirectToMeetingAdd() {
+        location.hash = `#/create`;
     }
 }
 

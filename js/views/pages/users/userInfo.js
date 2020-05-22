@@ -2,6 +2,7 @@ import Component from '../../component.js';
 import Users from '../../../models/users.js';
 import Error404 from '../../../views/pages/error404.js';
 import Games from '../../../models/games.js';
+import Meetings from '../../../models/meetings.js';
 
 
 class UserInfo extends Component {
@@ -10,6 +11,7 @@ class UserInfo extends Component {
 
         this.model = new Users();
         this.modelGames = new Games();
+        this.modelMeetings = new Meetings();
     }
     getData() {
         return new Promise(resolve => this.model.getUser(this.request.id).then(user => {
@@ -51,9 +53,8 @@ class UserInfo extends Component {
                         </div>
                     </div>
                 </div>
-                <div class="user-info__buttons">
-                <button class="user-info-buttons__btn-createMeeting">Создать встречу</button>
-                <button class="user-info-buttons__btn-usersMeetings">Мои встречи</button>
+                <div class = "user-info-meetigs">
+                    <a class="user-info-buttons__btn-usersMeetings" href="#/user/${user.id}/meetings">Мои встречи</a>
                 </div>
                 <div class="user-info-games">
                     <div class="user-info-buttons">
@@ -81,8 +82,7 @@ class UserInfo extends Component {
 
     setActions() {
         const buttonsContainer = document.getElementsByClassName('user-info-buttons')[0],
-            gamesList = document.getElementsByClassName('games-list')[0],
-            btnCreateMeeting = document.getElementsByClassName('user-info-buttons__btn-createMeeting')[0];
+            gamesList = document.getElementsByClassName('games-list')[0];
 
         buttonsContainer.addEventListener('click', event => {
             const target = event.target,
@@ -101,10 +101,6 @@ class UserInfo extends Component {
                     this.renderUserGames(this.user.playedGames, gamesList);
                     break;
             }
-        });
-        
-        btnCreateMeeting.addEventListener('click', () => {
-            this.redirectToMeetingAdd();
         });
     }
 
@@ -129,9 +125,6 @@ class UserInfo extends Component {
                 <a class="game__title" data-id="id" href="#/games/${game.id}">${game.title}</a>
             </div>        
         `
-    }
-    redirectToMeetingAdd() {
-        location.hash = `#/create`;
     }
 
 }

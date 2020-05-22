@@ -42,7 +42,6 @@ app.post('/api/games/list', (req, res) => {
 			}
 		}
 	}
-
 	res.send(games);
 });
 
@@ -97,6 +96,7 @@ app.post('/api/meeting', (req, res) => {
 	meeting.id = shortId.generate();
 	meeting.players = 'user 01';
 	meeting.description = meeting.description || '-';
+	meeting.status = 'Actual';
 
 	meetingsData.push(meeting);
 	setMeetingsToDB(meetingsData);
@@ -117,16 +117,24 @@ app.put('/api/meeting/:id', (req, res) => {
 		meeting = meetingsData.find(meeting => meeting.id === req.params.id),
 		updatedMeeting = req.body;
 
-		meeting.day = updatedMeeting.day;
-		meeting.time = updatedMeeting.time;
-		meeting.place = updatedMeeting.place;
-		meeting.description = updatedMeeting.description || '-';
+	meeting.day = updatedMeeting.day;
+	meeting.time = updatedMeeting.time;
+	meeting.place = updatedMeeting.place;
+	meeting.description = updatedMeeting.description || '-';
 
 	setMeetingsToDB(meetingsData);
 
 	res.sendStatus(204);
 });
 
+app.put('/api/meeting/:id/close', (req, res) => {
+	const meetingsData = getMeetingsFromDB();
+	meetingsData.find(meeting => meeting.id === req.params.id).status = 'Closed',
+
+		setMeetingsToDB(meetingsData);
+
+	res.sendStatus(204);
+});
 
 
 function getGamesFromDB() {
