@@ -13,21 +13,57 @@ class UserMeetings extends Component {
     }
 
     getData() {
-        return new Promise(resolve => this.modelMeeting.getMeetingsList().then(meetings => resolve(meetings)));
+        return new Promise(resolve => this.modelMeeting.getMeetingsList().then(meetings => {
+            this.meetings = meetings;
+            this.activeM = this.meetings.filter(meeting => meeting.status === "Actual");
+            // console.log(activeM);
+            resolve(meetings);
+        }));
     }
     render(meetings) {
         return new Promise(resolve => {
             resolve(`
                 <h1 class="page-title">Мои встречи</h1>
                 <div class="meet-list-buttons">
-                <button class="meet-list-actual" >Предстоящие</button>
-                <button class="meet-list-closed" >Прошедшие</button>
+                <button class="meet-list-actual" data-status = "Actual" >Предстоящие</button>
+                <button class="meet-list-closed" data-status = "Closed" >Прошедшие</button>
                 </div>
                     <div class="meet-list">
-                    ${meetings.map(meeting => this.getMeetingHTML(meeting)).join('\n ')}
+                    ${this.activeM.map(meeting => this.getMeetingHTML(meeting)).join('\n ')}
                     </div>
             `);
         });
+    }
+    afterRender() {
+        this.setActions();
+    }
+
+    setActions() {
+        const meetListContainer = document.getElementsByClassName('meet-list-buttons')[0],
+            meetList = document.getElementsByClassName('meet-list')[0];
+
+        meetListContainer.addEventListener('click', event => {
+            const target = event.target,
+                targetClassList = target.classList;
+
+            switch (true) {
+                case targetClassList.contains('meet-list-actual'):
+                    this.renderUserMeetings(target.dataset.status, meetList);
+                    break;
+
+                case targetClassList.contains('meet-list-closed'):
+                    this.renderUserMeetings(target.dataset.status, meetList);
+                    break;
+            };
+        });
+    }
+
+
+    renderUserMeetings(status, meetList) {
+        const filterMeeting = this.meetings.filter(meeting => meeting.status === status);
+        meetList.innerHTML = `
+        ${filterMeeting.map(meeting => this.getMeetingHTML(meeting)).join('\n ')}               
+        `;
     }
 
     getMeetingHTML(meeting) {
@@ -36,16 +72,6 @@ class UserMeetings extends Component {
                 <a class="meeting__title" data-id="${meeting.id}" href="#/meeting/${meeting.id}">${meeting.id}</a>
             </div>
         `;
-    }
-
-    afterRender() {
-        this.setActions();
-    }
-
-    setActions() {
-        const meetListContainer = document.getElementsByClassName('meet-list-buttons')[0];
-
-        // meetListContainer.addEventListener('click',()=>);
     }
 
 

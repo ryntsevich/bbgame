@@ -67,7 +67,7 @@ class Meetings {
             xhr.open('PUT', `http://localhost:3000/api/meeting/${id}/close`);
             xhr.setRequestHeader('Content-Type', 'application/json');
 
-            xhr.onload = () => resolve(JSON.parse(xhr.response));
+            xhr.onload = () => resolve();
 
 
             xhr.send();
