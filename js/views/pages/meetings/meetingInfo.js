@@ -55,6 +55,8 @@ class MeetingInfo extends Component {
                         <button class="btn-delete-meet">Удалить встречу</button>
                         <button class="btn-edit-meet">Редактировать встречу</button>
                         <button class="btn-close-meet">Закрыть встречу</button>
+                        <button class="btn-join-meet">Принять участие</button>
+
                 </div>
                 </div>
 `;
@@ -73,21 +75,27 @@ class MeetingInfo extends Component {
     setActions() {
         const btnDeleteMeeting = document.getElementsByClassName('btn-delete-meet')[0],
             btnEditMeeting = document.getElementsByClassName('btn-edit-meet')[0],
-            btnCloseMeeting = document.getElementsByClassName('btn-close-meet')[0];
+            btnCloseMeeting = document.getElementsByClassName('btn-close-meet')[0],
+            btnJoinMeeting = document.getElementsByClassName('btn-join-meet')[0];
 
 
 
         btnDeleteMeeting.addEventListener('click', () => this.deleteMeeting(this.meeting.id));
         btnEditMeeting.addEventListener('click', () => this.redirectToMeetingEdit(this.meeting.id));
-        btnCloseMeeting.addEventListener('click', ()=> this.closeMeeting(this.meeting.id))
+        btnCloseMeeting.addEventListener('click', () => this.closeMeeting(this.meeting.id));
+        btnJoinMeeting.addEventListener('click', () => this.joinToMeeting(this.meeting.id, '02'));
     }
 
     deleteMeeting(id) {
         this.modelMeeting.deleteMeeting(id).then(meeting => this.redirectToMeetingsList());
     }
 
-    closeMeeting(id){
+    closeMeeting(id) {
         this.modelMeeting.closeMeeting(id).then(meeting => this.redirectToMeetingsList());
+    }
+
+    joinToMeeting(meetingId, userId) {
+        this.modelMeeting.joinToMeeting(meetingId, userId).then(meeting => console.log('jnhbgfdcsx'));
     }
 
     redirectToMeetingsList() {

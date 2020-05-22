@@ -1,1 +1,48 @@
-[{"gameName":"Кланы Каледонии","day":"gff","time":"fgf","place":"gfg","description":"fgfg","id":"g_PLXLIxJ","players":"user 01","status":"Closed"}]
+[
+    {
+        "gameName": "Кланы Каледонии",
+        "day": "gff",
+        "time": "fgf",
+        "place": "gfg",
+        "description": "fgfg",
+        "id": "g_PLXLIxJ",
+        "players": [
+            "user 01"
+        ],
+        "status": "Closed"
+    },
+    {
+        "gameName": "null",
+        "day": "k",
+        "time": "l",
+        "place": "l",
+        "description": "-",
+        "id": "U3-NGGdG1",
+        "status": "Actual"
+    },
+    {
+        "gameName": "null",
+        "day": "k",
+        "time": "k",
+        "place": "l",
+        "description": "-",
+        "id": "aztfZ0J3K",
+        "players": [
+            "01"
+        ],
+        "status": "Actual"
+    },
+    {
+        "gameName": "Пандемия",
+        "day": "jhgnbgfd",
+        "time": "dgfnhgbdv",
+        "place": "dgfnbgv",
+        "description": "-",
+        "id": "jdAMf2dHp",
+        "players": [
+            "01",
+            "02"
+        ],
+        "status": "Actual"
+    }
+]

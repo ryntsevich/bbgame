@@ -67,6 +67,20 @@ class Meetings {
 			xhr.open('PUT', `http://localhost:3000/api/meeting/${id}/close`);
 			xhr.setRequestHeader('Content-Type', 'application/json');
 
+            xhr.onload = () => resolve(JSON.parse(xhr.response));
+            
+
+			xhr.send();
+		});
+    }
+    
+    joinToMeeting(meetingId, userId) {
+		return new Promise(resolve => {
+			const xhr = new XMLHttpRequest();
+
+			xhr.open('PUT', `http://localhost:3000/api/meeting/${meetingId}/users/${userId}`);
+			xhr.setRequestHeader('Content-Type', 'application/json');
+
 			xhr.onload = () => resolve();
 
 			xhr.send();

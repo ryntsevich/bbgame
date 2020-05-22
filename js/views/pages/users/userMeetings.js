@@ -7,19 +7,22 @@ import Meetings from '../../../models/meetings.js';
 
 class UserMeetings extends Component {
     constructor() {
-		super();
-		
+        super();
+
         this.modelMeeting = new Meetings();
-	}
-	
-	getData() {
-		return new Promise(resolve => this.modelMeeting.getMeetingsList().then(meetings => resolve(meetings)));
-	}
+    }
+
+    getData() {
+        return new Promise(resolve => this.modelMeeting.getMeetingsList().then(meetings => resolve(meetings)));
+    }
     render(meetings) {
         return new Promise(resolve => {
             resolve(`
                 <h1 class="page-title">Мои встречи</h1>
-                <button class="meet-list-title" >Предстоящие</button>
+                <div class="meet-list-buttons">
+                <button class="meet-list-actual" >Предстоящие</button>
+                <button class="meet-list-closed" >Прошедшие</button>
+                </div>
                     <div class="meet-list">
                     ${meetings.map(meeting => this.getMeetingHTML(meeting)).join('\n ')}
                     </div>
@@ -34,6 +37,17 @@ class UserMeetings extends Component {
             </div>
         `;
     }
+
+    afterRender() {
+        this.setActions();
+    }
+
+    setActions() {
+        const meetListContainer = document.getElementsByClassName('meet-list-buttons')[0];
+
+        // meetListContainer.addEventListener('click',()=>);
+    }
+
 
 
 }

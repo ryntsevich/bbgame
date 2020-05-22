@@ -92,9 +92,13 @@ app.get('/api/meeting/:id', (req, res) => {
 app.post('/api/meeting', (req, res) => {
 	const meetingsData = getMeetingsFromDB(),
 		meeting = req.body;
+	// usersData = getUsersFromDB();
+	// user = usersData.find(user => user.id === '01');
+	// console.log(user);
 
 	meeting.id = shortId.generate();
-	meeting.players = 'user 01';
+	meeting.players = ['01'];
+	console.log(meeting.players);
 	meeting.description = meeting.description || '-';
 	meeting.status = 'Actual';
 
@@ -129,11 +133,25 @@ app.put('/api/meeting/:id', (req, res) => {
 
 app.put('/api/meeting/:id/close', (req, res) => {
 	const meetingsData = getMeetingsFromDB();
-	meetingsData.find(meeting => meeting.id === req.params.id).status = 'Closed',
+	meetingsData.find(meeting => meeting.id === req.params.id).status = 'Closed';
 
-		setMeetingsToDB(meetingsData);
+	setMeetingsToDB(meetingsData);
 
 	res.sendStatus(204);
+});
+
+app.put('/api/meeting/:meetingId/users/:userId', (req, res) => {
+	const usersData = getUsersFromDB(),
+		user = usersData.find(user => user.id === req.params.userId),
+		meetingsData = getMeetingsFromDB(),
+		meeting = meetingsData.find(meeting=> meeting.id === req.params.meetingId);
+
+		meeting.players.push(user.id);
+
+	setMeetingsToDB(meetingsData);
+
+	res.sendStatus(204);
+
 });
 
 
