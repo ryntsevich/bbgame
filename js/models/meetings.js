@@ -48,44 +48,57 @@ class Meetings {
         });
     }
     editMeeting(updatedMeeting) {
-		return new Promise(resolve => {
-			const xhr = new XMLHttpRequest();
+        return new Promise(resolve => {
+            const xhr = new XMLHttpRequest();
 
-			xhr.open('PUT', `http://localhost:3000/api/meeting/${updatedMeeting.id}`);
-			xhr.setRequestHeader('Content-Type', 'application/json');
+            xhr.open('PUT', `http://localhost:3000/api/meeting/${updatedMeeting.id}`);
+            xhr.setRequestHeader('Content-Type', 'application/json');
 
-			xhr.onload = () => resolve();
+            xhr.onload = () => resolve();
 
-			xhr.send(JSON.stringify(updatedMeeting));
-		});
+            xhr.send(JSON.stringify(updatedMeeting));
+        });
     }
-    
-    closeMeeting(id) {
-		return new Promise(resolve => {
-			const xhr = new XMLHttpRequest();
 
-			xhr.open('PUT', `http://localhost:3000/api/meeting/${id}/close`);
-			xhr.setRequestHeader('Content-Type', 'application/json');
+    closeMeeting(id) {
+        return new Promise(resolve => {
+            const xhr = new XMLHttpRequest();
+
+            xhr.open('PUT', `http://localhost:3000/api/meeting/${id}/close`);
+            xhr.setRequestHeader('Content-Type', 'application/json');
 
             xhr.onload = () => resolve(JSON.parse(xhr.response));
-            
 
-			xhr.send();
-		});
+
+            xhr.send();
+        });
     }
-    
+
     joinToMeeting(meetingId, userId) {
-		return new Promise(resolve => {
-			const xhr = new XMLHttpRequest();
+        return new Promise(resolve => {
+            const xhr = new XMLHttpRequest();
 
-			xhr.open('PUT', `http://localhost:3000/api/meeting/${meetingId}/users/${userId}`);
-			xhr.setRequestHeader('Content-Type', 'application/json');
+            xhr.open('PUT', `http://localhost:3000/api/meeting/${meetingId}/users/${userId}`);
+            xhr.setRequestHeader('Content-Type', 'application/json');
 
-			xhr.onload = () => resolve();
+            xhr.onload = () => resolve();
 
-			xhr.send();
-		});
-	}
+            xhr.send();
+        });
+    }
+
+    getPlayers(meeting) {
+        return new Promise(resolve => {
+            const xhr = new XMLHttpRequest();
+
+            xhr.open('GET', `http://localhost:3000/api/meeting/${meeting.id}list`);
+
+            xhr.onload = () => resolve(JSON.parse(xhr.response));
+
+            xhr.send(JSON.stringify(meeting));
+        });
+
+    }
 
 }
 

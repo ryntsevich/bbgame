@@ -63,7 +63,7 @@ class MeetingAdd extends Component {
         });
         btnCreateMeeting.addEventListener('click', () => {
             this.addNewMeeting(addGameName, addDay, addTime, addPlace, addDescription);
-            localStorage.clear();
+            // localStorage.clear();
         });
 
     }

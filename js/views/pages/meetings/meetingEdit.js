@@ -45,7 +45,7 @@ class MeetingEdit extends Component {
                 </div>
                 <div class="meet-propertis">
                     <div class="meet-propertis__title">Участники:</div>
-                    <div class="meet-propertis__content">${players}</div>
+                    ${players.map(player => `<div class="meet-propertis__content">${player}</div>`).join('\n ')}
                 </div>
                 <div class="meet-propertis">
                     <div class="meet-propertis__title">Описание:</div>

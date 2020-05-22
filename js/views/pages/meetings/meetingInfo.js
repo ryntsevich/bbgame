@@ -8,6 +8,9 @@ class MeetingInfo extends Component {
         super();
 
         this.modelMeeting = new Meetings();
+        this.maxPlayersLS = localStorage.getItem('maxPlayers');
+        console.log(this.maxPlayersLS)
+
     }
     getData() {
         return new Promise(resolve => this.modelMeeting.getMeeting(this.request.id).then(meeting => {
@@ -23,6 +26,7 @@ class MeetingInfo extends Component {
 
             if (meeting) {
                 const { id, gameName, day, time, place, description, players } = meeting;
+                console.log(players.length === this.maxPlayersLS)
 
                 html = `
                 <h1 class="page-title">Встреча ${id}</h1>
@@ -43,9 +47,10 @@ class MeetingInfo extends Component {
                         <div class="meet-propertis__title">Место:</div>
                         <div class="meet-propertis__content">${place}</div>
                     </div>
-                    <div class="meet-propertis">
+                    <div class="meet-propertis players">
                         <div class="meet-propertis__title">Участники:</div>
-                        <div class="meet-propertis__content">${players}</div>
+                        ${players.map(player => `<div class="meet-propertis__content">${player}</div>`).join('\n ')}
+
                     </div>
                     <div class="meet-propertis">
                         <div class="meet-propertis__title">Описание:</div>
@@ -55,7 +60,7 @@ class MeetingInfo extends Component {
                         <button class="btn-delete-meet">Удалить встречу</button>
                         <button class="btn-edit-meet">Редактировать встречу</button>
                         <button class="btn-close-meet">Закрыть встречу</button>
-                        <button class="btn-join-meet">Принять участие</button>
+                        <button class="btn-join-meet" ${players.length == this.maxPlayersLS && 'disabled'}>Принять участие</button>
 
                 </div>
                 </div>
@@ -76,14 +81,15 @@ class MeetingInfo extends Component {
         const btnDeleteMeeting = document.getElementsByClassName('btn-delete-meet')[0],
             btnEditMeeting = document.getElementsByClassName('btn-edit-meet')[0],
             btnCloseMeeting = document.getElementsByClassName('btn-close-meet')[0],
-            btnJoinMeeting = document.getElementsByClassName('btn-join-meet')[0];
+            btnJoinMeeting = document.getElementsByClassName('btn-join-meet')[0],
+            playersContainer = document.getElementsByClassName('players')[0];
 
 
 
         btnDeleteMeeting.addEventListener('click', () => this.deleteMeeting(this.meeting.id));
         btnEditMeeting.addEventListener('click', () => this.redirectToMeetingEdit(this.meeting.id));
         btnCloseMeeting.addEventListener('click', () => this.closeMeeting(this.meeting.id));
-        btnJoinMeeting.addEventListener('click', () => this.joinToMeeting(this.meeting.id, '02'));
+        btnJoinMeeting.addEventListener('click', () => this.joinToMeeting(this.meeting.id, '02', playersContainer, btnJoinMeeting));
     }
 
     deleteMeeting(id) {
@@ -94,8 +100,18 @@ class MeetingInfo extends Component {
         this.modelMeeting.closeMeeting(id).then(meeting => this.redirectToMeetingsList());
     }
 
-    joinToMeeting(meetingId, userId) {
-        this.modelMeeting.joinToMeeting(meetingId, userId).then(meeting => console.log('jnhbgfdcsx'));
+    joinToMeeting(meetingId, userId, playersContainer, btnJoinMeeting) {
+        this.modelMeeting.joinToMeeting(meetingId, userId).then(meeting => {
+            this.modelMeeting.getMeeting(this.request.id).then(meeting => {
+                this.players = meeting.players;
+                btnJoinMeeting.disabled = this.players.length == this.maxPlayersLS;
+                playersContainer.innerHTML = `
+                       <div class="meet-propertis__title">Участники:</div>
+                        ${meeting.players.map(player => `<div class="meet-propertis__content">${player}</div>`).join('\n ')}
+                     `;
+            }
+            )
+        });
     }
 
     redirectToMeetingsList() {

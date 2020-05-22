@@ -24,7 +24,7 @@ class GameInfo extends Component {
             let html;
 
             if (game) {
-                const { id, title, img, age, numberPlayers, time } = game;
+                const { id, title, img, age, minPlayers, maxPlayers, time } = game;
 
                 html = `
                 <h1 class="page-title">${title}</h1>
@@ -37,7 +37,7 @@ class GameInfo extends Component {
                             <div class="properties__title ">Характеристики</div>
                             <div class="properties__name">
                                 <div class="name">Количество игроков</div>
-                                <div class="value">${numberPlayers}</div>
+                                <div class="value">${minPlayers} - ${maxPlayers}</div>
                             </div>
                             <div class="properties__name">
                                 <div class="name">Возраст игроков</div>
@@ -108,8 +108,9 @@ class GameInfo extends Component {
         });
 
         btnCreateMeeting.addEventListener('click', () => {
-            console.log(this.game.title);
+            // console.log(this.game.title);
             localStorage.setItem('nameGame', this.game.title);
+            localStorage.setItem('maxPlayers', this.game.maxPlayers);
             this.redirectToMeetingAdd();
         });
     }

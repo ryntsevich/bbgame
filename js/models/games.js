@@ -33,7 +33,6 @@ class Games {
 			xhr.setRequestHeader('Content-Type', 'application/json');
 			
 			xhr.send(JSON.stringify(games));
-			console.log(games)
 		});
 	}
 
