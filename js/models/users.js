@@ -36,6 +36,19 @@ class Users {
 		});
 	}
 
+	deleteFromCollection(userId, gameId, typeCollection) {
+		return new Promise(resolve => {
+			const xhr = new XMLHttpRequest();
+
+			xhr.open('DELETE', `http://localhost:3000/api/user/${userId}/games/${gameId}?typeCollection=${typeCollection}`);
+			xhr.setRequestHeader('Content-Type', 'application/json');
+
+			xhr.onload = () => resolve();
+
+			xhr.send();
+		});
+	}
+
 	addUser(newUser) {
 		return new Promise(resolve => {
 			const xhr = new XMLHttpRequest();

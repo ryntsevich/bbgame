@@ -67,6 +67,28 @@ app.put('/api/user/:userId/games/:gameId', (req, res) => {
 	res.sendStatus(204);
 });
 
+app.delete('/api/user/:userId/games/:gameId', (req, res) => {
+	const usersData = getUsersFromDB(),
+		gameId = req.params.gameId,
+		user = usersData.find(user => user.id === req.params.userId);
+
+	switch (req.query.typeCollection) {
+		case 'usersGames':
+			user.collectionGames = user.collectionGames.filter(game => game != gameId);
+			break;
+
+		case 'wishGames':
+			user.wishGames = user.wishGames.filter(game => game != gameId);
+			break;
+
+		case 'playedGames':
+			user.playedGames = user.playedGames.filter(game => game != gameId);
+			break;
+	}
+	setUsersToDB(usersData);
+	res.sendStatus(204);
+});
+
 app.get('/api/users', (req, res) => {
 	res.send(getUsersFromDB());
 });

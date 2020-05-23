@@ -10,11 +10,13 @@ class GameInfo extends Component {
 
         this.modelUsers = new Users();
         this.modelGames = new Games();
+        this.user = JSON.parse(localStorage.getItem('user'));
 
 
     }
     getData() {
         return new Promise(resolve => this.modelGames.getGame(this.request.id).then(game => {
+            // this.modelUsers.getUser(this.user.id).then()
             this.game = game;
             resolve(game);
         }
@@ -57,8 +59,8 @@ class GameInfo extends Component {
                         </div>
                     </div>
                     <div class="game-info__buttons">
-                    ${user.collectionGames.includes(id) ? `<button class="game-info-buttons__btn-usersGames" data-collection="usersGames" disabled>Добавленно в коллекцию</button>`
-                : `<button class="game-info-buttons__btn-usersGames" data-collection="usersGames">В мою коллекцию</button>`}
+                    ${user.collectionGames.includes(id) ? `<button class="game-info-buttons__btn-usersGames" data-status="delete" data-collection="usersGames">Удалить из коллекции</button>`
+                        : `<button class="game-info-buttons__btn-usersGames" data-status="add" data-collection="usersGames">В мою коллекцию</button>`}
                         <button class="game-info-buttons__btn-wishGames" data-collection="wishGames">Хочу поиграть</button>
                         <button class="game-info-buttons__btn-playedGames" data-collection="playedGames">Играл</button>
                         <button class="user-info-buttons__btn-createMeeting">Создать встречу</button>
@@ -89,7 +91,10 @@ class GameInfo extends Component {
             btnToUsersGame = document.getElementsByClassName('game-info-buttons__btn-usersGames')[0],
             btnToWishGames = document.getElementsByClassName('game-info-buttons__btn-wishGames')[0],
             btnToPlayedGames = document.getElementsByClassName('game-info-buttons__btn-playedGames')[0],
-            btnCreateMeeting = document.getElementsByClassName('user-info-buttons__btn-createMeeting')[0];
+            btnCreateMeeting = document.getElementsByClassName('user-info-buttons__btn-createMeeting')[0],
+
+            btnDeleteFromUserGame = document.getElementsByClassName('game-info-buttons__btn-usersGames-delete')[0];
+
         const user = JSON.parse(localStorage.getItem('user'));
 
         buttonsGameInfoContainer.addEventListener('click', () => {
@@ -98,24 +103,30 @@ class GameInfo extends Component {
 
             switch (true) {
                 case targetClassList.contains('game-info-buttons__btn-usersGames'):
-                    this.addGameToUserCollection(user.id, this.game.id, target.dataset.collection, btnToUsersGame);
-                    // console.log(this.user);
-                    break;
+                    if (target.dataset.status === 'add') {
+                        this.addGameToUserCollection(user.id, this.game.id, target.dataset.collection, btnToUsersGame);
+                        break;
+                    } else {
+                        this.deleteGameFromUserCollection(user.id, this.game.id, target.dataset.collection, btnToUsersGame);
+                        break;
+                    }
 
                 case targetClassList.contains('game-info-buttons__btn-wishGames'):
                     this.addGameToUserCollection(user.id, this.game.id, target.dataset.collection, btnToWishGames);
-
                     break;
 
                 case targetClassList.contains('game-info-buttons__btn-playedGames'):
                     this.addGameToUserCollection(user.id, this.game.id, target.dataset.collection, btnToPlayedGames);
+                    break;
+
+                case targetClassList.contains('game-info-buttons__btn-usersGames-delete'):
+                    this.deleteGameFromUserCollection(user.id, this.game.id, target.dataset.collection, btnDeleteFromUserGame);
                     break;
             }
 
         });
 
         btnCreateMeeting.addEventListener('click', () => {
-            // console.log(this.game.title);
             localStorage.setItem('nameGame', this.game.title);
             localStorage.setItem('maxPlayers', this.game.maxPlayers);
             this.redirectToMeetingAdd();
@@ -125,11 +136,18 @@ class GameInfo extends Component {
 
 
     addGameToUserCollection(userId, gameID, typeCollection, buttonName) {
-
         this.modelUsers.addToCollection(userId, gameID, typeCollection).then(button => {
-            buttonName.setAttribute('disabled', 'true');
-            buttonName.textContent = 'Добавленно в коллекцию';
+            buttonName.dataset.status = 'delete'
+            buttonName.textContent = 'Удалить из коллекции';
         })
+    }
+
+    deleteGameFromUserCollection(userId, gameID, typeCollection, buttonName) {
+        this.modelUsers.deleteFromCollection(userId, gameID, typeCollection).then(button => {
+            buttonName.dataset.status = 'add'
+            buttonName.textContent = 'В мою коллекцию';
+        });
+
     }
 
     getParagraphHTML(paragraph) {
