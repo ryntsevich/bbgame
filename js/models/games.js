@@ -15,7 +15,7 @@ class Games {
 		return new Promise(resolve => {
 			const xhr = new XMLHttpRequest();
 
-			xhr.open('GET', `http://localhost:3000/api/game/${id}`);
+			xhr.open('GET', `http://localhost:3000/api/games/${id}`);
 
 			xhr.onload = () => resolve(JSON.parse(xhr.response));
 
@@ -26,13 +26,13 @@ class Games {
 	getGamesByIds(games) {
 		return new Promise(resolve => {
 			const xhr = new XMLHttpRequest();
-			
+
 			xhr.open('POST', `http://localhost:3000/api/games/list`);
-			
+
 			xhr.onload = () => resolve(JSON.parse(xhr.response));
 			xhr.setRequestHeader('Content-Type', 'application/json');
-			
-			xhr.send(JSON.stringify(games));
+
+			xhr.send(JSON.stringify({ ids: games }));
 		});
 	}
 

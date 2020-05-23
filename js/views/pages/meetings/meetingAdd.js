@@ -74,13 +74,14 @@ class MeetingAdd extends Component {
             day: addDay.value.trim(),
             time: addTime.value.trim(),
             place: addPlace.value.trim(),
-            description: addDescription.value.trim()
+            description: addDescription.value.trim(),
+            players: [(JSON.parse(localStorage.getItem('user')))._id]
         };
 
 
         this.modelMeetings.addMeeting(newMeeting).then(meeting => {
             // this.clearAddNewMeeting(addGameName, addDay, addTime, addPlace, addDescription);
-            this.redirectToMeetingInfo(meeting.id);
+            this.redirectToMeetingInfo(meeting._id);
         });
 
     }
@@ -99,7 +100,7 @@ class MeetingAdd extends Component {
     // }
 
     redirectToMeetingInfo(id) {
-        location.hash = `#/meeting/${id}`;
+        location.hash = `#/meetings/${id}`;
     }
 
 

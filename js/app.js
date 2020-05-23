@@ -30,12 +30,12 @@ const Routes = {
     '/games': GamesList,
     '/games/:id': GameInfo,
     '/users': UsersList,
-    '/user/:id': UserInfo,
-    '/user/:id/meetings': UserMeetings,
-    '/meeting/:id': MeetingInfo,
+    '/users/:id': UserInfo,
+    '/users/:id/meetings': UserMeetings,
+    '/meetings/:id': MeetingInfo,
     '/meetings': MeetingsList,
     '/create': MeetingAdd,
-    '/meeting/:id/edit': MeetingEdit
+    '/meetings/:id/edit': MeetingEdit
     // '/tasks': AddAndList
     // '/game/:id/edit': GameEdit
 };

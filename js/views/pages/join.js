@@ -94,7 +94,7 @@ class SignUp extends Component {
     }
     this.modelUsers.addUser(newUser).then(user => {
       console.log(user);
-      this.redirectToUserInfo(user.id)
+      this.redirectToUserInfo(user._id)
     });
 
   }

@@ -22,10 +22,10 @@ class MeetingEdit extends Component {
             let html;
 
             if (meeting) {
-                const { id, gameName, day, time, place, description, players } = meeting;
+                const { _id, gameName, day, time, place, description, players } = meeting;
 
                 html = `
-                <h1 class="page-title">Встреча ${id}</h1>
+                <h1 class="page-title">Встреча ${_id}</h1>
                 <div class="meet">
                 <div class="meet-propertis">
                     <div class="meet-propertis__title">Игра:</div>
@@ -53,7 +53,7 @@ class MeetingEdit extends Component {
                 </div>
                 <div class="meet-propertis-btn">
                     <button class="btn-save-meet">Сохранить правки</button>
-                    <a class="btn-cancel-meet" href ="#/meeting/${this.meeting.id}">Отмена</a>
+                    <a class="btn-cancel-meet" href ="#/meetings/${this.meeting._id}">Отмена</a>
                 </div>
             </div>
                 </div>
@@ -86,11 +86,11 @@ class MeetingEdit extends Component {
         this.meeting.place = editPlace.value.trim();
         this.meeting.description = editDescription.value.trim();
 
-        this.modelMeeting.editMeeting(this.meeting).then(meeting => this.redirectToMeetingInfo(this.meeting.id));
+        this.modelMeeting.editMeeting(this.meeting).then(meeting => this.redirectToMeetingInfo(this.meeting._id));
     }
 
     redirectToMeetingInfo() {
-        location.hash = `#/meeting/${this.meeting.id}`;
+        location.hash = `#/meetings/${this.meeting._id}`;
     }
 
 }

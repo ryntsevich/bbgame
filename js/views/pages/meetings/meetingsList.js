@@ -26,8 +26,8 @@ class MeetingsList extends Component {
 
     getMeetingHTML(meeting) {
         return `
-            <div class="meeting" data-id="${meeting.id}">
-                <a class="meeting__title" data-id="${meeting.id}" href="#/meeting/${meeting.id}">${meeting.id}</a>
+            <div class="meeting" data-id="${meeting._id}">
+                <a class="meeting__title" data-id="${meeting._id}" href="#/meetings/${meeting._id}">${meeting._id}</a>
             </div>
         `;
     }
@@ -55,7 +55,7 @@ class MeetingsList extends Component {
     }
 
     redirectToMeetingInfo(id) {
-        location.hash = `#/meeting/${id}`;
+        location.hash = `#/meetings/${id}`;
     }
 }
 

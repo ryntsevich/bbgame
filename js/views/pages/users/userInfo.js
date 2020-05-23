@@ -15,9 +15,9 @@ class UserInfo extends Component {
     }
     getData() {
         return new Promise(resolve => this.model.getUser(this.request.id).then(user => {
+            console.log('user');
             this.modelGames.getGamesByIds(user.collectionGames).then(games => {
                 user['renderGames'] = games;
-                // console.log(games);
                 this.user = user;
                 localStorage.setItem('user', JSON.stringify(this.user));
                 // console.log(user);
@@ -56,7 +56,7 @@ class UserInfo extends Component {
                     </div>
                 </div>
                 <div class = "user-info-meetigs">
-                    <a class="user-info-buttons__btn-usersMeetings" href="#/user/${user.id}/meetings">Мои встречи</a>
+                    <a class="user-info-buttons__btn-usersMeetings" href="#/users/${user._id}/meetings">Мои встречи</a>
                 </div>
                 <div class="user-info-games">
                     <div class="user-info-buttons">
@@ -121,10 +121,10 @@ class UserInfo extends Component {
     getUsersGames(game) {
         return `
             <div class="game">
-                <div class="game__img" data-id="id">
-                    <img data-id="id" src="${game.img}" alt="" width = "100px" height="100px">
+                <div class="game__img">
+                    <img  src="${game.img}" alt="" width = "100px" height="100px">
                 </div>
-                <a class="game__title" data-id="id" href="#/games/${game.id}">${game.title}</a>
+                <a class="game__title" href="#/games/${game._id}">${game.title}</a>
             </div>        
         `
     }

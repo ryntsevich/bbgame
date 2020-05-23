@@ -13,9 +13,10 @@ class Users {
 
 	getUser(id) {
 		return new Promise(resolve => {
+			console.log(id)
 			const xhr = new XMLHttpRequest();
 
-			xhr.open('GET', `http://localhost:3000/api/user/${id}`);
+			xhr.open('GET', `http://localhost:3000/api/users/${id}`);
 
 			xhr.onload = () => resolve(JSON.parse(xhr.response));
 
@@ -27,7 +28,7 @@ class Users {
 		return new Promise(resolve => {
 			const xhr = new XMLHttpRequest();
 
-			xhr.open('PUT', `http://localhost:3000/api/user/${userId}/games/${gameId}?typeCollection=${typeCollection}`);
+			xhr.open('PUT', `http://localhost:3000/api/users/${userId}/games/${gameId}?typeCollection=${typeCollection}&action=add`);
 			xhr.setRequestHeader('Content-Type', 'application/json');
 
 			xhr.onload = () => resolve();
@@ -40,7 +41,7 @@ class Users {
 		return new Promise(resolve => {
 			const xhr = new XMLHttpRequest();
 
-			xhr.open('DELETE', `http://localhost:3000/api/user/${userId}/games/${gameId}?typeCollection=${typeCollection}`);
+			xhr.open('PUT', `http://localhost:3000/api/users/${userId}/games/${gameId}?typeCollection=${typeCollection}&action=remove`);
 			xhr.setRequestHeader('Content-Type', 'application/json');
 
 			xhr.onload = () => resolve();
@@ -53,7 +54,7 @@ class Users {
 		return new Promise(resolve => {
 			const xhr = new XMLHttpRequest();
 
-			xhr.open('POST', 'http://localhost:3000/api/user');
+			xhr.open('POST', 'http://localhost:3000/api/users');
 			xhr.setRequestHeader('Content-Type', 'application/json');
 
 			xhr.onload = () => resolve(JSON.parse(xhr.response));

@@ -16,7 +16,7 @@ class GameInfo extends Component {
     }
     getData() {
         return new Promise(resolve => this.modelGames.getGame(this.request.id).then(game => {
-            // this.modelUsers.getUser(this.user.id).then()
+            // this.modelUsers.getUser(this.user._id).then()
             this.game = game;
             resolve(game);
         }
@@ -30,17 +30,16 @@ class GameInfo extends Component {
             let html;
 
             if (game) {
-                const { id, title, img, age, minPlayers, maxPlayers, time } = game;
+                const { _id, title, img, age, minPlayers, maxPlayers, time } = game;
                 const user = JSON.parse(localStorage.getItem('user'));
-                // console.log(user.collectionGames.includes(id));
 
 
                 html = `
                 <h1 class="page-title">${title}</h1>
                 <div class="game-info">
-                    <div class="game-info__properties" data-id="${id}">
-                        <div class="properties__img" data-id="${id}">
-                            <img data-id="${id}" src="${img}" alt="">
+                    <div class="game-info__properties" data-id="${_id}">
+                        <div class="properties__img" data-id="${_id}">
+                            <img data-id="${_id}" src="${img}" alt="">
                         </div>
                         <div class="properties">
                             <div class="properties__title ">Характеристики</div>
@@ -59,13 +58,13 @@ class GameInfo extends Component {
                         </div>
                     </div>
                     <div class="game-info__buttons">
-                    ${user.collectionGames.includes(id) ? `<button class="game-info-buttons__btn-usersGames" data-status="delete" data-collection="usersGames">Удалить из коллекции</button>`
-                        : `<button class="game-info-buttons__btn-usersGames" data-status="add" data-collection="usersGames">В мою коллекцию</button>`}
+                    ${user.collectionGames.includes(_id) ? `<button class="game-info-buttons__btn-usersGames" data-status="delete" data-collection="collectionGames">Удалить из коллекции</button>`
+                        : `<button class="game-info-buttons__btn-usersGames" data-status="add" data-collection="collectionGames">В мою коллекцию</button>`}
                         <button class="game-info-buttons__btn-wishGames" data-collection="wishGames">Хочу поиграть</button>
                         <button class="game-info-buttons__btn-playedGames" data-collection="playedGames">Играл</button>
                         <button class="user-info-buttons__btn-createMeeting">Создать встречу</button>
                     </div>
-                    <div class="game-info__description" data-id="id">
+                    <div class="game-info__description" data-id="_id">
                         <div class="description-title">Описание</div>
                         <div class="description-content">
                             ${game.description.map(paragraph => this.getParagraphHTML(paragraph)).join('\n ')}
@@ -104,23 +103,23 @@ class GameInfo extends Component {
             switch (true) {
                 case targetClassList.contains('game-info-buttons__btn-usersGames'):
                     if (target.dataset.status === 'add') {
-                        this.addGameToUserCollection(user.id, this.game.id, target.dataset.collection, btnToUsersGame);
+                        this.addGameToUserCollection(user._id, this.game._id, target.dataset.collection, btnToUsersGame);
                         break;
                     } else {
-                        this.deleteGameFromUserCollection(user.id, this.game.id, target.dataset.collection, btnToUsersGame);
+                        this.deleteGameFromUserCollection(user._id, this.game._id, target.dataset.collection, btnToUsersGame);
                         break;
                     }
 
                 case targetClassList.contains('game-info-buttons__btn-wishGames'):
-                    this.addGameToUserCollection(user.id, this.game.id, target.dataset.collection, btnToWishGames);
+                    this.addGameToUserCollection(user._id, this.game._id, target.dataset.collection, btnToWishGames);
                     break;
 
                 case targetClassList.contains('game-info-buttons__btn-playedGames'):
-                    this.addGameToUserCollection(user.id, this.game.id, target.dataset.collection, btnToPlayedGames);
+                    this.addGameToUserCollection(user._id, this.game._id, target.dataset.collection, btnToPlayedGames);
                     break;
 
                 case targetClassList.contains('game-info-buttons__btn-usersGames-delete'):
-                    this.deleteGameFromUserCollection(user.id, this.game.id, target.dataset.collection, btnDeleteFromUserGame);
+                    this.deleteGameFromUserCollection(user._id, this.game._id, target.dataset.collection, btnDeleteFromUserGame);
                     break;
             }
 

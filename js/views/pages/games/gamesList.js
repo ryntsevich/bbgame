@@ -30,10 +30,10 @@ class GamesList extends Component {
     getGameHTML(game) {
         return `
             <div class="game">
-                <div class="game__img" data-id="${game.id}">
-                    <img data-id="${game.id}" src="${game.img}" alt="">
+                <div class="game__img" data-id="${game._id}">
+                    <img data-id="${game._id}" src="${game.img}" alt="">
                 </div>
-            <a class="game__title" data-id="${game.id}" href="#/games/${game.id}">${game.title}</a>
+            <a class="game__title" data-id="${game._id}" href="#/games/${game._id}">${game.title}</a>
             </div>
         `;
     }

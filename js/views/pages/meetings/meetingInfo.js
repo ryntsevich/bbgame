@@ -9,11 +9,12 @@ class MeetingInfo extends Component {
 
         this.modelMeeting = new Meetings();
         this.maxPlayersLS = localStorage.getItem('maxPlayers');
-        console.log(this.maxPlayersLS)
+        // console.log(this.maxPlayersLS)
 
     }
     getData() {
         return new Promise(resolve => this.modelMeeting.getMeeting(this.request.id).then(meeting => {
+            console.log('fgds');
             this.meeting = meeting;
             resolve(meeting);
         }
@@ -25,11 +26,11 @@ class MeetingInfo extends Component {
             let html;
 
             if (meeting) {
-                const { id, gameName, day, time, place, description, players } = meeting;
-                console.log(players.length === this.maxPlayersLS)
+                const { _id, gameName, day, time, place, description, players } = meeting;
+                // console.log(players.length === this.maxPlayersLS)
 
                 html = `
-                <h1 class="page-title">Встреча ${id}</h1>
+                <h1 class="page-title">Встреча ${_id}</h1>
                 <div class="meet">
                     <div class="meet-propertis">
                         <div class="meet-propertis__title">Игра:</div>
@@ -82,14 +83,16 @@ class MeetingInfo extends Component {
             // btnDeleteMeeting = document.getElementsByClassName('btn-delete-meet')[0],
             btnCloseMeeting = document.getElementsByClassName('btn-close-meet')[0],
             btnJoinMeeting = document.getElementsByClassName('btn-join-meet')[0],
-            playersContainer = document.getElementsByClassName('players')[0];
+            playersContainer = document.getElementsByClassName('players')[0],
+
+            user = JSON.parse(localStorage.getItem('user'));
 
 
 
-        // btnDeleteMeeting.addEventListener('click', () => this.deleteMeeting(this.meeting.id));
-        btnEditMeeting.addEventListener('click', () => this.redirectToMeetingEdit(this.meeting.id));
-        btnCloseMeeting.addEventListener('click', () => this.closeMeeting(this.meeting.id));
-        btnJoinMeeting.addEventListener('click', () => this.joinToMeeting(this.meeting.id, '02', playersContainer, btnJoinMeeting));
+        // btnDeleteMeeting.addEventListener('click', () => this.deleteMeeting(this.meeting._id));
+        btnEditMeeting.addEventListener('click', () => this.redirectToMeetingEdit(this.meeting._id));
+        btnCloseMeeting.addEventListener('click', () => this.closeMeeting(this.meeting._id));
+        btnJoinMeeting.addEventListener('click', () => this.joinToMeeting(this.meeting._id, user._id, playersContainer, btnJoinMeeting));
     }
 
     // deleteMeeting(id) {
@@ -118,7 +121,7 @@ class MeetingInfo extends Component {
         location.hash = `#/meetings`;
     }
     redirectToMeetingEdit() {
-        location.hash = `#/meeting/${this.meeting.id}/edit`;
+        location.hash = `#/meetings/${this.meeting._id}/edit`;
     }
 
 }

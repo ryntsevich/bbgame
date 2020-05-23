@@ -68,7 +68,7 @@ class UserMeetings extends Component {
     getMeetingHTML(meeting) {
         return `
             <div class="meeting">
-                <a class="meeting__title" data-id="${meeting.id}" href="#/meeting/${meeting.id}">${meeting.id}</a>
+                <a class="meeting__title" data-id="${meeting._id}" href="#/meetings/${meeting._id}">${meeting._id}</a>
             </div>
         `;
     }
