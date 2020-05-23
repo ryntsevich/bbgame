@@ -78,6 +78,24 @@ app.get('/api/user/:id', (req, res) => {
 	user ? res.send(user) : res.send({});
 });
 
+app.post('/api/user', (req, res) => {
+	const usersData = getUsersFromDB(),
+		user = req.body;
+
+	user.id = shortId.generate();
+	user.img = "images/avatar.jpg";
+	user.collectionGames = [];
+	user.wishGames = [];
+	user.playedGames = [];
+
+
+	usersData.push(user);
+	setUsersToDB(usersData);
+
+	res.send(user);
+});
+
+
 app.get('/api/meetings', (req, res) => {
 	res.send(getMeetingsFromDB());
 });

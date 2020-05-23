@@ -36,38 +36,18 @@ class Users {
 		});
 	}
 
+	addUser(newUser) {
+		return new Promise(resolve => {
+			const xhr = new XMLHttpRequest();
 
+			xhr.open('POST', 'http://localhost:3000/api/user');
+			xhr.setRequestHeader('Content-Type', 'application/json');
 
+			xhr.onload = () => resolve(JSON.parse(xhr.response));
 
-
-
-	// addTask(newTask) {
-	// 	return new Promise(resolve => {
-	// 		const xhr = new XMLHttpRequest();
-
-	// 		xhr.open('POST', 'http://localhost:3000/api/task');
-	// 		xhr.setRequestHeader('Content-Type', 'application/json');
-
-	// 		xhr.onload = () => resolve(JSON.parse(xhr.response));
-
-	// 		xhr.send(JSON.stringify(newTask));
-	// 	});
-	// }
-
-
-
-	// editTask(updatedTask) {
-	// 	return new Promise(resolve => {
-	// 		const xhr = new XMLHttpRequest();
-
-	// 		xhr.open('PUT', `http://localhost:3000/api/task/${updatedTask.id}`);
-	// 		xhr.setRequestHeader('Content-Type', 'application/json');
-
-	// 		xhr.onload = () => resolve();
-
-	// 		xhr.send(JSON.stringify(updatedTask));
-	// 	});
-	// }
+			xhr.send(JSON.stringify(newUser));
+		});
+	}
 }
 
 export default Users;

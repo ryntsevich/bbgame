@@ -6,7 +6,7 @@ class Footer extends Component {
             resolve(`
                 <footer class="footer">                   
                     <p class="footer__info">
-                        &copy; All Rights Reserved, 2019
+                        &copy; All Rights Reserved, 2020
                     </p>                  
                 </footer>
             `);

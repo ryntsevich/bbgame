@@ -22,11 +22,11 @@ class MeetingAdd extends Component {
                 </div>
                 <div class="meet-propertis">
                     <div class="meet-propertis__title">Дата:</div>
-                    <input class="meet-propertis__content meet-add-day" type="text">
+                    <input class="meet-propertis__content meet-add-day" type="date">
                 </div>
                 <div class="meet-propertis">
                     <div class="meet-propertis__title">Время:</div>
-                    <input class="meet-propertis__content meet-add-time" type="text">
+                    <input class="meet-propertis__content meet-add-time" type="time">
                 </div>
                 <div class="meet-propertis">
                     <div class="meet-propertis__title">Место:</div>
@@ -58,7 +58,8 @@ class MeetingAdd extends Component {
             addDescription = document.getElementsByClassName('meet-add-description')[0],
             listContainer = document.getElementsByClassName('meet')[0];
 
-        listContainer.addEventListener('keyup', () => {
+
+        listContainer.addEventListener('input', () => {
             this.changeButtonStatus(addDay, addTime, addPlace, btnCreateMeeting);
         });
         btnCreateMeeting.addEventListener('click', () => {

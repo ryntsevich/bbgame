@@ -47,9 +47,9 @@ class UserInfo extends Component {
                             <div class="name">Возраст</div>
                             <div class="value">${user.age}</div>
                         </div>
-                        <div class="user-male item">
+                        <div class="user-gender item">
                             <div class="name">Пол</div>
-                            <div class="value">${user.male}</div>
+                            <div class="value">${user.gender}</div>
                         </div>
                     </div>
                 </div>

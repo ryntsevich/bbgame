@@ -33,11 +33,11 @@ class MeetingEdit extends Component {
                 </div>
                 <div class="meet-propertis">
                     <div class="meet-propertis__title">Дата:</div>
-                    <input class="meet-propertis__content meet-edit-day" type="text" value="${day}">
+                    <input class="meet-propertis__content meet-edit-day" type="date" value="${day}">
                 </div>
                 <div class="meet-propertis">
                     <div class="meet-propertis__title">Время:</div>
-                    <input class="meet-propertis__content meet-edit-time" type="text" value="${time}">
+                    <input class="meet-propertis__content meet-edit-time" type="time" value="${time}">
                 </div>
                 <div class="meet-propertis">
                     <div class="meet-propertis__title">Место:</div>
