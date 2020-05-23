@@ -10,6 +10,8 @@ class GameInfo extends Component {
 
         this.modelUsers = new Users();
         this.modelGames = new Games();
+
+
     }
     getData() {
         return new Promise(resolve => this.modelGames.getGame(this.request.id).then(game => {
@@ -19,12 +21,17 @@ class GameInfo extends Component {
         ));
     }
 
+
+
     render(game) {
         return new Promise(resolve => {
             let html;
 
             if (game) {
                 const { id, title, img, age, minPlayers, maxPlayers, time } = game;
+                const user = JSON.parse(localStorage.getItem('user'));
+                // console.log(user.collectionGames.includes(id));
+
 
                 html = `
                 <h1 class="page-title">${title}</h1>
@@ -50,7 +57,8 @@ class GameInfo extends Component {
                         </div>
                     </div>
                     <div class="game-info__buttons">
-                        <button class="game-info-buttons__btn-usersGames" data-collection="usersGames">В мою коллекцию</button>
+                    ${user.collectionGames.includes(id) ? `<button class="game-info-buttons__btn-usersGames" data-collection="usersGames" disabled>Добавленно в коллекцию</button>`
+                : `<button class="game-info-buttons__btn-usersGames" data-collection="usersGames">В мою коллекцию</button>`}
                         <button class="game-info-buttons__btn-wishGames" data-collection="wishGames">Хочу поиграть</button>
                         <button class="game-info-buttons__btn-playedGames" data-collection="playedGames">Играл</button>
                         <button class="user-info-buttons__btn-createMeeting">Создать встречу</button>
@@ -72,7 +80,6 @@ class GameInfo extends Component {
 
     afterRender() {
         this.setActions();
-
         this.getParagraphHTML();
     }
 
@@ -83,7 +90,7 @@ class GameInfo extends Component {
             btnToWishGames = document.getElementsByClassName('game-info-buttons__btn-wishGames')[0],
             btnToPlayedGames = document.getElementsByClassName('game-info-buttons__btn-playedGames')[0],
             btnCreateMeeting = document.getElementsByClassName('user-info-buttons__btn-createMeeting')[0];
-
+        const user = JSON.parse(localStorage.getItem('user'));
 
         buttonsGameInfoContainer.addEventListener('click', () => {
             const target = event.target,
@@ -91,17 +98,17 @@ class GameInfo extends Component {
 
             switch (true) {
                 case targetClassList.contains('game-info-buttons__btn-usersGames'):
-                    this.addGameToUserCollection('01', this.game.id, target.dataset.collection, btnToUsersGame);
-                    console.log(btnToUsersGame);
+                    this.addGameToUserCollection(user.id, this.game.id, target.dataset.collection, btnToUsersGame);
+                    // console.log(this.user);
                     break;
 
                 case targetClassList.contains('game-info-buttons__btn-wishGames'):
-                    this.addGameToUserCollection('01', this.game.id, target.dataset.collection, btnToWishGames);
+                    this.addGameToUserCollection(user.id, this.game.id, target.dataset.collection, btnToWishGames);
 
                     break;
 
                 case targetClassList.contains('game-info-buttons__btn-playedGames'):
-                    this.addGameToUserCollection('01', this.game.id, target.dataset.collection, btnToPlayedGames);
+                    this.addGameToUserCollection(user.id, this.game.id, target.dataset.collection, btnToPlayedGames);
                     break;
             }
 
@@ -114,6 +121,8 @@ class GameInfo extends Component {
             this.redirectToMeetingAdd();
         });
     }
+
+
 
     addGameToUserCollection(userId, gameID, typeCollection, buttonName) {
 

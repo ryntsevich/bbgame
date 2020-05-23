@@ -17,8 +17,10 @@ class UserInfo extends Component {
         return new Promise(resolve => this.model.getUser(this.request.id).then(user => {
             this.modelGames.getGamesByIds(user.collectionGames).then(games => {
                 user['renderGames'] = games;
-                console.log(games);
+                // console.log(games);
                 this.user = user;
+                localStorage.setItem('user', JSON.stringify(this.user));
+                // console.log(user);
                 resolve(user);
             })
         }));
