@@ -19,6 +19,19 @@ class Login extends Component {
             `);
     });
   }
+  afterRender() {
+    this.setActions();
+  }
+
+  setActions() {
+    const btnSignUp = document.getElementsByClassName('form-login__btn-registration button')[0];
+
+    btnSignUp.addEventListener('click', () => this.redirectToFormRegistration());
+  }
+
+  redirectToFormRegistration() {
+    location.hash = `#/join`;
+  }
 }
 
 export default Login;

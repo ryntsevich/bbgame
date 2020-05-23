@@ -16,7 +16,6 @@ class UserMeetings extends Component {
         return new Promise(resolve => this.modelMeeting.getMeetingsList().then(meetings => {
             this.meetings = meetings;
             this.activeM = this.meetings.filter(meeting => meeting.status === "Actual");
-            // console.log(activeM);
             resolve(meetings);
         }));
     }

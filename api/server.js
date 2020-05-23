@@ -95,7 +95,6 @@ app.post('/api/meeting', (req, res) => {
 
 	meeting.id = shortId.generate();
 	meeting.players = ['01'];
-	console.log(meeting.players);
 	meeting.description = meeting.description || '-';
 	meeting.status = 'Actual';
 
