@@ -1,7 +1,4 @@
 import Component from '../../component.js';
-
-// import Error404 from '../../../views/pages/error404.js';
-
 import Users from '../../../models/users.js';
 import Meetings from '../../../models/meetings.js';
 

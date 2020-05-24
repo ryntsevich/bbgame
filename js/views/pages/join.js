@@ -117,7 +117,6 @@ class SignUp extends Component {
     location.hash = `#/user/${id}`;
   }
 
-
 }
 
 export default SignUp;

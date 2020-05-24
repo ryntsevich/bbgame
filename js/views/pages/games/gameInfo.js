@@ -11,19 +11,14 @@ class GameInfo extends Component {
         this.modelUsers = new Users();
         this.modelGames = new Games();
         this.user = JSON.parse(localStorage.getItem('user'));
-
-
     }
     getData() {
         return new Promise(resolve => this.modelGames.getGame(this.request.id).then(game => {
-            // this.modelUsers.getUser(this.user._id).then()
             this.game = game;
             resolve(game);
         }
         ));
     }
-
-
 
     render(game) {
         return new Promise(resolve => {

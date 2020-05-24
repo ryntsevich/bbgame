@@ -3,7 +3,7 @@ class Meetings {
         return new Promise(resolve => {
             const xhr = new XMLHttpRequest();
 
-            xhr.open('GET', 'http://localhost:3000/api/meetings');
+            xhr.open('GET', 'http://localhost:3000/api/meetings?status=Actual');
 
             xhr.onload = () => resolve(JSON.parse(xhr.response));
 

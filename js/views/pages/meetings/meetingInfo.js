@@ -62,7 +62,6 @@ class MeetingInfo extends Component {
                         <button class="btn-edit-meet">Редактировать встречу</button>
                         <button class="btn-close-meet">Закрыть встречу</button>
                         <button class="btn-join-meet" ${players.length == this.maxPlayersLS && 'disabled'}>Принять участие</button>
-
                 </div>
                 </div>
 `;

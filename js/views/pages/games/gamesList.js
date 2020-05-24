@@ -1,19 +1,16 @@
 import Component from '../../component.js';
-
-// import Error404 from '../../../views/pages/error404.js';
-
 import Games from '../../../models/games.js';
 
 class GamesList extends Component {
     constructor() {
-		super();
-		
-		this.model = new Games();
-	}
-	
-	getData() {
-		return new Promise(resolve => this.model.getGamesList().then(games => resolve(games)));
-	}
+        super();
+
+        this.model = new Games();
+    }
+
+    getData() {
+        return new Promise(resolve => this.model.getGamesList().then(games => resolve(games)));
+    }
     render(games) {
         return new Promise(resolve => {
             resolve(`
@@ -27,11 +24,38 @@ class GamesList extends Component {
         });
     }
 
+    afterRender() {
+        this.setActions();
+    }
+
+    setActions() {
+        const gameContainer = document.getElementsByClassName('games-list')[0];
+
+        gameContainer.addEventListener('click', event => {
+            const target = event.target,
+                targetClassList = target.classList;
+
+            switch (true) {
+                case targetClassList.contains('game'):
+                case targetClassList.contains('game__img'):
+                case targetClassList.contains('game__title'):
+                    this.redirectToGameInfo(target.dataset.id);
+                    break;
+
+            }
+        });
+
+    }
+
+    redirectToGameInfo(id) {
+        location.hash = `#/games/${id}`;
+    }
+
     getGameHTML(game) {
         return `
-            <div class="game">
+            <div class="game" data-id="${game._id}">
                 <div class="game__img" data-id="${game._id}">
-                    <img data-id="${game._id}" src="${game.img}" alt="">
+                    <img class="game__img" data-id="${game._id}" src="${game.img}" alt="">
                 </div>
             <a class="game__title" data-id="${game._id}" href="#/games/${game._id}">${game.title}</a>
             </div>

@@ -1,6 +1,4 @@
 import Component from '../../component.js';
-
-// import Error404 from '../../../views/pages/error404.js';
 import Meetings from '../../../models/meetings.js';
 
 class MeetingsList extends Component {
@@ -24,13 +22,7 @@ class MeetingsList extends Component {
         });
     }
 
-    getMeetingHTML(meeting) {
-        return `
-            <div class="meeting" data-id="${meeting._id}">
-                <a class="meeting__title" data-id="${meeting._id}" href="#/meetings/${meeting._id}">${meeting._id}</a>
-            </div>
-        `;
-    }
+
 
     afterRender() {
         this.setActions();
@@ -56,6 +48,14 @@ class MeetingsList extends Component {
 
     redirectToMeetingInfo(id) {
         location.hash = `#/meetings/${id}`;
+    }
+
+    getMeetingHTML(meeting) {
+        return `
+            <div class="meeting" data-id="${meeting._id}">
+                <a class="meeting__title" data-id="${meeting._id}" href="#/meetings/${meeting._id}">${meeting._id}</a>
+            </div>
+        `;
     }
 }
 

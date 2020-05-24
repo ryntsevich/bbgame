@@ -6,14 +6,14 @@ import Users from '../../../models/users.js';
 
 class UsersList extends Component {
     constructor() {
-		super();
-		
-		this.model = new Users();
-	}
-	
-	getData() {
-		return new Promise(resolve => this.model.getUsersList().then(users => resolve(users)));
-	}
+        super();
+
+        this.model = new Users();
+    }
+
+    getData() {
+        return new Promise(resolve => this.model.getUsersList().then(users => resolve(users)));
+    }
     render(users) {
         return new Promise(resolve => {
             resolve(`
@@ -25,6 +25,7 @@ class UsersList extends Component {
         });
     }
 
+
     getUserHTML(user) {
         return `
             <div class="user">
@@ -32,6 +33,7 @@ class UsersList extends Component {
             </div>
         `;
     }
+
 
 
 }

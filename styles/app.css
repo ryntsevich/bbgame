@@ -258,10 +258,11 @@ input[type=radio] {
   justify-content: center;
   align-items: center;
   padding: 15px;
-  border: 1px solid black;
+  cursor: pointer;
 }
 .game__img {
   margin-bottom: 10px;
+  cursor: pointer;
 }
 .game__title {
   text-align: center;
@@ -315,7 +316,6 @@ input[type=radio] {
   display: flex;
   justify-content: center;
   max-width: 800px;
-  border: 1px solid black;
 }
 .user-info__img {
   text-align: center;
@@ -329,7 +329,6 @@ input[type=radio] {
 }
 .user-info-games {
   width: 650px;
-  border: 1px solid black;
   margin-bottom: 30px;
 }
 .users-list {
