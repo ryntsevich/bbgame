@@ -377,3 +377,9 @@ input[type=radio] {
 .button {
   border: none;
 }
+header > a {
+  color: white;
+}
+a {
+  color: black;
+}

@@ -1,6 +1,7 @@
 import Component from '../../component.js';
 import Meetings from '../../../models/meetings.js';
 import Error404 from '../../../views/pages/error404.js';
+import Users from '../../../models/users.js';
 
 
 class MeetingInfo extends Component {
@@ -8,14 +9,17 @@ class MeetingInfo extends Component {
         super();
 
         this.modelMeeting = new Meetings();
+        this.modelUser = new Users();
         this.maxPlayersLS = localStorage.getItem('maxPlayers');
-        // console.log(this.maxPlayersLS)
 
     }
     getData() {
         return new Promise(resolve => this.modelMeeting.getMeeting(this.request.id).then(meeting => {
             this.meeting = meeting;
-            resolve(meeting);
+            this.modelUser.getUsersByIds(meeting.players).then(users => {
+                this.users = users;
+                resolve(meeting);
+            })
         }
         ));
     }
@@ -26,7 +30,6 @@ class MeetingInfo extends Component {
 
             if (meeting) {
                 const { _id, gameName, day, time, place, description, players } = meeting;
-                // console.log(players.length === this.maxPlayersLS)
 
                 html = `
                 <h1 class="page-title">Встреча</h1>
@@ -49,7 +52,7 @@ class MeetingInfo extends Component {
                     </div>
                     <div class="meet-propertis players">
                         <div class="meet-propertis__title">Участники:</div>
-                        ${players.map(player => `<div class="meet-propertis__content">${player}</div>`).join('\n ')}
+                        ${this.users.map(user => `<div class="meet-propertis__content">${user.username}</div>`).join('\n ')}
 
                     </div>
                     <div class="meet-propertis">
@@ -102,13 +105,14 @@ class MeetingInfo extends Component {
     }
 
     joinToMeeting(meetingId, userId, playersContainer, btnJoinMeeting) {
-        this.modelMeeting.joinToMeeting(meetingId, userId).then(meeting => {
-            this.modelMeeting.getMeeting(this.request.id).then(meeting => {
-                this.players = meeting.players;
-                btnJoinMeeting.disabled = this.players.length == this.maxPlayersLS;
+        this.modelMeeting.joinToMeeting(meetingId, userId).then(result => {
+            this.meeting.players.push(userId);
+            this.modelUser.getUsersByIds(this.meeting.players).then(users => {
+                this.users = users;
+                btnJoinMeeting.disabled = this.users.length >= this.maxPlayersLS;
                 playersContainer.innerHTML = `
                        <div class="meet-propertis__title">Участники:</div>
-                        ${meeting.players.map(player => `<div class="meet-propertis__content">${player}</div>`).join('\n ')}
+                        ${this.users.map(user => `<div class="meet-propertis__content">${user.name}</div>`).join('\n ')}
                      `;
             }
             )
