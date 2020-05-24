@@ -14,7 +14,6 @@ class MeetingInfo extends Component {
     }
     getData() {
         return new Promise(resolve => this.modelMeeting.getMeeting(this.request.id).then(meeting => {
-            console.log('fgds');
             this.meeting = meeting;
             resolve(meeting);
         }
@@ -30,7 +29,7 @@ class MeetingInfo extends Component {
                 // console.log(players.length === this.maxPlayersLS)
 
                 html = `
-                <h1 class="page-title">Встреча ${_id}</h1>
+                <h1 class="page-title">Встреча</h1>
                 <div class="meet">
                     <div class="meet-propertis">
                         <div class="meet-propertis__title">Игра:</div>

@@ -38,6 +38,7 @@ class MeetingsList extends Component {
             switch (true) {
                 case targetClassList.contains('meeting'):
                 case targetClassList.contains('meeting__title'):
+                case targetClassList.contains('meeting__propertis'):
                     this.redirectToMeetingInfo(target.dataset.id);
                     break;
 
@@ -53,8 +54,12 @@ class MeetingsList extends Component {
     getMeetingHTML(meeting) {
         return `
             <div class="meeting" data-id="${meeting._id}">
-                <a class="meeting__title" data-id="${meeting._id}" href="#/meetings/${meeting._id}">${meeting._id}</a>
-            </div>
+                <div class="meeting__title" data-id="${meeting._id}" href="#/meetings/${meeting._id}">${meeting.gameName}</div>
+                <div class="meeting__propertis" data-id="${meeting._id}">
+                <a data-id="${meeting._id}" href="#/meetings/${meeting._id}">${meeting.day}<a>
+                <a data-id="${meeting._id}" href="#/meetings/${meeting._id}">${meeting.place}</a>
+                </div>
+                </div>
         `;
     }
 }
