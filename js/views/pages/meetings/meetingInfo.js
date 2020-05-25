@@ -19,7 +19,7 @@ class MeetingInfo extends Component {
             this.modelUser.getUsersByIds(meeting.players).then(users => {
                 this.users = users;
                 resolve(meeting);
-            })
+            });
         }
         ));
     }

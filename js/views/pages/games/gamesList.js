@@ -57,7 +57,7 @@ class GamesList extends Component {
                 <div class="game__img" data-id="${game._id}">
                     <img class="game__img" data-id="${game._id}" src="${game.img}" alt="">
                 </div>
-            <a class="game__title" data-id="${game._id}" href="#/games/${game._id}">${game.title}</a>
+            <div class="game__title" data-id="${game._id}">${game.title}</div>
             </div>
         `;
     }

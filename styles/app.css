@@ -135,11 +135,10 @@ body {
   min-height: 100vh;
 }
 .page-title {
-  font-weight: bold;
-  font-size: 32px;
   padding: 15px 0;
   text-align: center;
-  color: #a30c0c;
+  font-size: 2.8rem;
+  letter-spacing: -0.02em;
 }
 .header-container,
 .footer-container {
@@ -244,15 +243,16 @@ input[type=radio] {
 }
 .games {
   max-width: 800px;
-  margin: 20px auto 0;
   margin-bottom: 30px;
 }
 .games-list {
   display: grid;
   grid-template-columns: repeat(3, 30%);
   justify-content: space-around;
+  padding: 20px;
 }
 .game {
+  float: left;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -314,22 +314,84 @@ input[type=radio] {
 }
 .user-info {
   display: flex;
-  justify-content: center;
-  max-width: 800px;
+  justify-content: space-between;
+  width: 600px;
 }
 .user-info__img {
   text-align: center;
-  padding: 0 40px;
+  padding: 10px 5px;
 }
 .user-info__about {
-  padding: 10px 40px;
+  padding: 10px 30px;
 }
 .user-info__about .item {
   margin-bottom: 15px;
 }
+.user-info__about .item .name {
+  font-weight: bold;
+}
+.user-info__buttons {
+  display: flex;
+  flex-direction: column;
+  padding: 20px 15px;
+}
+.user-info__buttons .user-info-buttons__btn-usersMeetings {
+  text-align: center;
+  padding: 10px 30px;
+  background-color: #a30c0c;
+  border-radius: 4px;
+  color: white;
+  margin-bottom: 5px;
+}
+.user-info__buttons .user-info-buttons__btn-usersMeetings:hover {
+  background-color: #bb1414;
+}
+.user-info__buttons .user-info-buttons__btn-editUserPage {
+  text-align: center;
+  padding: 10px 30px;
+  background-color: gray;
+  border-radius: 4px;
+  color: white;
+  margin-bottom: 5px;
+}
 .user-info-games {
-  width: 650px;
+  width: 600px;
   margin-bottom: 30px;
+}
+.user-info-games .user-info-games-buttons {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  overflow: hidden;
+  background-color: #f1f1f1;
+}
+.user-info-games .user-info-games-buttons button {
+  width: 35%;
+  height: 40px;
+  background-color: inherit;
+  border: solid #ccc;
+  border-width: 1px 1px 1px;
+  font-size: 16px;
+  outline: none;
+  cursor: pointer;
+}
+.user-info-games .user-info-games-buttons button:hover {
+  background-color: #ddd;
+}
+.user-info-games .user-info-games-buttons .active {
+  background-color: white;
+  border-bottom: none;
+}
+.user-info-games .user-info-games-buttons .active:hover {
+  background-color: white;
+}
+.user-info-games .games {
+  border: 1px solid #ccc;
+  border-top: none;
+}
+.user-info-games .games .game__img:hover {
+  transform: scale(1.125);
+  transition: transform 0.3s;
 }
 .users-list {
   width: 600px;
@@ -371,7 +433,7 @@ input[type=radio] {
 }
 .meet-list .meeting__propertis {
   display: flex;
-  width: 30%;
+  width: 50%;
   justify-content: space-between;
 }
 .button {

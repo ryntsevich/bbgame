@@ -21,11 +21,11 @@ body {
 }
 
 .page-title {
-  font-weight: bold;
-  font-size: 32px;
+  // font-size: 32px;
   padding: 15px 0;
   text-align: center;
-  color: @red;
+  font-size: 2.8rem;
+  letter-spacing: -0.02em;
 }
 
 .header-container,
@@ -151,7 +151,7 @@ input[type=radio]{
 
 .games {
   max-width: 800px;
-  margin: 20px auto 0;
+  // margin: 20px auto 0;
   margin-bottom: 30px; 
 }
 
@@ -160,10 +160,12 @@ input[type=radio]{
   display: grid;
   grid-template-columns: repeat(3, 30%);
   justify-content: space-around;
+  padding: 20px;
 }
 
 
 .game {
+  float: left;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -176,7 +178,6 @@ input[type=radio]{
   &__img {
     margin-bottom: 10px;
     cursor: pointer;
-
   }
 
   &__title {
@@ -184,6 +185,7 @@ input[type=radio]{
     font-size: 18px;
   }
 }
+
 
 .game-info{
   display: flex;
@@ -244,30 +246,107 @@ input[type=radio]{
 
   .user-info{
     display: flex;
-    justify-content: center;
-    max-width: 800px;
-    // border: 1px solid black;
+    justify-content: space-between;
+    width: 600px;
 
     &__img {
       text-align: center;
-      padding: 0 40px;
+      padding: 10px 5px;
     }
 
     &__about {
-      padding: 10px 40px;
+      padding: 10px 30px;
 
       .item {
         margin-bottom: 15px;
+        
+        .name {
+          font-weight: bold;
+        }
+      }
+      // .user-info-meetigs {
+      //   margin-top: 25px;
+      // }
+    }
+
+    &__buttons{
+      display: flex;
+      flex-direction: column;
+      padding: 20px 15px;
+
+      .user-info-buttons__btn-usersMeetings {
+        text-align: center;
+        padding: 10px 30px;
+        background-color: @red;
+        border-radius: 4px;
+        color: white;
+        margin-bottom: 5px;
       }
 
+      .user-info-buttons__btn-usersMeetings:hover {
+        background-color:#bb1414;
+      }
+
+      .user-info-buttons__btn-editUserPage{
+        text-align: center;
+        padding: 10px 30px;
+        background-color: gray;
+        border-radius: 4px;
+        color: white;
+        margin-bottom: 5px;
+      }
     }
   }
 
   .user-info-games {
-    width: 650px;
-    // border: 1px solid black;
+    width: 600px;
     margin-bottom: 30px;
+    
+    .user-info-games-buttons{
+      display: flex;  
+      flex-direction: row;
+      justify-content: space-around;
+      overflow: hidden;
+      // border: 1px solid #ccc;
+      background-color: #f1f1f1;
 
+      button{
+        width: 35%;
+        height: 40px;
+        background-color: inherit;
+        border: solid #ccc;
+        border-width: 1px 1px 1px;
+      // border: 1px solid #ccc;
+        // border: none;
+        font-size: 16px;
+        outline: none;
+        cursor: pointer;
+        // padding: 14px 16px;
+        // transition: 0.3s;
+      }
+
+      button:hover {
+        background-color: #ddd;
+      }
+
+      .active {     
+         background-color: white;
+         border-bottom: none;
+        }
+
+        .active:hover{
+         background-color: white;
+        }
+    }
+    .games {
+      border: 1px solid #ccc;
+      border-top: none;
+
+    .game__img:hover {
+      transform: scale(1.125); 
+      transition: transform .3s;
+    }
+    }
   }
 
   .users-list {
@@ -316,7 +395,7 @@ input[type=radio]{
 
       &__propertis{
         display: flex;
-        width: 30%;
+        width: 50%;
         justify-content: space-between;
     
       }

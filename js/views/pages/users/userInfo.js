@@ -20,7 +20,6 @@ class UserInfo extends Component {
                 user['renderGames'] = games;
                 this.user = user;
                 localStorage.setItem('user', JSON.stringify(this.user));
-                // console.log(user);
                 resolve(user);
             })
         }));
@@ -54,15 +53,16 @@ class UserInfo extends Component {
                             <div class="value">${user.gender}</div>
                         </div>
                     </div>
-                </div>
-                <div class = "user-info-meetigs">
-                    <a class="user-info-buttons__btn-usersMeetings" href="#/users/${user._id}/meetings">Мои встречи</a>
+                    <div class = "user-info__buttons">
+                        <a class="user-info-buttons__btn-usersMeetings" href="#/users/${user._id}/meetings">Мои встречи</a>
+                        <a class="user-info-buttons__btn-editUserPage" href="#/users/${user._id}/meetings">Редактировать</a>
+                    </div>
                 </div>
                 <div class="user-info-games">
-                    <div class="user-info-buttons">
-                        <button class="user-info-buttons__btn-usersGames">Моя коллекция</button>
-                        <button class="user-info-buttons__btn-wishGames">Хочу поиграть</button>
-                        <button class="user-info-buttons__btn-playedGames">Играл</button>
+                    <div class="user-info-games-buttons">
+                        <button class="user-info-games-buttons__btn-usersGames active">Моя коллекция</button>
+                        <button class="user-info-games-buttons__btn-wishGames">Хочу поиграть</button>
+                        <button class="user-info-games-buttons__btn-playedGames">Играл</button>
                     </div>
                     <div class="games">
                         <div class="games-list">
@@ -83,7 +83,7 @@ class UserInfo extends Component {
     }
 
     setActions() {
-        const buttonsContainer = document.getElementsByClassName('user-info-buttons')[0],
+        const buttonsContainer = document.getElementsByClassName('user-info-games-buttons')[0],
             gamesList = document.getElementsByClassName('games-list')[0];
 
         buttonsContainer.addEventListener('click', event => {
@@ -91,16 +91,35 @@ class UserInfo extends Component {
                 targetClassList = target.classList;
 
             switch (true) {
-                case targetClassList.contains('user-info-buttons__btn-usersGames'):
+                case targetClassList.contains('user-info-games-buttons__btn-usersGames'):
+                    buttonsContainer.getElementsByClassName('active')[0].classList.remove('active');
+                    targetClassList.add('active');
                     this.renderUserGames(this.user.collectionGames, gamesList);
                     break;
 
-                case targetClassList.contains('user-info-buttons__btn-wishGames'):
+                case targetClassList.contains('user-info-games-buttons__btn-wishGames'):
+                    buttonsContainer.getElementsByClassName('active')[0].classList.remove('active');
+                    targetClassList.add('active');
                     this.renderUserGames(this.user.wishGames, gamesList);
                     break;
 
-                case targetClassList.contains('user-info-buttons__btn-playedGames'):
+                case targetClassList.contains('user-info-games-buttons__btn-playedGames'):
+                    buttonsContainer.getElementsByClassName('active')[0].classList.remove('active');
+                    targetClassList.add('active');
                     this.renderUserGames(this.user.playedGames, gamesList);
+                    break;
+            }
+        });
+
+        gamesList.addEventListener('click', event => {
+            const target = event.target,
+                targetClassList = target.classList;
+
+            switch (true) {
+                case targetClassList.contains('game'):
+                case targetClassList.contains('game__img'):
+                case targetClassList.contains('game__title'):
+                    this.redirectToGameInfo(target.dataset.id);
                     break;
             }
         });
@@ -114,19 +133,22 @@ class UserInfo extends Component {
             } else {
                 gamesList.innerHTML = '<p>Список пуст</p>';
             }
-
         });
     }
 
+
     getUsersGames(game) {
         return `
-            <div class="game">
-                <div class="game__img">
-                    <img  src="${game.img}" alt="" width = "100px" height="100px">
+            <div class="game" data-id="${game._id}">
+                <div class="game__img" data-id="${game._id}">
+                    <img class="game__img" data-id="${game._id}" src="${game.img}" alt="namegame" width ="100px" heigth="100px"> 
                 </div>
-                <a class="game__title" href="#/games/${game._id}">${game.title}</a>
-            </div>        
-        `
+            <div class="game__title" data-id="${game._id}">${game.title}</div>
+            </div>
+        `;
+    }
+    redirectToGameInfo(id) {
+        location.hash = `#/games/${id}`;
     }
 
 }

@@ -1,6 +1,7 @@
 import Component from '../../component.js';
 import Meetings from '../../../models/meetings.js';
 import Error404 from '../../../views/pages/error404.js';
+import Users from '../../../models/users.js';
 
 
 class MeetingEdit extends Component {
@@ -8,10 +9,15 @@ class MeetingEdit extends Component {
         super();
 
         this.modelMeeting = new Meetings();
+        this.modelUser = new Users();
     }
     getData() {
         return new Promise(resolve => this.modelMeeting.getMeeting(this.request.id).then(meeting => {
             this.meeting = meeting;
+            // this.modelUser.getUsersByIds(meeting.players).then(users => {
+            //     this.users = users;
+            //     console.log(users)
+            // });
             resolve(meeting);
         }
         ));
@@ -23,9 +29,10 @@ class MeetingEdit extends Component {
 
             if (meeting) {
                 const { _id, gameName, day, time, place, description, players } = meeting;
+                console.log(this.users)
 
                 html = `
-                <h1 class="page-title">Встреча ${_id}</h1>
+                <h1 class="page-title">Встреча</h1>
                 <div class="meet">
                 <div class="meet-propertis">
                     <div class="meet-propertis__title">Игра:</div>
@@ -45,7 +52,7 @@ class MeetingEdit extends Component {
                 </div>
                 <div class="meet-propertis">
                     <div class="meet-propertis__title">Участники:</div>
-                    ${players.map(player => `<div class="meet-propertis__content">${player}</div>`).join('\n ')}
+                    ${this.meeting.players.map(player => `<div class="meet-propertis__content">${player}</div>`).join('\n ')}
                 </div>
                 <div class="meet-propertis">
                     <div class="meet-propertis__title">Описание:</div>
@@ -85,6 +92,8 @@ class MeetingEdit extends Component {
         this.meeting.time = editTime.value.trim();
         this.meeting.place = editPlace.value.trim();
         this.meeting.description = editDescription.value.trim();
+
+        console.log(editPlace.value.trim())
 
         this.modelMeeting.editMeeting(this.meeting).then(meeting => this.redirectToMeetingInfo(this.meeting._id));
     }
