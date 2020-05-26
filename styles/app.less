@@ -202,6 +202,7 @@ input[type=radio]{
 
   &__properties {
     display: flex;
+    margin-bottom: 15px;
 
     .properties__img {
       text-align: center;
@@ -232,15 +233,17 @@ input[type=radio]{
   }
 
   &__buttons {
-    display: flex;
+    // display: flex;
     width: 600px;
+    text-align: center;
 
     button {
-      width: 40%;
+      // width: 40%;
       // height: 40px;
-      padding: 10px 30px;
+      padding: 10px 20px;
       font-size: 14px;
       margin-right: 5px;
+      margin-bottom: 20px;
       text-align: center;
       border-radius: 4px;
       outline: none;
@@ -250,6 +253,7 @@ input[type=radio]{
 
     button[data-status=add],
     .user-info-buttons__btn-createMeeting {
+      width: 30%;
       background-color: @niagara;
       color: white;
     }
@@ -406,9 +410,51 @@ input[type=radio]{
       &__content {
         margin: 5px;
       }
+      a{
+        display: inline-block;
+        margin-bottom: 5px;
+      }
+      a:hover{
+        color: @red;
+      }
     }
-   .meet-propertis-btn{
+   .meet-propertis-btn {
      text-align: center;
+
+     button{
+      // width: 30%;
+      // float: left;
+      // height: 40px;
+      padding: 10px;
+      font-size: 14px;
+      // margin-right: 2px;
+      margin-bottom: 10px;
+      text-align: center;
+      border-radius: 4px;
+      outline: none;
+      cursor: pointer;
+      color: white;
+     }
+
+     .main{
+       width: 30%;
+       background-color: @red;
+     }
+     .main:hover{
+       background-color: #bb1414;;
+     }
+
+     .btn-join-meet{
+       padding: 10px 30px;
+       background-color: @niagara;
+     }
+     .btn-join-meet:hover{
+       background-color: #15bdb8;
+     }
+     .btn-join-meet:disabled{
+      background-color: gray;
+      cursor: auto;
+     }
    }
   }
 
@@ -476,6 +522,11 @@ input[type=radio]{
 
 button {
   border: none;  
+}
+
+button:disabled {
+  color: yellow;
+  background-color: black;
 }
 
 .btn-tab{

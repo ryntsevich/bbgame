@@ -282,6 +282,7 @@ input[type=radio] {
 }
 .game-info__properties {
   display: flex;
+  margin-bottom: 15px;
 }
 .game-info__properties .properties__img {
   text-align: center;
@@ -306,14 +307,14 @@ input[type=radio] {
   font-weight: bold;
 }
 .game-info__buttons {
-  display: flex;
   width: 600px;
+  text-align: center;
 }
 .game-info__buttons button {
-  width: 40%;
-  padding: 10px 30px;
+  padding: 10px 20px;
   font-size: 14px;
   margin-right: 5px;
+  margin-bottom: 20px;
   text-align: center;
   border-radius: 4px;
   outline: none;
@@ -321,6 +322,7 @@ input[type=radio] {
 }
 .game-info__buttons button[data-status=add],
 .game-info__buttons .user-info-buttons__btn-createMeeting {
+  width: 30%;
   background-color: #0ca39e;
   color: white;
 }
@@ -447,8 +449,43 @@ input[type=radio] {
 .meet .meet-propertis__content {
   margin: 5px;
 }
+.meet .meet-propertis a {
+  display: inline-block;
+  margin-bottom: 5px;
+}
+.meet .meet-propertis a:hover {
+  color: #a30c0c;
+}
 .meet .meet-propertis-btn {
   text-align: center;
+}
+.meet .meet-propertis-btn button {
+  padding: 10px;
+  font-size: 14px;
+  margin-bottom: 10px;
+  text-align: center;
+  border-radius: 4px;
+  outline: none;
+  cursor: pointer;
+  color: white;
+}
+.meet .meet-propertis-btn .main {
+  width: 30%;
+  background-color: #a30c0c;
+}
+.meet .meet-propertis-btn .main:hover {
+  background-color: #bb1414;
+}
+.meet .meet-propertis-btn .btn-join-meet {
+  padding: 10px 30px;
+  background-color: #0ca39e;
+}
+.meet .meet-propertis-btn .btn-join-meet:hover {
+  background-color: #15bdb8;
+}
+.meet .meet-propertis-btn .btn-join-meet:disabled {
+  background-color: gray;
+  cursor: auto;
 }
 .meet-list-buttons {
   width: 600px;
@@ -501,6 +538,10 @@ input[type=radio] {
 }
 button {
   border: none;
+}
+button:disabled {
+  color: yellow;
+  background-color: black;
 }
 .btn-tab {
   width: 35%;

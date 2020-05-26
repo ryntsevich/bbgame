@@ -11,6 +11,8 @@ class MeetingInfo extends Component {
         this.modelMeeting = new Meetings();
         this.modelUser = new Users();
         this.maxPlayersLS = localStorage.getItem('maxPlayers');
+        this.user = JSON.parse(localStorage.getItem('user'));
+
 
     }
     getData() {
@@ -29,7 +31,9 @@ class MeetingInfo extends Component {
             let html;
 
             if (meeting) {
-                const { _id, gameName, day, time, place, description, players } = meeting;
+                const { _id, gameName, day, time, place, description, players, status } = meeting;
+
+                let isTrue = players.includes(this.user._id) || status === 'Closed' || players.length == this.maxPlayersLS;
 
                 html = `
                 <h1 class="page-title">Встреча</h1>
@@ -52,18 +56,17 @@ class MeetingInfo extends Component {
                     </div>
                     <div class="meet-propertis players">
                         <div class="meet-propertis__title">Участники:</div>
-                        ${this.users.map(user => `<div class="meet-propertis__content">${user.username}</div>`).join('\n ')}
-
-                    </div>
+                        ${this.users.map(user => `<a class="meet-propertis__content" href="#/users/${user._id}">${user.username}</a></br>`).join('\n ')} 
+                        </div>
                     <div class="meet-propertis">
                         <div class="meet-propertis__title">Описание:</div>
                         <div class="meet-propertis__content">${description}</div>
                     </div>
                     <div class="meet-propertis-btn">
-                        <!--<button class="btn-delete-meet">Удалить встречу</button>-->
-                        <button class="btn-edit-meet">Редактировать встречу</button>
-                        <button class="btn-close-meet">Закрыть встречу</button>
-                        <button class="btn-join-meet" ${players.length == this.maxPlayersLS && 'disabled'}>Принять участие</button>
+                    <button class="btn-close-meet main">Закрыть встречу</button>
+                    <button class="btn-edit-meet main">Редактировать встречу</button>
+                    <button class="btn-repeal-meet main">Отменить встречу</button>
+                    <button class="btn-join-meet" ${ isTrue && 'disabled'}>Принять участие</button>
                 </div>
                 </div>
 `;
@@ -84,16 +87,16 @@ class MeetingInfo extends Component {
             // btnDeleteMeeting = document.getElementsByClassName('btn-delete-meet')[0],
             btnCloseMeeting = document.getElementsByClassName('btn-close-meet')[0],
             btnJoinMeeting = document.getElementsByClassName('btn-join-meet')[0],
-            playersContainer = document.getElementsByClassName('players')[0],
+            playersContainer = document.getElementsByClassName('players')[0];
 
-            user = JSON.parse(localStorage.getItem('user'));
+        // user = JSON.parse(localStorage.getItem('user'));
 
 
 
         // btnDeleteMeeting.addEventListener('click', () => this.deleteMeeting(this.meeting._id));
         btnEditMeeting.addEventListener('click', () => this.redirectToMeetingEdit(this.meeting._id));
         btnCloseMeeting.addEventListener('click', () => this.closeMeeting(this.meeting._id));
-        btnJoinMeeting.addEventListener('click', () => this.joinToMeeting(this.meeting._id, user._id, playersContainer, btnJoinMeeting));
+        btnJoinMeeting.addEventListener('click', () => this.joinToMeeting(this.meeting._id, this.user._id, playersContainer, btnJoinMeeting));
     }
 
     // deleteMeeting(id) {
@@ -112,7 +115,7 @@ class MeetingInfo extends Component {
                 btnJoinMeeting.disabled = this.users.length >= this.maxPlayersLS;
                 playersContainer.innerHTML = `
                        <div class="meet-propertis__title">Участники:</div>
-                        ${this.users.map(user => `<div class="meet-propertis__content">${user.name}</div>`).join('\n ')}
+                        ${this.users.map(user => `<a class="meet-propertis__content" href="#/users/${user._id}">${user.name}</a></br>`).join('\n ')}
                      `;
             }
             )

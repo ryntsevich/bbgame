@@ -12,8 +12,8 @@ class Login extends Component {
             <p class="form-login__title">Войти</p>
             <input class="form-login__email form-elem" type="text" name="email" placeholder="Email" required>
             <input class="form-login__password form-elem" type="password" name="password" placeholder="Password" required>
-            <input class="form-login__btn-login button" type="submit" value="Вход">
-            <input class="form-login__btn-registration button" type="submit" value="Регистрация">
+            <button class="form-login__btn-login button">Вход</button>
+            <button class="form-login__btn-registration button">Регистрация</button>
           </div>   
       </div>           
             `);

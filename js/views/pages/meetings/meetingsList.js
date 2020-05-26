@@ -9,7 +9,10 @@ class MeetingsList extends Component {
     }
 
     getData() {
-        return new Promise(resolve => this.modelMeeting.getMeetingsList().then(meetings => resolve(meetings)));
+        return new Promise(resolve => this.modelMeeting.getMeetingsList().then(meetings => {
+            meetings = meetings.filter(meeting => meeting.status === 'Actual');
+            resolve(meetings)
+        }));
     }
     render(meetings) {
         return new Promise(resolve => {
@@ -39,6 +42,7 @@ class MeetingsList extends Component {
                 case targetClassList.contains('meeting'):
                 case targetClassList.contains('meeting__title'):
                 case targetClassList.contains('meeting__propertis'):
+                case targetClassList.contains('meeting__propertis-a'):
                     this.redirectToMeetingInfo(target.dataset.id);
                     break;
 
@@ -56,8 +60,8 @@ class MeetingsList extends Component {
             <div class="meeting" data-id="${meeting._id}">
                 <div class="meeting__title" data-id="${meeting._id}" href="#/meetings/${meeting._id}">${meeting.gameName}</div>
                 <div class="meeting__propertis" data-id="${meeting._id}">
-                <a data-id="${meeting._id}" href="#/meetings/${meeting._id}">${meeting.day}<a>
-                <a data-id="${meeting._id}" href="#/meetings/${meeting._id}">${meeting.place}</a>
+                <div class="meeting__propertis-a" data-id="${meeting._id}">${meeting.day}</div>
+                <div class="meeting__propertis-a" data-id="${meeting._id}">${meeting.place}</div>
                 </div>
                 </div>
         `;

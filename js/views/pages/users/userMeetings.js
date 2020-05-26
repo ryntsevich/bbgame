@@ -7,6 +7,8 @@ class UserMeetings extends Component {
         super();
 
         this.modelMeeting = new Meetings();
+        this.user = JSON.parse(localStorage.getItem('user'));
+
     }
 
     getData() {
