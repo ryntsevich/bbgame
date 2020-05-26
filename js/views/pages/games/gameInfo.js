@@ -55,8 +55,10 @@ class GameInfo extends Component {
                     <div class="game-info__buttons">
                     ${user.collectionGames.includes(_id) ? `<button class="game-info-buttons__btn-usersGames" data-status="delete" data-collection="collectionGames">Удалить из коллекции</button>`
                         : `<button class="game-info-buttons__btn-usersGames" data-status="add" data-collection="collectionGames">В мою коллекцию</button>`}
-                        <button class="game-info-buttons__btn-wishGames" data-collection="wishGames">Хочу поиграть</button>
-                        <button class="game-info-buttons__btn-playedGames" data-collection="playedGames">Играл</button>
+                        ${user.wishGames.includes(_id) ? `<button class="game-info-buttons__btn-wishGames" data-status="delete" data-collection="wishGames">Удалить из коллекции</button>`
+                        : `<button class="game-info-buttons__btn-wishGames" data-status="add" data-collection="wishGames">Хочу поиграть</button>`}
+                        ${user.playedGames.includes(_id) ? `<button class="game-info-buttons__btn-playedGames" data-status="delete" data-collection="playedGames">Удалить из коллекции</button>`
+                        : `<button class="game-info-buttons__btn-playedGames" data-status="add" data-collection="playedGames">Играл</button>`}
                         <button class="user-info-buttons__btn-createMeeting">Создать встречу</button>
                     </div>
                     <div class="game-info__description" data-id="_id">
@@ -87,9 +89,8 @@ class GameInfo extends Component {
             btnToPlayedGames = document.getElementsByClassName('game-info-buttons__btn-playedGames')[0],
             btnCreateMeeting = document.getElementsByClassName('user-info-buttons__btn-createMeeting')[0],
 
-            btnDeleteFromUserGame = document.getElementsByClassName('game-info-buttons__btn-usersGames-delete')[0];
 
-        const user = JSON.parse(localStorage.getItem('user'));
+        user = JSON.parse(localStorage.getItem('user'));
 
         buttonsGameInfoContainer.addEventListener('click', () => {
             const target = event.target,
@@ -106,16 +107,22 @@ class GameInfo extends Component {
                     }
 
                 case targetClassList.contains('game-info-buttons__btn-wishGames'):
-                    this.addGameToUserCollection(user._id, this.game._id, target.dataset.collection, btnToWishGames);
-                    break;
+                    if (target.dataset.status === 'add') {
+                        this.addGameToUserCollection(user._id, this.game._id, target.dataset.collection, btnToWishGames);
+                        break;
+                    } else {
+                        this.deleteGameFromUserCollection(user._id, this.game._id, target.dataset.collection, btnToWishGames);
+                        break;
+                    }
 
                 case targetClassList.contains('game-info-buttons__btn-playedGames'):
-                    this.addGameToUserCollection(user._id, this.game._id, target.dataset.collection, btnToPlayedGames);
-                    break;
-
-                case targetClassList.contains('game-info-buttons__btn-usersGames-delete'):
-                    this.deleteGameFromUserCollection(user._id, this.game._id, target.dataset.collection, btnDeleteFromUserGame);
-                    break;
+                    if (target.dataset.status === 'add') {
+                        this.addGameToUserCollection(user._id, this.game._id, target.dataset.collection, btnToPlayedGames);
+                        break;
+                    } else {
+                        this.deleteGameFromUserCollection(user._id, this.game._id, target.dataset.collection, btnToPlayedGames);
+                        break;
+                    }
             }
 
         });
@@ -130,18 +137,30 @@ class GameInfo extends Component {
 
 
     addGameToUserCollection(userId, gameID, typeCollection, buttonName) {
-        this.modelUsers.addToCollection(userId, gameID, typeCollection).then(button => {
-            buttonName.dataset.status = 'delete'
-            buttonName.textContent = 'Удалить из коллекции';
-        })
+        this.modelUsers.addToCollection(userId, gameID, typeCollection).then(user => {
+            this.modelUsers.getUser(userId).then(user => {
+                localStorage.setItem('user', JSON.stringify(user));
+                buttonName.dataset.status = 'delete'
+                buttonName.textContent = 'Удалить из коллекции';
+            });
+        });
     }
 
-    deleteGameFromUserCollection(userId, gameID, typeCollection, buttonName) {
-        this.modelUsers.deleteFromCollection(userId, gameID, typeCollection).then(button => {
-            buttonName.dataset.status = 'add'
-            buttonName.textContent = 'В мою коллекцию';
-        });
 
+    deleteGameFromUserCollection(userId, gameID, typeCollection, buttonName) {
+        this.modelUsers.deleteFromCollection(userId, gameID, typeCollection).then(user => {
+            this.modelUsers.getUser(userId).then(user => {
+                localStorage.setItem('user', JSON.stringify(user));
+                buttonName.dataset.status = 'add';
+                if(typeCollection === "playedGames") {
+                    buttonName.textContent = 'Играл';
+                } else if(typeCollection === "wishGames"){
+                    buttonName.textContent = 'Хочу поиграть';
+                } else {
+                    buttonName.textContent = 'В мою коллекцию';
+                }
+            });
+        });
     }
 
     getParagraphHTML(paragraph) {

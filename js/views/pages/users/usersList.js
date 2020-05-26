@@ -24,15 +24,36 @@ class UsersList extends Component {
             `);
         });
     }
+    afterRender() {
+        this.setActions();
+    }
+    setActions() {
+        const userList = document.getElementsByClassName('users-list')[0];
 
+        userList.addEventListener('click', event => {
+            const target = event.target,
+                targetClassList = target.classList;
+
+            switch (true) {
+                case targetClassList.contains('user'):
+                case targetClassList.contains('user__title'):
+                    this.redirectToUserInfo(target.dataset.id);
+                    break;
+            }
+        });
+    }
 
     getUserHTML(user) {
         return `
-            <div class="user">
-                <a class="user__title" data-id="${user._id}" href="#/users/${user._id}">${user.name}</a>
+            <div class="user" data-id="${user._id}">
+                <div class="user__title" data-id="${user._id}">${user.name}</div>
             </div>
         `;
     }
+    redirectToUserInfo(id) {
+        location.hash = `#/users/${id}`;
+    }
+
 
 
 

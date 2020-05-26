@@ -21,12 +21,12 @@ class UserMeetings extends Component {
             resolve(`
                 <h1 class="page-title">Мои встречи</h1>
                 <div class="meet-list-buttons">
-                <button class="meet-list-actual" data-status = "Actual" >Предстоящие</button>
-                <button class="meet-list-closed" data-status = "Closed" >Прошедшие</button>
+                    <button class="meet-list-actual active" data-status = "Actual" >Предстоящие</button>
+                    <button class="meet-list-closed" data-status = "Closed" >Прошедшие</button>
                 </div>
-                    <div class="meet-list">
+                <div class="meet-list">
                     ${this.activeM.map(meeting => this.getMeetingHTML(meeting)).join('\n ')}
-                    </div>
+                </div>
             `);
         });
     }
@@ -44,13 +44,31 @@ class UserMeetings extends Component {
 
             switch (true) {
                 case targetClassList.contains('meet-list-actual'):
+                    meetListContainer.getElementsByClassName('active')[0].classList.remove('active');
+                    targetClassList.add('active');
                     this.renderUserMeetings(target.dataset.status, meetList);
                     break;
 
                 case targetClassList.contains('meet-list-closed'):
+                    meetListContainer.getElementsByClassName('active')[0].classList.remove('active');
+                    targetClassList.add('active');
                     this.renderUserMeetings(target.dataset.status, meetList);
                     break;
             };
+        });
+
+        meetList.addEventListener('click', event => {
+            const target = event.target,
+                targetClassList = target.classList;
+
+            switch (true) {
+                case targetClassList.contains('meeting'):
+                case targetClassList.contains('meeting__title'):
+                case targetClassList.contains('meeting__propertis'):
+                case targetClassList.contains('meeting__propertis-a'):
+                    this.redirectToMeetingInfo(target.dataset.id);
+                    break;
+            }
         });
     }
 
@@ -62,15 +80,22 @@ class UserMeetings extends Component {
         `;
     }
 
-    getMeetingHTML(meeting) {
-        return `
-            <div class="meeting">
-                <a class="meeting__title" data-id="${meeting._id}" href="#/meetings/${meeting._id}">${meeting._id}</a>
-            </div>
-        `;
+    redirectToMeetingInfo(id) {
+        location.hash = `#/meetings/${id}`;
     }
 
 
+    getMeetingHTML(meeting) {
+        return `
+            <div class="meeting" data-id="${meeting._id}">
+                <div class="meeting__title" data-id="${meeting._id}" href="#/meetings/${meeting._id}">${meeting.gameName}</div>
+                <div class="meeting__propertis" data-id="${meeting._id}">
+                <div class="meeting__propertis-a" data-id="${meeting._id}" >${meeting.day}</div>
+                <div class="meeting__propertis-a" data-id="${meeting._id}" >${meeting.place}</div>
+                </div>
+                </div>
+        `;
+    }
 
 }
 

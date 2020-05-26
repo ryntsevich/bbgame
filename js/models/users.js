@@ -13,7 +13,6 @@ class Users {
 
 	getUser(id) {
 		return new Promise(resolve => {
-			console.log(id)
 			const xhr = new XMLHttpRequest();
 
 			xhr.open('GET', `http://localhost:3000/api/users/${id}`);
@@ -39,6 +38,7 @@ class Users {
 
 	deleteFromCollection(userId, gameId, typeCollection) {
 		return new Promise(resolve => {
+
 			const xhr = new XMLHttpRequest();
 
 			xhr.open('PUT', `http://localhost:3000/api/users/${userId}/games/${gameId}?typeCollection=${typeCollection}&action=remove`);

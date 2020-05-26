@@ -252,13 +252,14 @@ input[type=radio] {
   padding: 20px;
 }
 .game {
-  float: left;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   padding: 15px;
+  margin-bottom: 8px;
   cursor: pointer;
+  border: 1px solid white;
 }
 .game__img {
   margin-bottom: 10px;
@@ -267,6 +268,10 @@ input[type=radio] {
 .game__title {
   text-align: center;
   font-size: 18px;
+}
+.gameList:hover {
+  border: 1px solid #ccc;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
 }
 .game-info {
   display: flex;
@@ -299,6 +304,36 @@ input[type=radio] {
 .game-info__properties .properties__name .value {
   padding-top: 5px;
   font-weight: bold;
+}
+.game-info__buttons {
+  display: flex;
+  width: 600px;
+}
+.game-info__buttons button {
+  width: 40%;
+  padding: 10px 30px;
+  font-size: 14px;
+  margin-right: 5px;
+  text-align: center;
+  border-radius: 4px;
+  outline: none;
+  cursor: pointer;
+}
+.game-info__buttons button[data-status=add],
+.game-info__buttons .user-info-buttons__btn-createMeeting {
+  background-color: #0ca39e;
+  color: white;
+}
+.game-info__buttons button[data-status=add]:hover,
+.game-info__buttons .user-info-buttons__btn-createMeeting:hover {
+  background-color: #15bdb8;
+}
+.game-info__buttons button[data-status=delete] {
+  background-color: #a30c0c;
+  color: white;
+}
+.game-info__buttons button[data-status=delete]:hover {
+  background-color: #bb1414;
 }
 .game-info__description {
   padding: 0 40px;
@@ -365,19 +400,6 @@ input[type=radio] {
   overflow: hidden;
   background-color: #f1f1f1;
 }
-.user-info-games .user-info-games-buttons button {
-  width: 35%;
-  height: 40px;
-  background-color: inherit;
-  border: solid #ccc;
-  border-width: 1px 1px 1px;
-  font-size: 16px;
-  outline: none;
-  cursor: pointer;
-}
-.user-info-games .user-info-games-buttons button:hover {
-  background-color: #ddd;
-}
 .user-info-games .user-info-games-buttons .active {
   background-color: white;
   border-bottom: none;
@@ -397,9 +419,17 @@ input[type=radio] {
   width: 600px;
 }
 .users-list .user {
-  border: 1px solid black;
+  border: 1px solid #0ca39e;
   padding: 10px;
   margin-bottom: 5px;
+  outline: none;
+  cursor: pointer;
+  border-left: 16px solid #0ca39e;
+  border-top: 3px solid #0ca39e;
+}
+.users-list .user:hover {
+  background-color: #0ca39e;
+  color: white;
 }
 .meet {
   width: 600px;
@@ -420,13 +450,42 @@ input[type=radio] {
 .meet .meet-propertis-btn {
   text-align: center;
 }
+.meet-list-buttons {
+  width: 600px;
+  text-align: center;
+  overflow: hidden;
+}
+.meet-list-buttons .meet-list-actual {
+  width: 35%;
+  height: 40px;
+  background-color: white;
+  border: none;
+  font-size: 16px;
+  outline: none;
+  cursor: pointer;
+}
+.meet-list-buttons .meet-list-closed {
+  width: 35%;
+  height: 40px;
+  background-color: white;
+  border: none;
+  font-size: 16px;
+  outline: none;
+  cursor: pointer;
+  margin-left: -5px;
+}
+.meet-list-buttons .active {
+  font-size: 18px;
+  border-bottom: 6px solid #a30c0c;
+}
 .meet-list {
   width: 600px;
+  padding: 10px;
 }
 .meet-list .meeting {
   display: flex;
   justify-content: space-between;
-  border: 1px solid black;
+  border: 1px solid #a30c0c;
   padding: 10px;
   margin-bottom: 5px;
   cursor: pointer;
@@ -436,8 +495,25 @@ input[type=radio] {
   width: 50%;
   justify-content: space-between;
 }
-.button {
+.meet-list .meeting:hover {
+  background-color: #a30c0c;
+  color: white;
+}
+button {
   border: none;
+}
+.btn-tab {
+  width: 35%;
+  height: 40px;
+  background-color: #ccc;
+  border: solid #ccc;
+  border-width: 1px 1px 1px;
+  font-size: 16px;
+  outline: none;
+  cursor: pointer;
+}
+.btn-tab:hover {
+  background-color: #ddd;
 }
 header > a {
   color: white;

@@ -53,7 +53,7 @@ class GamesList extends Component {
 
     getGameHTML(game) {
         return `
-            <div class="game" data-id="${game._id}">
+            <div class="game gameList" data-id="${game._id}">
                 <div class="game__img" data-id="${game._id}">
                     <img class="game__img" data-id="${game._id}" src="${game.img}" alt="">
                 </div>
