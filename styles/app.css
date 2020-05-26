@@ -476,16 +476,25 @@ input[type=radio] {
 .meet .meet-propertis-btn .main:hover {
   background-color: #bb1414;
 }
-.meet .meet-propertis-btn .btn-join-meet {
+.meet .meet-propertis-btn .btn-join-meet,
+.meet .meet-propertis-btn .btn-save-meet {
   padding: 10px 30px;
   background-color: #0ca39e;
 }
-.meet .meet-propertis-btn .btn-join-meet:hover {
+.meet .meet-propertis-btn .btn-join-meet:hover,
+.meet .meet-propertis-btn .btn-save-meet:hover {
   background-color: #15bdb8;
 }
 .meet .meet-propertis-btn .btn-join-meet:disabled {
   background-color: gray;
   cursor: auto;
+}
+.meet .meet-propertis-btn .btn-cancel-meet {
+  font-size: 14px;
+  padding: 10px 60px;
+  background-color: #a30c0c;
+  border-radius: 4px;
+  color: white;
 }
 .meet-list-buttons {
   width: 600px;

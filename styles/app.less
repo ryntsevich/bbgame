@@ -444,16 +444,26 @@ input[type=radio]{
        background-color: #bb1414;;
      }
 
-     .btn-join-meet{
-       padding: 10px 30px;
-       background-color: @niagara;
+     .btn-join-meet,
+     .btn-save-meet {
+        padding: 10px 30px;
+        background-color: @niagara;
      }
-     .btn-join-meet:hover{
-       background-color: #15bdb8;
+     .btn-join-meet:hover,
+     .btn-save-meet:hover {
+        background-color: #15bdb8;
      }
      .btn-join-meet:disabled{
-      background-color: gray;
-      cursor: auto;
+        background-color: gray;
+        cursor: auto;
+     }
+
+     .btn-cancel-meet {
+        font-size: 14px;
+        padding: 10px 60px;
+        background-color: @red;
+        border-radius: 4px;
+        color: white;
      }
    }
   }

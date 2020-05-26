@@ -51,7 +51,7 @@ class Meetings {
         return new Promise(resolve => {
             const xhr = new XMLHttpRequest();
 
-            xhr.open('PUT', `http://localhost:3000/api/meetings/${updatedMeeting.id}`);
+            xhr.open('PUT', `http://localhost:3000/api/meetings/${updatedMeeting._id}`);
             xhr.setRequestHeader('Content-Type', 'application/json');
 
             xhr.onload = () => resolve();

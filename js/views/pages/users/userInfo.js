@@ -55,7 +55,7 @@ class UserInfo extends Component {
                     </div>
                     <div class = "user-info__buttons">
                         <a class="user-info-buttons__btn-usersMeetings" href="#/users/${user._id}/meetings">Мои встречи</a>
-                        <a class="user-info-buttons__btn-editUserPage" >Редактировать</a>
+                        <a class="user-info-buttons__btn-editUserPage">Редактировать</a>
                     </div>
                 </div>
                 <div class="user-info-games">

@@ -14,11 +14,11 @@ class MeetingEdit extends Component {
     getData() {
         return new Promise(resolve => this.modelMeeting.getMeeting(this.request.id).then(meeting => {
             this.meeting = meeting;
-            // this.modelUser.getUsersByIds(meeting.players).then(users => {
-            //     this.users = users;
-            //     console.log(users)
-            // });
-            resolve(meeting);
+            this.modelUser.getUsersByIds(this.meeting.players).then(users => {
+                this.users = users;
+                // console.log(this.users)
+                resolve(meeting);
+            });
         }
         ));
     }
@@ -29,7 +29,6 @@ class MeetingEdit extends Component {
 
             if (meeting) {
                 const { _id, gameName, day, time, place, description, players } = meeting;
-                console.log(this.users)
 
                 html = `
                 <h1 class="page-title">Встреча</h1>
@@ -52,7 +51,7 @@ class MeetingEdit extends Component {
                 </div>
                 <div class="meet-propertis">
                     <div class="meet-propertis__title">Участники:</div>
-                    ${this.meeting.players.map(player => `<div class="meet-propertis__content">${player}</div>`).join('\n ')}
+                    ${this.users.map(user => `<div class="meet-propertis__content ">${user.name}</div>`).join('\n ')}
                 </div>
                 <div class="meet-propertis">
                     <div class="meet-propertis__title">Описание:</div>
@@ -93,7 +92,7 @@ class MeetingEdit extends Component {
         this.meeting.place = editPlace.value.trim();
         this.meeting.description = editDescription.value.trim();
 
-        console.log(editPlace.value.trim())
+        // console.log(this.meeting)
 
         this.modelMeeting.editMeeting(this.meeting).then(meeting => this.redirectToMeetingInfo(this.meeting._id));
     }
