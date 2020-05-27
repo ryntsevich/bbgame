@@ -14,8 +14,11 @@ class UserMeetings extends Component {
     getData() {
         return new Promise(resolve => this.modelMeeting.getMeetingsList().then(meetings => {
             this.meetings = meetings;
-            this.activeM = this.meetings.filter(meeting => meeting.status === "Actual");
+            this.userMeetings = this.meetings.filter(meeting => meeting.players.includes(this.user._id))
+            this.activeM = this.userMeetings.filter(meeting => meeting.status === "Actual");
+            
             resolve(meetings);
+
         }));
     }
     render(meetings) {
@@ -23,8 +26,8 @@ class UserMeetings extends Component {
             resolve(`
                 <h1 class="page-title">Мои встречи</h1>
                 <div class="meet-list-buttons">
-                    <button class="meet-list-actual active" data-status = "Actual" >Предстоящие</button>
-                    <button class="meet-list-closed" data-status = "Closed" >Прошедшие</button>
+                    <button class="meet-list-actual active" data-status = "Actual">Предстоящие</button>
+                    <button class="meet-list-closed" data-status = "Closed">Прошедшие</button>
                 </div>
                 <div class="meet-list">
                     ${this.activeM.map(meeting => this.getMeetingHTML(meeting)).join('\n ')}
@@ -41,6 +44,7 @@ class UserMeetings extends Component {
             meetList = document.getElementsByClassName('meet-list')[0];
 
         meetListContainer.addEventListener('click', event => {
+
             const target = event.target,
                 targetClassList = target.classList;
 
@@ -76,9 +80,10 @@ class UserMeetings extends Component {
 
 
     renderUserMeetings(status, meetList) {
-        const filterMeeting = this.meetings.filter(meeting => meeting.status === status);
+        const filterMeeting = this.userMeetings.filter(meeting => meeting.status === status);
+
         meetList.innerHTML = `
-        ${filterMeeting.map(meeting => this.getMeetingHTML(meeting)).join('\n ')}               
+        ${filterMeeting.map(meeting => this.getMeetingHTML(meeting)).join('\n ')}
         `;
     }
 

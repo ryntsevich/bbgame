@@ -55,7 +55,7 @@ class MeetingEdit extends Component {
                 </div>
                 <div class="meet-propertis">
                     <div class="meet-propertis__title">Описание:</div>
-                    <input class="meet-propertis__content meet-edit-description" type="text" value="${description}">
+                    <textarea class="meet-propertis__content meet-edit-description" type="text" value="${description}">${description}</textarea>
                 </div>
                 <div class="meet-propertis-btn">
                     <button class="btn-save-meet">Сохранить правки</button>

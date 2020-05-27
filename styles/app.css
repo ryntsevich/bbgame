@@ -126,7 +126,7 @@ table {
   font-family: sans-serif !important;
 }
 body {
-  min-width: 700px;
+  min-width: 600px;
 }
 .content-container {
   display: flex;
@@ -140,27 +140,72 @@ body {
   font-size: 2.8rem;
   letter-spacing: -0.02em;
 }
-.header-container,
 .footer-container {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 20px;
-  background: #033025;
+  height: 30px;
+  background: #0ca39e;
 }
-input {
+.header-container {
+  background: #0ca39e;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+}
+.header-container .header {
+  width: 800px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  font-size: 16px;
+}
+.header-container .header a {
+  color: white;
+}
+.header-container .header a:hover {
+  color: rgba(0, 0, 0, 0.699);
+}
+.header-container .header .header-links .header-links__link {
+  margin-right: 10px;
+}
+.header-container .header .header-user {
+  margin-left: 25px;
+  padding: 7px 7px;
+}
+.header-container .header .header-user__img {
+  margin: 0 2px -7px 0;
+  margin-top: -5px;
+}
+input,
+textarea {
   width: 100%;
   height: 35px;
   margin-top: 5px;
   outline: none;
   border-radius: 4px;
-  border: solid black 1px;
+  border: solid #cac6c6 1px;
   padding-left: 7px;
+}
+textarea {
+  height: 80px;
+  padding-top: 8px;
+  resize: none;
 }
 input[type=radio] {
   width: 37%;
   height: 18px;
   margin: 0;
+}
+input[type=radio]:hover,
+input[type=radio]:focus {
+  box-shadow: none;
+}
+textarea:focus,
+textarea:hover,
+input:focus,
+input:hover {
+  box-shadow: 0 1px 6px 0 rgba(91, 91, 94, 0.637);
 }
 .form-login-container {
   display: flex;
@@ -180,7 +225,7 @@ input[type=radio] {
 .form-login__title {
   margin-bottom: 14px;
   font-size: 18px;
-  color: #a30c0c;
+  color: #A30C11;
   font-weight: bold;
 }
 .form-login .form-elem {
@@ -197,7 +242,7 @@ input[type=radio] {
   height: 35px;
   font-size: 16px;
   border-radius: 4px;
-  background: #a30c0c;
+  background: #A30C11;
   cursor: pointer;
   color: white;
   margin-bottom: 10px;
@@ -331,7 +376,7 @@ input[type=radio] {
   background-color: #15bdb8;
 }
 .game-info__buttons button[data-status=delete] {
-  background-color: #a30c0c;
+  background-color: #A30C11;
   color: white;
 }
 .game-info__buttons button[data-status=delete]:hover {
@@ -375,7 +420,7 @@ input[type=radio] {
 .user-info__buttons .user-info-buttons__btn-usersMeetings {
   text-align: center;
   padding: 10px 30px;
-  background-color: #a30c0c;
+  background-color: #A30C11;
   border-radius: 4px;
   color: white;
   margin-bottom: 5px;
@@ -454,7 +499,7 @@ input[type=radio] {
   margin-bottom: 5px;
 }
 .meet .meet-propertis a:hover {
-  color: #a30c0c;
+  color: #A30C11;
 }
 .meet .meet-propertis-btn {
   text-align: center;
@@ -471,28 +516,35 @@ input[type=radio] {
 }
 .meet .meet-propertis-btn .main {
   width: 30%;
-  background-color: #a30c0c;
+  background-color: #A30C11;
 }
 .meet .meet-propertis-btn .main:hover {
   background-color: #bb1414;
 }
+.meet .meet-propertis-btn .main:disabled {
+  background-color: gray;
+  cursor: auto;
+}
 .meet .meet-propertis-btn .btn-join-meet,
-.meet .meet-propertis-btn .btn-save-meet {
+.meet .meet-propertis-btn .btn-save-meet,
+.meet .meet-propertis-btn .btn-create-meet {
   padding: 10px 30px;
   background-color: #0ca39e;
 }
 .meet .meet-propertis-btn .btn-join-meet:hover,
-.meet .meet-propertis-btn .btn-save-meet:hover {
+.meet .meet-propertis-btn .btn-save-meet:hover,
+.meet .meet-propertis-btn .btn-create-meet:hover {
   background-color: #15bdb8;
 }
-.meet .meet-propertis-btn .btn-join-meet:disabled {
+.meet .meet-propertis-btn .btn-join-meet:disabled,
+.meet .meet-propertis-btn .btn-create-meet:disabled {
   background-color: gray;
   cursor: auto;
 }
 .meet .meet-propertis-btn .btn-cancel-meet {
   font-size: 14px;
   padding: 10px 60px;
-  background-color: #a30c0c;
+  background-color: #A30C11;
   border-radius: 4px;
   color: white;
 }
@@ -522,7 +574,7 @@ input[type=radio] {
 }
 .meet-list-buttons .active {
   font-size: 18px;
-  border-bottom: 6px solid #a30c0c;
+  border-bottom: 6px solid #A30C11;
 }
 .meet-list {
   width: 600px;
@@ -531,7 +583,7 @@ input[type=radio] {
 .meet-list .meeting {
   display: flex;
   justify-content: space-between;
-  border: 1px solid #a30c0c;
+  border: 1px solid #A30C11;
   padding: 10px;
   margin-bottom: 5px;
   cursor: pointer;
@@ -542,21 +594,17 @@ input[type=radio] {
   justify-content: space-between;
 }
 .meet-list .meeting:hover {
-  background-color: #a30c0c;
+  background-color: #A30C11;
   color: white;
 }
 button {
   border: none;
 }
-button:disabled {
-  color: yellow;
-  background-color: black;
-}
 .btn-tab {
   width: 35%;
   height: 40px;
   background-color: #ccc;
-  border: solid #ccc;
+  border: solid #b8b5b5;
   border-width: 1px 1px 1px;
   font-size: 16px;
   outline: none;

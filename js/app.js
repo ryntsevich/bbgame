@@ -35,19 +35,29 @@ const Routes = {
 };
 
 function router() {
-    const headerContainer = document.getElementsByClassName('header-container')[0],
+    const
         contentContainer = document.getElementsByClassName('content-container')[0],
         footerContainer = document.getElementsByClassName('footer-container')[0],
-        header = new Header(),
+        pageContainer = document.getElementsByClassName('page-container')[0],
         footer = new Footer();
 
-    if (headerContainer) {
-        header.render().then(html => headerContainer.innerHTML = html)
-    }
+    let headerContainer = document.getElementsByClassName('header-container')[0];
+
 
     const request = parseRequestURL(),
         parsedURL = `/${request.resource || ''}${request.id ? '/:id' : ''}${request.action ? `/${request.action}` : ''}`,
         page = Routes[parsedURL] ? new Routes[parsedURL]() : new Error404();
+
+    if (parsedURL != '/' && parsedURL != '/join') {
+        if (!headerContainer) {
+            pageContainer.insertAdjacentHTML('afterbegin', '<div class="header-container"></div>');
+            headerContainer = document.getElementsByClassName('header-container')[0];
+        }
+        const header = new Header();
+        header.render().then(html => headerContainer.innerHTML = html)
+    } else if (headerContainer && (parsedURL == '/' || parsedURL == '/join')) {
+        headerContainer.remove();
+    }
 
     page.getData().then(data => {
         page.render(data).then(html => {
@@ -56,9 +66,7 @@ function router() {
         });
     });
 
-    if (footerContainer) {
-        footer.render().then(html => footerContainer.innerHTML = html);
-    }
+    footer.render().then(html => footerContainer.innerHTML = html);
 }
 
 window.addEventListener('load', router);

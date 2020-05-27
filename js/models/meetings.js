@@ -64,13 +64,13 @@ class Meetings {
         return new Promise(resolve => {
             const xhr = new XMLHttpRequest();
 
-            xhr.open('PUT', `http://localhost:3000/api/meetings/${id}`);
+            xhr.open('PUT', `http://localhost:3000/api/meetings/${id}/close`);
             xhr.setRequestHeader('Content-Type', 'application/json');
 
             xhr.onload = () => resolve();
 
 
-            xhr.send(JSON.stringify({ status: 'Closed'}));
+            xhr.send(JSON.stringify({ status: 'Closed' }));
         });
     }
 

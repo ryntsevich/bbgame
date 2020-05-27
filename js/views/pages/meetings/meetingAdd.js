@@ -33,7 +33,7 @@ class MeetingAdd extends Component {
                 </div>
                 <div class="meet-propertis">
                     <div class="meet-propertis__title">Описание:</div>
-                    <input class="meet-propertis__content meet-add-description" type="text">
+                    <textarea class="meet-propertis__content meet-add-description" type="text"></textarea>
                 </div>
                 <div class="meet-propertis-btn">
                     <button class="btn-create-meet" disabled>Создать встречу</button>

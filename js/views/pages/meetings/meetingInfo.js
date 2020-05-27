@@ -63,10 +63,10 @@ class MeetingInfo extends Component {
                         <div class="meet-propertis__content">${description}</div>
                     </div>
                     <div class="meet-propertis-btn">
-                    <button class="btn-close-meet main">Закрыть встречу</button>
-                    <button class="btn-edit-meet main">Редактировать встречу</button>
-                    <button class="btn-repeal-meet main">Отменить встречу</button>
-                    <button class="btn-join-meet" ${ isTrue && 'disabled'}>Принять участие</button>
+                    <button class="btn-close-meet main" ${this.meeting.status === "Closed" ? "disabled" : ""}>Закрыть встречу</button>
+                    <button class="btn-edit-meet main" ${this.meeting.status === "Closed" ? "disabled" : ""}>Редактировать встречу</button>
+                    <button class="btn-repeal-meet main" ${this.meeting.status === "Closed" ? "disabled" : ""}>Отменить встречу</button>
+                    <button class="btn-join-meet" ${ isTrue && "disabled"}>Принять участие</button>
                 </div>
                 </div>
 `;
@@ -87,10 +87,8 @@ class MeetingInfo extends Component {
             // btnDeleteMeeting = document.getElementsByClassName('btn-delete-meet')[0],
             btnCloseMeeting = document.getElementsByClassName('btn-close-meet')[0],
             btnJoinMeeting = document.getElementsByClassName('btn-join-meet')[0],
+            // btnRepealMeeting 
             playersContainer = document.getElementsByClassName('players')[0];
-
-        // user = JSON.parse(localStorage.getItem('user'));
-
 
 
         // btnDeleteMeeting.addEventListener('click', () => this.deleteMeeting(this.meeting._id));
