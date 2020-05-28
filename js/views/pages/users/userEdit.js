@@ -1,8 +1,6 @@
 import Component from '../../component.js';
 import Users from '../../../models/users.js';
 import Error404 from '../../../views/pages/error404.js';
-import Games from '../../../models/games.js';
-import Meetings from '../../../models/meetings.js';
 
 
 class UserEdit extends Component {
@@ -77,10 +75,10 @@ class UserEdit extends Component {
 
     setActions() {
         const btnSaveUser = document.getElementsByClassName('user-info-buttons__btn-saveUserPage')[0],
-        editName = document.getElementsByClassName('name-edit')[0],
-        editCity = document.getElementsByClassName('city-edit')[0],
-        editAge = document.getElementsByClassName('age-edit')[0],
-        editGender = document.getElementsByClassName('gender-edit');
+            editName = document.getElementsByClassName('name-edit')[0],
+            editCity = document.getElementsByClassName('city-edit')[0],
+            editAge = document.getElementsByClassName('age-edit')[0],
+            editGender = document.getElementsByClassName('gender-edit');
 
         btnSaveUser.addEventListener('click', () => this.editUser(editName, editCity, editAge, editGender));
     }
@@ -96,17 +94,12 @@ class UserEdit extends Component {
     }
 
     getValueGender(editGender) {
-        for (var i = 0; i < editGender.length; i++) {
-          if (editGender[i].checked) {
-            return editGender[i].value;
-          }
-        }
-      }
+        return Array.from(editGender).find(elem => elem.checked).value;
+    }
 
     redirectToUserInfo(id) {
         location.hash = `#/users/${id}`;
     }
-
 }
 
 export default UserEdit;
