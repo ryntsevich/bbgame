@@ -1,7 +1,4 @@
 import Component from '../../component.js';
-
-// import Error404 from '../../../views/pages/error404.js';
-
 import Users from '../../../models/users.js';
 
 class UsersList extends Component {
@@ -14,12 +11,13 @@ class UsersList extends Component {
     getData() {
         return new Promise(resolve => this.model.getUsersList().then(users => resolve(users)));
     }
+
     render(users) {
         return new Promise(resolve => {
             resolve(`
                 <h1 class="page-title">Список всех пользователей</h1>
                     <div class="users-list">
-                    ${users.map(user => this.getUserHTML(user)).join('\n ')}
+                        ${users.map(user => this.getUserHTML(user)).join('\n ')}
                     </div>
             `);
         });
@@ -50,13 +48,10 @@ class UsersList extends Component {
             </div>
         `;
     }
+
     redirectToUserInfo(id) {
         location.hash = `#/users/${id}`;
     }
-
-
-
-
 }
 
 export default UsersList;
