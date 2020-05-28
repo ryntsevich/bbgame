@@ -25,8 +25,8 @@ class GameInfo extends Component {
             let html;
 
             if (game) {
-                const { _id, title, img, age, minPlayers, maxPlayers, time } = game;
-                const user = JSON.parse(localStorage.getItem('user'));
+                const { _id, title, img, age, minPlayers, maxPlayers, time } = game,
+                    user = JSON.parse(localStorage.getItem('user'));
 
 
                 html = `
@@ -81,15 +81,12 @@ class GameInfo extends Component {
         this.getParagraphHTML();
     }
 
-
     setActions() {
         const buttonsGameInfoContainer = document.getElementsByClassName('game-info__buttons')[0],
             btnToUsersGame = document.getElementsByClassName('game-info-buttons__btn-usersGames')[0],
             btnToWishGames = document.getElementsByClassName('game-info-buttons__btn-wishGames')[0],
             btnToPlayedGames = document.getElementsByClassName('game-info-buttons__btn-playedGames')[0],
             btnCreateMeeting = document.getElementsByClassName('user-info-buttons__btn-createMeeting')[0],
-
-
             user = JSON.parse(localStorage.getItem('user'));
 
         buttonsGameInfoContainer.addEventListener('click', () => {
@@ -98,33 +95,15 @@ class GameInfo extends Component {
 
             switch (true) {
                 case targetClassList.contains('game-info-buttons__btn-usersGames'):
-                    if (target.dataset.status === 'add') {
-                        this.addGameToUserCollection(user._id, this.game._id, target.dataset.collection, btnToUsersGame);
-                        break;
-                    } else {
-                        this.deleteGameFromUserCollection(user._id, this.game._id, target.dataset.collection, btnToUsersGame);
-                        break;
-                    }
-
+                    this.selectActionButton(target.dataset.status, user._id, this.game._id, target.dataset.collection, btnToUsersGame);
+                    break;
                 case targetClassList.contains('game-info-buttons__btn-wishGames'):
-                    if (target.dataset.status === 'add') {
-                        this.addGameToUserCollection(user._id, this.game._id, target.dataset.collection, btnToWishGames);
-                        break;
-                    } else {
-                        this.deleteGameFromUserCollection(user._id, this.game._id, target.dataset.collection, btnToWishGames);
-                        break;
-                    }
-
+                    this.selectActionButton(target.dataset.status, user._id, this.game._id, target.dataset.collection, btnToWishGames);
+                    break;
                 case targetClassList.contains('game-info-buttons__btn-playedGames'):
-                    if (target.dataset.status === 'add') {
-                        this.addGameToUserCollection(user._id, this.game._id, target.dataset.collection, btnToPlayedGames);
-                        break;
-                    } else {
-                        this.deleteGameFromUserCollection(user._id, this.game._id, target.dataset.collection, btnToPlayedGames);
-                        break;
-                    }
+                    this.selectActionButton(target.dataset.status, user._id, this.game._id, target.dataset.collection, btnToPlayedGames);
+                    break;
             }
-
         });
 
         btnCreateMeeting.addEventListener('click', () => {
@@ -134,7 +113,9 @@ class GameInfo extends Component {
         });
     }
 
-
+    selectActionButton(status, userId, gameId, collection, btnToPlayedGames) {
+        status === 'add' ? this.addGameToUserCollection(userId, gameId, collection, btnToPlayedGames) : this.deleteGameFromUserCollection(userId, gameId, collection, btnToPlayedGames);
+    }
 
     addGameToUserCollection(userId, gameID, typeCollection, buttonName) {
         this.modelUsers.addToCollection(userId, gameID, typeCollection).then(user => {
@@ -154,6 +135,7 @@ class GameInfo extends Component {
 
 
     deleteGameFromUserCollection(userId, gameID, typeCollection, buttonName) {
+        console.log(buttonName)
         this.modelUsers.deleteFromCollection(userId, gameID, typeCollection).then(user => {
             this.modelUsers.getUser(userId).then(user => {
                 localStorage.setItem('user', JSON.stringify(user));
