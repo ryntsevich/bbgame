@@ -15,7 +15,7 @@ class SignUp extends Component {
               <p class="form-signup__title">Регистрация</p>
               <div class="form-signup__item">
                   <label for="file">Фото для профиля</label>
-                  <input type="file" name="file" id="file" class="inputfile form-signup-avatar" />
+                  <input class = "form-sign-img" type="file" name="file">
                 </div>
               <div class="form-signup__item">
                   <label for="name">Имя</label>
@@ -65,6 +65,7 @@ class SignUp extends Component {
 
   setActions() {
     const btnAddUser = document.getElementsByClassName('btn-signup')[0],
+      addImg = document.getElementsByClassName('form-sign-img')[0],
       addNameUser = document.getElementsByClassName('form-signup-name')[0],
       addLoginUser = document.getElementsByClassName('form-signup-login')[0],
       addEmailUser = document.getElementsByClassName('form-signup-email')[0],
@@ -79,11 +80,12 @@ class SignUp extends Component {
     formContainer.addEventListener('keyup', () => {
       this.changeButtonStatus(addNameUser, addLoginUser, addEmailUser, addPasswordUser, addCityUser, addAgeUser, addGenderUser, btnAddUser);
     });
-    btnAddUser.addEventListener('click', () => this.addNewUser(addNameUser, addLoginUser, addEmailUser, addPasswordUser, addCityUser, addAgeUser, addGenderUser));
+    btnAddUser.addEventListener('click', () => this.addNewUser(addImg, addNameUser, addLoginUser, addEmailUser, addPasswordUser, addCityUser, addAgeUser, addGenderUser));
   }
 
-  addNewUser(addNameUser, addLoginUser, addEmailUser, addPasswordUser, addCityUser, addAgeUser, addGenderUser) {
+  addNewUser(addImg, addNameUser, addLoginUser, addEmailUser, addPasswordUser, addCityUser, addAgeUser, addGenderUser) {
     const newUser = {
+      img: addImg.value,
       name: addNameUser.value.trim(),
       username: addLoginUser.value.trim(),
       email: addEmailUser.value.trim(),

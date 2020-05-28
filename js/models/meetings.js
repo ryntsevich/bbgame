@@ -47,6 +47,7 @@ class Meetings {
             xhr.send();
         });
     }
+    
     editMeeting(updatedMeeting) {
         return new Promise(resolve => {
             const xhr = new XMLHttpRequest();
@@ -64,7 +65,7 @@ class Meetings {
         return new Promise(resolve => {
             const xhr = new XMLHttpRequest();
 
-            xhr.open('PUT', `http://localhost:3000/api/meetings/${id}/close`);
+            xhr.open('PUT', `http://localhost:3000/api/meetings/${id}`);
             xhr.setRequestHeader('Content-Type', 'application/json');
 
             xhr.onload = () => resolve();
@@ -91,7 +92,7 @@ class Meetings {
         return new Promise(resolve => {
             const xhr = new XMLHttpRequest();
 
-            xhr.open('PUT', `http://localhost:3000/api/meetings/${id}/repeal`);
+            xhr.open('PUT', `http://localhost:3000/api/meetings/${id}`);
             xhr.setRequestHeader('Content-Type', 'application/json');
 
             xhr.onload = () => resolve();

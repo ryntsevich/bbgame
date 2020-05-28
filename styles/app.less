@@ -200,13 +200,18 @@ input:hover {
         margin-bottom: 14px;
       }
     
-    .btn-signup{
+    .btn-signup {
       height: 35px;
       font-size: 16px;
       border-radius: 4px;
       background: @niagara;
       cursor: pointer;
       color: white;
+    }
+
+    .btn-signup:disabled {
+      background-color: gray;
+      cursor: auto;
     }
   }
 }
@@ -380,26 +385,39 @@ input:hover {
       flex-direction: column;
       padding: 20px 15px;
 
-      .user-info-buttons__btn-usersMeetings {
+      .user-info-buttons__btn-editUserPage,
+      .user-info-buttons__btn-cancelUserPage {
         text-align: center;
         padding: 10px 30px;
         background-color: @red;
         border-radius: 4px;
         color: white;
         margin-bottom: 5px;
+        cursor: pointer;
+
       }
 
-      .user-info-buttons__btn-usersMeetings:hover {
-        background-color:#bb1414;
-      }
-
-      .user-info-buttons__btn-editUserPage{
+      .user-info-buttons__btn-saveUserPage,
+      .user-info-buttons__btn-usersMeetings {
         text-align: center;
         padding: 10px 30px;
-        background-color: gray;
+        background-color: @niagara;
         border-radius: 4px;
         color: white;
         margin-bottom: 5px;
+        cursor: pointer;
+      }
+
+
+      .user-info-buttons__btn-saveUserPage:hover,
+      .user-info-buttons__btn-usersMeetings:hover {
+        background-color: #15bdb8;
+      }
+   
+
+      .user-info-buttons__btn-cancelUserPage:hover,
+      .user-info-buttons__btn-editUserPage:hover {
+        background-color:#bb1414;
       }
     }
   }

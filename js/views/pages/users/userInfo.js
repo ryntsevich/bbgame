@@ -33,12 +33,16 @@ class UserInfo extends Component {
             if (user) {
 
                 html = `
-                <h1 class="page-title">${user.name}</h1>
+                <h1 class="page-title">${user.username}</h1>
                 <div class="user-info">
                     <div class="user-info__img">
                         <img src="${user.img}" alt="">
                     </div>
                     <div class="user-info__about">
+                        <div class="user-name item">
+                            <div class="name">Имя</div>
+                            <div class="value" type ="text">${user.name}</div>
+                        </div>
                         <div class="user-city item">
                             <div class="name">Город</div>
                             <div class="value">${user.city}</div>
@@ -53,8 +57,8 @@ class UserInfo extends Component {
                         </div>
                     </div>
                     <div class = "user-info__buttons">
+                        <a class="user-info-buttons__btn-editUserPage" href="#/users/${user._id}/edit">Редактировать</a>
                         <a class="user-info-buttons__btn-usersMeetings" href="#/users/${user._id}/meetings">Мои встречи</a>
-                        <a class="user-info-buttons__btn-editUserPage">Редактировать</a>
                     </div>
                 </div>
                 <div class="user-info-games">

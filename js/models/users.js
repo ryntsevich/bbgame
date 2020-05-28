@@ -75,6 +75,19 @@ class Users {
 			xhr.send(JSON.stringify({ ids: users }));
 		});
 	}
+
+	editUser(updatedUser) {
+        return new Promise(resolve => {
+            const xhr = new XMLHttpRequest();
+
+            xhr.open('PUT', `http://localhost:3000/api/users/${updatedUser._id}`);
+            xhr.setRequestHeader('Content-Type', 'application/json');
+
+            xhr.onload = () => resolve();
+
+            xhr.send(JSON.stringify(updatedUser));
+        });
+    }
 }
 
 export default Users;

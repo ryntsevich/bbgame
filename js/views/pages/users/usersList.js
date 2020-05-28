@@ -46,7 +46,7 @@ class UsersList extends Component {
     getUserHTML(user) {
         return `
             <div class="user" data-id="${user._id}">
-                <div class="user__title" data-id="${user._id}">${user.name}</div>
+                <div class="user__title" data-id="${user._id}">${user.username}</div>
             </div>
         `;
     }

@@ -19,6 +19,7 @@ import MeetingInfo from './views/pages/meetings/meetingInfo.js';
 import MeetingsList from './views/pages/meetings/meetingsList.js';
 import MeetingAdd from './views/pages/meetings/meetingAdd.js';
 import MeetingEdit from './views/pages/meetings/meetingEdit.js';
+import UserEdit from './views/pages/users/userEdit.js';
 
 const Routes = {
     '/': Login,
@@ -27,6 +28,7 @@ const Routes = {
     '/games/:id': GameInfo,
     '/users': UsersList,
     '/users/:id': UserInfo,
+    '/users/:id/edit': UserEdit,
     '/users/:id/meetings': UserMeetings,
     '/meetings/:id': MeetingInfo,
     '/meetings': MeetingsList,

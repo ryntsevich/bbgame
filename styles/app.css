@@ -287,6 +287,10 @@ input:hover {
   cursor: pointer;
   color: white;
 }
+.form-signup-container .form-signup .btn-signup:disabled {
+  background-color: gray;
+  cursor: auto;
+}
 .games {
   max-width: 800px;
   margin-bottom: 30px;
@@ -418,24 +422,33 @@ input:hover {
   flex-direction: column;
   padding: 20px 15px;
 }
-.user-info__buttons .user-info-buttons__btn-usersMeetings {
+.user-info__buttons .user-info-buttons__btn-editUserPage,
+.user-info__buttons .user-info-buttons__btn-cancelUserPage {
   text-align: center;
   padding: 10px 30px;
   background-color: #A30C11;
   border-radius: 4px;
   color: white;
   margin-bottom: 5px;
+  cursor: pointer;
 }
-.user-info__buttons .user-info-buttons__btn-usersMeetings:hover {
-  background-color: #bb1414;
-}
-.user-info__buttons .user-info-buttons__btn-editUserPage {
+.user-info__buttons .user-info-buttons__btn-saveUserPage,
+.user-info__buttons .user-info-buttons__btn-usersMeetings {
   text-align: center;
   padding: 10px 30px;
-  background-color: gray;
+  background-color: #0ca39e;
   border-radius: 4px;
   color: white;
   margin-bottom: 5px;
+  cursor: pointer;
+}
+.user-info__buttons .user-info-buttons__btn-saveUserPage:hover,
+.user-info__buttons .user-info-buttons__btn-usersMeetings:hover {
+  background-color: #15bdb8;
+}
+.user-info__buttons .user-info-buttons__btn-cancelUserPage:hover,
+.user-info__buttons .user-info-buttons__btn-editUserPage:hover {
+  background-color: #bb1414;
 }
 .user-info-games {
   width: 600px;
