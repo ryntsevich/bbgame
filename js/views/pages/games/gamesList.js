@@ -41,10 +41,8 @@ class GamesList extends Component {
                 case targetClassList.contains('game__title'):
                     this.redirectToGameInfo(target.dataset.id);
                     break;
-
             }
         });
-
     }
 
     redirectToGameInfo(id) {
@@ -61,8 +59,6 @@ class GamesList extends Component {
             </div>
         `;
     }
-
-
 }
 
 export default GamesList;
