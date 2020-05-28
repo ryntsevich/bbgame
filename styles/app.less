@@ -1,6 +1,5 @@
 @import "reset";
 
-// @red:rgb(163, 12, 12);
 @red:#A30C11;
 @niagara: #0ca39e;
 
@@ -22,7 +21,6 @@ body {
 }
 
 .page-title {
-  // font-size: 32px;
   padding: 15px 0;
   text-align: center;
   font-size: 2.8rem;
@@ -78,10 +76,6 @@ body {
   }
 }
 
-
-
-
-
 input,
 textarea {
   width: 100%;
@@ -92,6 +86,7 @@ textarea {
   border: solid rgb(202, 198, 198) 1px;
   padding-left: 7px;
 }
+
 textarea {
   height: 80px;
   padding-top: 8px; 
@@ -116,7 +111,6 @@ input:hover {
   box-shadow: 0 1px 6px 0 rgba(91, 91, 94, 0.637);
 }
 
-
 .form-login-container {
     display: flex;
     flex-direction: column;
@@ -134,7 +128,6 @@ input:hover {
   flex-direction: column;
   padding: 10px;
 
-
   &__title {
     margin-bottom: 14px;
     font-size: 18px;
@@ -149,8 +142,7 @@ input:hover {
     outline: none;
     border-radius: 4px;
     border: solid black 1px;
-    padding-left: 7px;
-    
+    padding-left: 7px;    
   }
 
   &__btn-login {
@@ -174,7 +166,6 @@ input:hover {
     color: white;
   }
 }
-
 
 .form-signup-container {
   display: flex;
@@ -216,13 +207,10 @@ input:hover {
   }
 }
 
-
 .games {
   max-width: 800px;
-  // margin: 20px auto 0;
   margin-bottom: 30px; 
 }
-
 
 .games-list {
   display: grid;
@@ -233,7 +221,6 @@ input:hover {
 
 
 .game {
-  // float: left;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -253,12 +240,11 @@ input:hover {
     font-size: 18px;
   }
 }
+
 .gameList:hover{
   border: 1px solid #ccc;
   box-shadow: 0 2px 5px rgba(0,0,0,0.3);
-
 }
-
 
 .game-info {
   display: flex;
@@ -305,8 +291,6 @@ input:hover {
     text-align: center;
 
     button {
-      // width: 40%;
-      // height: 40px;
       padding: 10px 20px;
       font-size: 14px;
       margin-right: 5px;
@@ -315,7 +299,6 @@ input:hover {
       border-radius: 4px;
       outline: none;
       cursor: pointer;
-
     }
 
     button[data-status=add],
@@ -350,14 +333,13 @@ input:hover {
       font-weight: bold;
     }
 
-    .description-content p{
+    .description-content p {
       margin-top: 10px;
     }
   }
 }
 
-
-  .user-info{
+  .user-info {
     display: flex;
     justify-content: space-between;
     width: 600px;
@@ -379,7 +361,7 @@ input:hover {
       }
     }
 
-    &__buttons{
+    &__buttons {
       display: flex;
       flex-direction: column;
       padding: 20px 15px;
@@ -393,7 +375,6 @@ input:hover {
         color: white;
         margin-bottom: 5px;
         cursor: pointer;
-
       }
 
       .user-info-buttons__btn-saveUserPage,
@@ -407,12 +388,10 @@ input:hover {
         cursor: pointer;
       }
 
-
       .user-info-buttons__btn-saveUserPage:hover,
       .user-info-buttons__btn-usersMeetings:hover {
         background-color: #15bdb8;
       }
-   
 
       .user-info-buttons__btn-cancelUserPage:hover,
       .user-info-buttons__btn-editUserPage:hover {
@@ -453,8 +432,7 @@ input:hover {
   }
 
   .users-list {
-    width: 600px;
-    
+    width: 600px;    
 
     .user{
       border: 1px solid @niagara;
@@ -476,7 +454,6 @@ input:hover {
     width: 600px;
     padding: 10px;
     margin-bottom: 30px;
-
 
     .meet-propertis {
       margin-bottom: 20px;
@@ -501,12 +478,8 @@ input:hover {
      text-align: center;
 
      button{
-      // width: 30%;
-      // float: left;
-      // height: 40px;
       padding: 10px;
       font-size: 14px;
-      // margin-right: 2px;
       margin-bottom: 10px;
       text-align: center;
       border-radius: 4px;
@@ -533,11 +506,13 @@ input:hover {
         padding: 10px 30px;
         background-color: @niagara;
      }
+
      .btn-join-meet:hover,
      .btn-save-meet:hover,
      .btn-create-meet:hover {
         background-color: #15bdb8;
      }
+
      .btn-join-meet:disabled,
      .btn-create-meet:disabled {
         background-color: gray;
@@ -581,11 +556,9 @@ input:hover {
       margin-left: -5px;
     }
     .active {
-      // border: none;
       font-size: 18px;
       border-bottom: 6px solid @red;
     }
-
   }
 
   .meet-list {
@@ -600,12 +573,10 @@ input:hover {
       margin-bottom: 5px;
       cursor: pointer;
 
-
       &__propertis{
         display: flex;
         width: 50%;
-        justify-content: space-between;
-    
+        justify-content: space-between;    
       }
     }
 
@@ -613,14 +584,11 @@ input:hover {
       background-color: @red;
       color: white;
     }
-
   }
 
 button {
   border: none;  
 }
-
-
 
 .btn-tab{
   width: 35%;
@@ -628,13 +596,9 @@ button {
   background-color: #ccc;
   border: solid rgb(184, 181, 181);
   border-width: 1px 1px 1px;
-// border: 1px solid #ccc;
-  // border: none;
   font-size: 16px;
   outline: none;
   cursor: pointer;
-  // padding: 14px 16px;
-  // transition: 0.3s;
 }
 
 .btn-tab:hover {
