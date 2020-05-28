@@ -19,13 +19,11 @@ class MeetingsList extends Component {
             resolve(`
                 <h1 class="page-title">Список всех встреч</h1>
                     <div class="meet-list">
-                    ${meetings.map(meeting => this.getMeetingHTML(meeting)).join('\n ')}
+                        ${meetings.map(meeting => this.getMeetingHTML(meeting)).join('\n ')}
                     </div>
             `);
         });
     }
-
-
 
     afterRender() {
         this.setActions();
@@ -45,10 +43,8 @@ class MeetingsList extends Component {
                 case targetClassList.contains('meeting__propertis-a'):
                     this.redirectToMeetingInfo(target.dataset.id);
                     break;
-
             }
         });
-
     }
 
     redirectToMeetingInfo(id) {
@@ -60,10 +56,10 @@ class MeetingsList extends Component {
             <div class="meeting" data-id="${meeting._id}">
                 <div class="meeting__title" data-id="${meeting._id}" href="#/meetings/${meeting._id}">${meeting.gameName}</div>
                 <div class="meeting__propertis" data-id="${meeting._id}">
-                <div class="meeting__propertis-a" data-id="${meeting._id}">${meeting.day}</div>
-                <div class="meeting__propertis-a" data-id="${meeting._id}">${meeting.place}</div>
+                    <div class="meeting__propertis-a" data-id="${meeting._id}">${meeting.day}</div>
+                    <div class="meeting__propertis-a" data-id="${meeting._id}">${meeting.place}</div>
                 </div>
-                </div>
+            </div>
         `;
     }
 }
