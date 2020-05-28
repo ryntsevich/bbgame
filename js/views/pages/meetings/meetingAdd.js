@@ -45,7 +45,6 @@ class MeetingAdd extends Component {
 
     afterRender() {
         this.setActions();
-
     }
 
     setActions() {
@@ -57,16 +56,15 @@ class MeetingAdd extends Component {
             addDescription = document.getElementsByClassName('meet-add-description')[0],
             listContainer = document.getElementsByClassName('meet')[0];
 
-
         listContainer.addEventListener('input', () => {
             this.changeButtonStatus(addDay, addTime, addPlace, btnCreateMeeting);
         });
+
         btnCreateMeeting.addEventListener('click', () => {
             this.addNewMeeting(addGameName, addDay, addTime, addPlace, addDescription);
-            // localStorage.clear();
         });
-
     }
+
     addNewMeeting(addGameName, addDay, addTime, addPlace, addDescription) {
         const newMeeting = {
             gameName: addGameName.value.trim(),
@@ -77,12 +75,9 @@ class MeetingAdd extends Component {
             players: [(JSON.parse(localStorage.getItem('user')))._id]
         };
 
-
         this.modelMeetings.addMeeting(newMeeting).then(meeting => {
-            // this.clearAddNewMeeting(addGameName, addDay, addTime, addPlace, addDescription);
             this.redirectToMeetingInfo(meeting._id);
         });
-
     }
 
     changeButtonStatus(addDay, addTime, addPlace, btnCreateMeeting) {
@@ -90,20 +85,9 @@ class MeetingAdd extends Component {
         btnCreateMeeting.disabled = !obj.every(elem => elem.value.trim());
     }
 
-    // clearAddNewMeeting(addGameName, addDay, addTime, addPlace, addDescription) {
-    //     addGameName.value = '';
-    //     addDay.value = '';
-    //     addTime.value = '';
-    //     addPlace.value = '';
-    //     addDescription.value = '';
-    // }
-
     redirectToMeetingInfo(id) {
         location.hash = `#/meetings/${id}`;
     }
-
-
-
 }
 
 export default MeetingAdd;
