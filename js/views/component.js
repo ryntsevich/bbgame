@@ -10,7 +10,7 @@ class Component {
     }
 
 
-    afterRender() { }
+    afterRender() {}
 }
 
 export default Component;

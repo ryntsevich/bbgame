@@ -35,8 +35,6 @@ class Games {
 			xhr.send(JSON.stringify({ ids: games }));
 		});
 	}
-
-
 }
 
 export default Games;

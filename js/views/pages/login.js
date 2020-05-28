@@ -4,7 +4,6 @@ class Login extends Component {
   render() {
     return new Promise(resolve => {
       resolve(`
-
           <div class ="form-login-container">
             <div class="form-login-img">
               <img src="images/dice3.png" alt="dice" class="dice">
@@ -16,9 +15,7 @@ class Login extends Component {
               <button class="form-login__btn-login button">Вход</button>
               <button class="form-login__btn-registration button">Регистрация</button>
             </div>
-          </div>   
-
-
+          </div>
             `);
     });
   }
@@ -48,10 +45,10 @@ class Login extends Component {
       xhr.setRequestHeader('Content-Type', 'application/json');
 
       xhr.onload = () => resolve(JSON.parse(xhr.response));
-      
-    xhr.send(JSON.stringify(credentialns));
-  });
-}
+
+      xhr.send(JSON.stringify(credentialns));
+    });
+  }
 }
 
 export default Login;

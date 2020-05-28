@@ -133,7 +133,6 @@ class GameInfo extends Component {
         });
     }
 
-
     deleteGameFromUserCollection(userId, gameID, typeCollection, buttonName) {
         console.log(buttonName)
         this.modelUsers.deleteFromCollection(userId, gameID, typeCollection).then(user => {

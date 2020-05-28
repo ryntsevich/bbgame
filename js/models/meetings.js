@@ -10,6 +10,7 @@ class Meetings {
             xhr.send();
         });
     }
+
     getMeeting(id) {
         return new Promise(resolve => {
             const xhr = new XMLHttpRequest();
@@ -35,19 +36,6 @@ class Meetings {
         });
     }
 
-    deleteMeeting(id) {
-        return new Promise(resolve => {
-            const xhr = new XMLHttpRequest();
-
-            xhr.open('DELETE', `http://localhost:3000/api/meetings/${id}`);
-            xhr.setRequestHeader('Content-Type', 'application/json');
-
-            xhr.onload = () => resolve();
-
-            xhr.send();
-        });
-    }
-    
     editMeeting(updatedMeeting) {
         return new Promise(resolve => {
             const xhr = new XMLHttpRequest();
@@ -69,7 +57,6 @@ class Meetings {
             xhr.setRequestHeader('Content-Type', 'application/json');
 
             xhr.onload = () => resolve();
-
 
             xhr.send(JSON.stringify({ status: 'Closed' }));
         });
@@ -97,7 +84,6 @@ class Meetings {
 
             xhr.onload = () => resolve();
 
-
             xhr.send(JSON.stringify({ status: 'Repeal' }));
         });
     }
@@ -112,9 +98,7 @@ class Meetings {
 
             xhr.send(JSON.stringify(meeting));
         });
-
     }
-
 }
 
 export default Meetings;

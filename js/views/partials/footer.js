@@ -4,10 +4,10 @@ class Footer extends Component {
     render() {
         return new Promise(resolve => {
             resolve(`
-                <footer class="footer">                   
+                <footer class="footer">
                     <p class="footer__info">
                         &copy; All Rights Reserved, 2020
-                    </p>                  
+                    </p>
                 </footer>
             `);
         });
