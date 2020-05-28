@@ -87,6 +87,20 @@ class Meetings {
         });
     }
 
+    repealMeeting(id) {
+        return new Promise(resolve => {
+            const xhr = new XMLHttpRequest();
+
+            xhr.open('PUT', `http://localhost:3000/api/meetings/${id}/repeal`);
+            xhr.setRequestHeader('Content-Type', 'application/json');
+
+            xhr.onload = () => resolve();
+
+
+            xhr.send(JSON.stringify({ status: 'Repeal' }));
+        });
+    }
+
     getPlayers(meeting) {
         return new Promise(resolve => {
             const xhr = new XMLHttpRequest();

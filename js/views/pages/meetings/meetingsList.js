@@ -11,7 +11,7 @@ class MeetingsList extends Component {
     getData() {
         return new Promise(resolve => this.modelMeeting.getMeetingsList().then(meetings => {
             meetings = meetings.filter(meeting => meeting.status === 'Actual');
-            resolve(meetings)
+            resolve(meetings);
         }));
     }
     render(meetings) {

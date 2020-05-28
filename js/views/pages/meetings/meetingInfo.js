@@ -87,7 +87,7 @@ class MeetingInfo extends Component {
             // btnDeleteMeeting = document.getElementsByClassName('btn-delete-meet')[0],
             btnCloseMeeting = document.getElementsByClassName('btn-close-meet')[0],
             btnJoinMeeting = document.getElementsByClassName('btn-join-meet')[0],
-            // btnRepealMeeting 
+            btnRepealMeeting = document.getElementsByClassName('btn-repeal-meet')[0],
             playersContainer = document.getElementsByClassName('players')[0];
 
 
@@ -95,6 +95,7 @@ class MeetingInfo extends Component {
         btnEditMeeting.addEventListener('click', () => this.redirectToMeetingEdit(this.meeting._id));
         btnCloseMeeting.addEventListener('click', () => this.closeMeeting(this.meeting._id));
         btnJoinMeeting.addEventListener('click', () => this.joinToMeeting(this.meeting._id, this.user._id, playersContainer, btnJoinMeeting));
+        btnRepealMeeting.addEventListener('click', () => this.repealMeeting(this.meeting._id));
     }
 
     // deleteMeeting(id) {
@@ -118,6 +119,10 @@ class MeetingInfo extends Component {
             }
             )
         });
+    }
+
+    repealMeeting(id) {
+        this.modelMeeting.repealMeeting(id).then(meeting => this.redirectToMeetingsList());
     }
 
     redirectToMeetingsList() {

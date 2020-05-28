@@ -5,7 +5,6 @@ class Header extends Component {
         const resource = this.request.resource;
         return new Promise(resolve => {
             const user = JSON.parse(localStorage.getItem('user'));
-            console.log(user)
             resolve(`
             <header class="header">
                 <div class="header-links">

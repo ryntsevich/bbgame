@@ -92,7 +92,6 @@ class MeetingEdit extends Component {
         this.meeting.place = editPlace.value.trim();
         this.meeting.description = editDescription.value.trim();
 
-        // console.log(this.meeting)
 
         this.modelMeeting.editMeeting(this.meeting).then(meeting => this.redirectToMeetingInfo(this.meeting._id));
     }

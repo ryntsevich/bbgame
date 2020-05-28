@@ -85,13 +85,14 @@ class SignUp extends Component {
   addNewUser(addNameUser, addLoginUser, addEmailUser, addPasswordUser, addCityUser, addAgeUser, addGenderUser) {
     const newUser = {
       name: addNameUser.value.trim(),
-      login: addLoginUser.value.trim(),
+      username: addLoginUser.value.trim(),
       email: addEmailUser.value.trim(),
       password: addPasswordUser.value.trim(),
       city: addCityUser.value.trim(),
       age: addAgeUser.value.trim(),
       gender: this.getValueGender(addGenderUser)
     }
+
     this.modelUsers.addUser(newUser).then(user => {
       console.log(user);
       this.redirectToUserInfo(user._id)
@@ -114,7 +115,7 @@ class SignUp extends Component {
   }
 
   redirectToUserInfo(id) {
-    location.hash = `#/user/${id}`;
+    location.hash = `#/users/${id}`;
   }
 
 }

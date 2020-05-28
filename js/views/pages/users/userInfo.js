@@ -15,7 +15,6 @@ class UserInfo extends Component {
     }
     getData() {
         return new Promise(resolve => this.model.getUser(this.request.id).then(user => {
-            console.log('user');
             this.modelGames.getGamesByIds(user.collectionGames).then(games => {
                 user['renderGames'] = games;
                 this.user = user;
