@@ -11,8 +11,8 @@ class UserInfo extends Component {
 
         this.model = new Users();
         this.modelGames = new Games();
-        this.modelMeetings = new Meetings();
     }
+
     getData() {
         return new Promise(resolve => this.model.getUser(this.request.id).then(user => {
             this.modelGames.getGamesByIds(user.collectionGames).then(games => {
@@ -20,7 +20,7 @@ class UserInfo extends Component {
                 this.user = user;
                 localStorage.setItem('user', JSON.stringify(this.user));
                 resolve(user);
-            })
+            });
         }));
     }
 
@@ -69,7 +69,7 @@ class UserInfo extends Component {
                     </div>
                     <div class="games">
                         <div class="games-list">
-                                ${user.renderGames.length != 0 ? user.renderGames.map(game => this.getUsersGames(game)).join('\n ') : 'Список пуст'}
+                            ${user.renderGames.length != 0 ? user.renderGames.map(game => this.getUsersGames(game)).join('\n ') : 'Список пуст'}
                         </div>
                     </div>
                 </div>
@@ -95,20 +95,17 @@ class UserInfo extends Component {
 
             switch (true) {
                 case targetClassList.contains('user-info-games-buttons__btn-usersGames'):
-                    buttonsContainer.getElementsByClassName('active')[0].classList.remove('active');
-                    targetClassList.add('active');
+                    this.setActiveTabs(buttonsContainer, targetClassList);
                     this.renderUserGames(this.user.collectionGames, gamesList);
                     break;
 
                 case targetClassList.contains('user-info-games-buttons__btn-wishGames'):
-                    buttonsContainer.getElementsByClassName('active')[0].classList.remove('active');
-                    targetClassList.add('active');
+                    this.setActiveTabs(buttonsContainer, targetClassList);
                     this.renderUserGames(this.user.wishGames, gamesList);
                     break;
 
                 case targetClassList.contains('user-info-games-buttons__btn-playedGames'):
-                    buttonsContainer.getElementsByClassName('active')[0].classList.remove('active');
-                    targetClassList.add('active');
+                    this.setActiveTabs(buttonsContainer, targetClassList);
                     this.renderUserGames(this.user.playedGames, gamesList);
                     break;
             }
@@ -128,6 +125,11 @@ class UserInfo extends Component {
         });
     }
 
+    setActiveTabs(buttonsContainer, targetClassList) {
+        buttonsContainer.getElementsByClassName('active')[0].classList.remove('active');
+        targetClassList.add('active');
+    }
+
     renderUserGames(gameIds, gamesList) {
         this.modelGames.getGamesByIds(gameIds).then(games => {
             if (gameIds.length != 0) {
@@ -138,7 +140,6 @@ class UserInfo extends Component {
             }
         });
     }
-
 
     getUsersGames(game) {
         return `
@@ -153,7 +154,6 @@ class UserInfo extends Component {
     redirectToGameInfo(id) {
         location.hash = `#/games/${id}`;
     }
-
 }
 
 export default UserInfo;
