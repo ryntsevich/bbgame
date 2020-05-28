@@ -51,7 +51,7 @@ class MeetingEdit extends Component {
                 </div>
                 <div class="meet-propertis">
                     <div class="meet-propertis__title">Участники:</div>
-                    ${this.users.map(user => `<div class="meet-propertis__content ">${user.name}</div>`).join('\n ')}
+                    ${this.users.map(user => `<div class="meet-propertis__content ">${user.username}</div>`).join('\n ')}
                 </div>
                 <div class="meet-propertis">
                     <div class="meet-propertis__title">Описание:</div>

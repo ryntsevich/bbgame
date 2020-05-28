@@ -49,11 +49,11 @@ class UserEdit extends Component {
                         <div class="user-gender item">
                             <div class="name">Пол</div>
                             <label>
-                                <input class="value gender-edit" type="radio" name="gender" value="Мужской" checked>
+                                <input class="value gender-edit" type="radio" name="gender" value="Мужской" ${user.gender === 'Мужской' && 'checked'}>
                                 Мужской
                             </label>
                             <label>
-                                <input class="value gender-edit" type="radio" name="gender" value="Женский">
+                                <input class="value gender-edit" type="radio" name="gender" value="Женский" ${user.gender === 'Женский' && 'checked'}>
                                 Женский
                             </label>
                         </div>

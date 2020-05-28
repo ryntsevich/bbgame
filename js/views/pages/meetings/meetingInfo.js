@@ -111,10 +111,10 @@ class MeetingInfo extends Component {
             this.meeting.players.push(userId);
             this.modelUser.getUsersByIds(this.meeting.players).then(users => {
                 this.users = users;
-                btnJoinMeeting.disabled = this.users.length >= this.maxPlayersLS;
+                btnJoinMeeting.disabled = (this.users.length >= this.maxPlayersLS || this.meeting.players.includes(this.user._id));
                 playersContainer.innerHTML = `
                        <div class="meet-propertis__title">Участники:</div>
-                        ${this.users.map(user => `<a class="meet-propertis__content" href="#/users/${user._id}">${user.name}</a></br>`).join('\n ')}
+                        ${this.users.map(user => `<a class="meet-propertis__content" href="#/users/${user._id}">${user.username}</a></br>`).join('\n ')}
                      `;
             }
             )

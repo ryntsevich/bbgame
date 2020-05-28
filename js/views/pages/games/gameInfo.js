@@ -55,9 +55,9 @@ class GameInfo extends Component {
                     <div class="game-info__buttons">
                     ${user.collectionGames.includes(_id) ? `<button class="game-info-buttons__btn-usersGames" data-status="delete" data-collection="collectionGames">Удалить из коллекции</button>`
                         : `<button class="game-info-buttons__btn-usersGames" data-status="add" data-collection="collectionGames">В мою коллекцию</button>`}
-                        ${user.wishGames.includes(_id) ? `<button class="game-info-buttons__btn-wishGames" data-status="delete" data-collection="wishGames">Удалить из коллекции</button>`
+                        ${user.wishGames.includes(_id) ? `<button class="game-info-buttons__btn-wishGames" data-status="delete" data-collection="wishGames">Удалить из "Хочу поиграть"</button>`
                         : `<button class="game-info-buttons__btn-wishGames" data-status="add" data-collection="wishGames">Хочу поиграть</button>`}
-                        ${user.playedGames.includes(_id) ? `<button class="game-info-buttons__btn-playedGames" data-status="delete" data-collection="playedGames">Удалить из коллекции</button>`
+                        ${user.playedGames.includes(_id) ? `<button class="game-info-buttons__btn-playedGames" data-status="delete" data-collection="playedGames">Удалить из "Играл"</button>`
                         : `<button class="game-info-buttons__btn-playedGames" data-status="add" data-collection="playedGames">Играл</button>`}
                         <button class="user-info-buttons__btn-createMeeting">Создать встречу</button>
                     </div>
@@ -90,7 +90,7 @@ class GameInfo extends Component {
             btnCreateMeeting = document.getElementsByClassName('user-info-buttons__btn-createMeeting')[0],
 
 
-        user = JSON.parse(localStorage.getItem('user'));
+            user = JSON.parse(localStorage.getItem('user'));
 
         buttonsGameInfoContainer.addEventListener('click', () => {
             const target = event.target,
@@ -140,8 +140,14 @@ class GameInfo extends Component {
         this.modelUsers.addToCollection(userId, gameID, typeCollection).then(user => {
             this.modelUsers.getUser(userId).then(user => {
                 localStorage.setItem('user', JSON.stringify(user));
-                buttonName.dataset.status = 'delete'
-                buttonName.textContent = 'Удалить из коллекции';
+                buttonName.dataset.status = 'delete';
+                if (typeCollection === "playedGames") {
+                    buttonName.textContent = 'Удалить из "Играл"';
+                } else if (typeCollection === "wishGames") {
+                    buttonName.textContent = 'Удалить из "Хочу поиграть"';
+                } else {
+                    buttonName.textContent = 'Удалить из коллекции';
+                }
             });
         });
     }
@@ -152,9 +158,9 @@ class GameInfo extends Component {
             this.modelUsers.getUser(userId).then(user => {
                 localStorage.setItem('user', JSON.stringify(user));
                 buttonName.dataset.status = 'add';
-                if(typeCollection === "playedGames") {
+                if (typeCollection === "playedGames") {
                     buttonName.textContent = 'Играл';
-                } else if(typeCollection === "wishGames"){
+                } else if (typeCollection === "wishGames") {
                     buttonName.textContent = 'Хочу поиграть';
                 } else {
                     buttonName.textContent = 'В мою коллекцию';
