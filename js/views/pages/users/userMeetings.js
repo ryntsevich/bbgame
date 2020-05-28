@@ -14,14 +14,16 @@ class UserMeetings extends Component {
     getData() {
         return new Promise(resolve => this.modelMeeting.getMeetingsList().then(meetings => {
             this.meetings = meetings;
-            this.userMeetings = this.meetings.filter(meeting => meeting.players.includes(this.user._id))
+            this.userMeetings = this.meetings.filter(meeting => meeting.players.includes(this.user._id));
             this.activeM = this.userMeetings.filter(meeting => meeting.status === "Actual");
-            
+
             resolve(meetings);
 
         }));
     }
+
     render(meetings) {
+
         return new Promise(resolve => {
             resolve(`
                 <h1 class="page-title">Мои встречи</h1>
@@ -35,6 +37,7 @@ class UserMeetings extends Component {
             `);
         });
     }
+
     afterRender() {
         this.setActions();
     }
@@ -50,14 +53,12 @@ class UserMeetings extends Component {
 
             switch (true) {
                 case targetClassList.contains('meet-list-actual'):
-                    meetListContainer.getElementsByClassName('active')[0].classList.remove('active');
-                    targetClassList.add('active');
+                    this.setActiveTabs(meetListContainer, targetClassList);
                     this.renderUserMeetings(target.dataset.status, meetList);
                     break;
 
                 case targetClassList.contains('meet-list-closed'):
-                    meetListContainer.getElementsByClassName('active')[0].classList.remove('active');
-                    targetClassList.add('active');
+                    this.setActiveTabs(meetListContainer, targetClassList);
                     this.renderUserMeetings(target.dataset.status, meetList);
                     break;
             };
@@ -78,12 +79,16 @@ class UserMeetings extends Component {
         });
     }
 
+    setActiveTabs(meetListContainer, targetClassList) {
+        meetListContainer.getElementsByClassName('active')[0].classList.remove('active');
+        targetClassList.add('active');
+    }
 
     renderUserMeetings(status, meetList) {
         const filterMeeting = this.userMeetings.filter(meeting => meeting.status === status);
 
         meetList.innerHTML = `
-        ${filterMeeting.map(meeting => this.getMeetingHTML(meeting)).join('\n ')}
+            ${filterMeeting.map(meeting => this.getMeetingHTML(meeting)).join('\n ')}
         `;
     }
 
@@ -97,13 +102,12 @@ class UserMeetings extends Component {
             <div class="meeting" data-id="${meeting._id}">
                 <div class="meeting__title" data-id="${meeting._id}" href="#/meetings/${meeting._id}">${meeting.gameName}</div>
                 <div class="meeting__propertis" data-id="${meeting._id}">
-                <div class="meeting__propertis-a" data-id="${meeting._id}" >${meeting.day}</div>
-                <div class="meeting__propertis-a" data-id="${meeting._id}" >${meeting.place}</div>
+                    <div class="meeting__propertis-a" data-id="${meeting._id}" >${meeting.day}</div>
+                    <div class="meeting__propertis-a" data-id="${meeting._id}" >${meeting.place}</div>
                 </div>
-                </div>
+            </div>
         `;
     }
-
 }
 
 export default UserMeetings;
