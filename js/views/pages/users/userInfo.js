@@ -36,7 +36,7 @@ class UserInfo extends Component {
                 <h1 class="page-title">${user.username}</h1>
                 <div class="user-info">
                     <div class="user-info__img">
-                        <img src="${user.img}" alt="">
+                        <img src="${user.img}" alt="img" width ="200px" heigth="200px">
                     </div>
                     <div class="user-info__about">
                         <div class="user-name item">

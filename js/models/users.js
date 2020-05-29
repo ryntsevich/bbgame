@@ -56,11 +56,12 @@ class Users {
 			const xhr = new XMLHttpRequest();
 
 			xhr.open('POST', 'http://localhost:3000/api/users');
-			xhr.setRequestHeader('Content-Type', 'application/json');
+			// xhr.setRequestHeader('Content-Type', 'multipart/form-data');
 
 			xhr.onload = () => resolve(JSON.parse(xhr.response));
-
-			xhr.send(JSON.stringify(newUser));
+			var formData = new FormData();
+			Object.keys(newUser).forEach(key => { formData.append(key, newUser[key]) });
+			xhr.send(formData);
 		});
 	}
 

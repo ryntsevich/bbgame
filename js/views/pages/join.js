@@ -15,7 +15,7 @@ class SignUp extends Component {
                   <p class="form-signup__title">Регистрация</p>
                   <div class="form-signup__item">
                       <label for="file">Фото для профиля</label>
-                      <input class = "form-sign-img" type="file" name="file" accept="image/*">
+                      <input class = "form-signup-img" type="file" name="file" accept="image/*">
                     </div>
                   <div class="form-signup__item">
                       <label for="name">Имя</label>
@@ -65,6 +65,7 @@ class SignUp extends Component {
 
   setActions() {
     const btnAddUser = document.getElementsByClassName('btn-signup')[0],
+      addImg = document.getElementsByClassName('form-signup-img')[0],
       addNameUser = document.getElementsByClassName('form-signup-name')[0],
       addLoginUser = document.getElementsByClassName('form-signup-login')[0],
       addEmailUser = document.getElementsByClassName('form-signup-email')[0],
@@ -80,10 +81,11 @@ class SignUp extends Component {
       this.changeButtonStatus(addNameUser, addLoginUser, addEmailUser, addPasswordUser, addCityUser, addAgeUser, btnAddUser);
     });
 
-    btnAddUser.addEventListener('click', () => this.addNewUser(addNameUser, addLoginUser, addEmailUser, addPasswordUser, addCityUser, addAgeUser, addGenderUser));
+    btnAddUser.addEventListener('click', () => this.addNewUser(addImg, addNameUser, addLoginUser, addEmailUser, addPasswordUser, addCityUser, addAgeUser, addGenderUser));
   }
 
-  addNewUser(addNameUser, addLoginUser, addEmailUser, addPasswordUser, addCityUser, addAgeUser, addGenderUser) {
+
+  addNewUser(addImg, addNameUser, addLoginUser, addEmailUser, addPasswordUser, addCityUser, addAgeUser, addGenderUser) {
     const newUser = {
       name: addNameUser.value.trim(),
       username: addLoginUser.value.trim(),
@@ -91,7 +93,8 @@ class SignUp extends Component {
       password: addPasswordUser.value.trim(),
       city: addCityUser.value.trim(),
       age: addAgeUser.value.trim(),
-      gender: this.getValueGender(addGenderUser)
+      gender: this.getValueGender(addGenderUser),
+      file: addImg.files[0]
     }
 
     this.modelUsers.addUser(newUser).then(user => this.redirectToUserInfo(user._id));
@@ -104,7 +107,7 @@ class SignUp extends Component {
 
   changeButtonStatus(addNameUser, addLoginUser, addEmailUser, addPasswordUser, addCityUser, addAgeUser, btnAddUser) {
     const obj = [addNameUser, addLoginUser, addEmailUser, addPasswordUser, addCityUser];
-    btnAddUser.disabled = !(obj.every(elem => elem.value.trim()) && addAgeUser.value.length);
+    btnAddUser.disabled = !(addAgeUser.value.length && obj.every(elem => elem.value.trim()));
   }
 
   redirectToUserInfo(id) {
