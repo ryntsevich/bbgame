@@ -171,7 +171,6 @@ body {
   margin-right: 10px;
 }
 .header-container .header .header-user {
-  margin-left: 25px;
   padding: 7px 7px;
 }
 .header-container .header .header-user__img {
@@ -632,4 +631,225 @@ header > a {
 }
 a {
   color: black;
+}
+.error {
+  margin-top: 30px;
+  padding: 20px 40px;
+  font-size: 18px;
+  color: rgba(49, 47, 47, 0.822);
+}
+.error .main {
+  margin-bottom: 15px;
+  font-size: 26px;
+}
+.error p {
+  margin-bottom: 5px;
+}
+@media screen and (max-width: 414px) {
+  body {
+    min-width: 414px;
+  }
+  .content-container {
+    width: 100%;
+    height: 100%;
+  }
+  .page-title {
+    display: none;
+  }
+  .header-container {
+    display: block;
+    height: 100%;
+  }
+  .header-container .header {
+    width: 100%;
+    display: block;
+    font-size: 1.5em;
+  }
+  .header-container .header .header-links__link {
+    width: 100%;
+    height: 2em;
+    display: block;
+    background-color: #0ca39e;
+    margin-right: 0;
+    padding: 10px;
+    border-bottom: 1px solid #e6dbdb66;
+  }
+  .header-container .header-user {
+    margin-left: 0;
+  }
+  .header-container .header-user a {
+    color: #83effb;
+  }
+  .header-container .header-user__img {
+    display: none;
+  }
+  .footer-container {
+    padding: 30px 0;
+    height: 2em;
+  }
+  .form-login-container {
+    display: block;
+    width: 100%;
+    margin-top: 40px;
+  }
+  .form-login-container .form-login {
+    display: block;
+    text-align: center;
+    padding: 20px;
+  }
+  .form-login-container .form-login__title {
+    font-size: 2em;
+  }
+  .form-login-container .form-login .form-elem {
+    width: 100%;
+    height: 4em;
+  }
+  .form-login-container .form-login__btn-login,
+  .form-login-container .form-login__btn-registration {
+    width: 100%;
+    height: 3em;
+    font-size: 1.5em;
+  }
+  input,
+  textarea {
+    height: 4em;
+  }
+  input[type=radio] {
+    width: 50%;
+    height: 30px;
+    margin: 0;
+  }
+  .form-signup-container {
+    display: block;
+    width: 100%;
+  }
+  .form-signup-container .form-signup {
+    display: block;
+    max-width: 100%;
+    padding: 40px;
+    font-size: 20px;
+  }
+  .form-signup-container .form-signup__title {
+    text-align: center;
+    font-size: 2em;
+  }
+  .form-signup-container .form-signup .btn-signup {
+    width: 100%;
+    height: 2em;
+    font-size: 1.2em;
+    margin-top: 30px;
+  }
+  .games {
+    max-width: 414px;
+  }
+  .games-list {
+    grid-template-columns: repeat(1, 100%);
+  }
+  .game-info {
+    display: block;
+    width: 100%;
+  }
+  .game-info__properties {
+    display: block;
+  }
+  .game-info__properties .properties {
+    width: 100%;
+    padding: 0 10px;
+  }
+  .game-info__properties .properties__title {
+    text-align: center;
+    font-size: 1.5em;
+  }
+  .game-info__properties .properties__name {
+    font-size: 1.5em;
+    padding: 0 10px;
+  }
+  .game-info__buttons {
+    width: 100%;
+    padding: 0 20px;
+  }
+  .game-info__buttons button {
+    padding: 5px 5px;
+  }
+  .game-info__buttons button[data-status=add],
+  .game-info__buttons button[data-status=delete],
+  .game-info__buttons .user-info-buttons__btn-createMeeting {
+    width: 100%;
+    height: 2.5em;
+    font-size: 1.2em;
+  }
+  .game-info .description-title {
+    text-align: center;
+    font-size: 1.5em;
+  }
+  .user-info {
+    display: block;
+    width: 100%;
+  }
+  .user-info__about {
+    font-size: 1.3em;
+  }
+  .user-info__buttons {
+    padding: 0 10px;
+    font-size: 1.2em;
+    margin-bottom: 20px;
+  }
+  .user-info-games {
+    width: 100%;
+  }
+  .user-info-games .btn-tab {
+    width: 100%;
+  }
+  .meet-list {
+    width: 100%;
+  }
+  .meet-list .meeting {
+    display: block;
+  }
+  .meet-list .meeting__title {
+    margin-bottom: 20px;
+    font-size: 1.6em;
+  }
+  .meet-list .meeting__propertis {
+    font-size: 1.2em;
+  }
+  .meet-list-buttons {
+    width: 100%;
+  }
+  .meet-list-buttons .meet-list-actual,
+  .meet-list-buttons .meet-list-closed {
+    width: 50%;
+    height: 3em;
+    font-size: 1.2em;
+  }
+  .meet-list-buttons .active {
+    font-size: 1.5em;
+  }
+  .meet {
+    width: 100%;
+  }
+  .meet .meet-propertis {
+    font-size: 1.5em;
+  }
+  .meet .meet-propertis__title {
+    font-size: 1.2em;
+  }
+  .meet .meet-propertis-btn {
+    text-align: center;
+  }
+  .meet .meet-propertis-btn .main,
+  .meet .meet-propertis-btn .btn-join-meet {
+    width: 100%;
+    font-size: 1.2em;
+  }
+  .users-list {
+    width: 100%;
+    margin-top: 30px;
+    padding: 10px;
+  }
+  .users-list .user {
+    width: 100%;
+    font-size: 1.5em;
+    border-left: 1px solid #0ca39e;
+  }
 }

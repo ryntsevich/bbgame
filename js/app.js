@@ -65,11 +65,11 @@ function router() {
         page.render(data).then(html => {
             contentContainer.innerHTML = html;
             page.afterRender();
-        });
+        }) ;
     });
 
-    footer.render().then(html => footerContainer.innerHTML = html);
-}
+        footer.render().then(html => footerContainer.innerHTML = html);
+    }
 
 window.addEventListener('load', router);
-window.addEventListener('hashchange', router);
+    window.addEventListener('hashchange', router);

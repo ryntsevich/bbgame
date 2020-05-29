@@ -47,11 +47,11 @@ class UserEdit extends Component {
                         <div class="user-gender item">
                             <div class="name">Пол</div>
                             <label>
-                                <input class="value gender-edit" type="radio" name="gender" value="Мужской" ${user.gender === 'Мужской' && 'checked'}>
+                                <input class="value" type="radio" name="gender-edit" value="Мужской" ${user.gender === 'Мужской' && 'checked'}>
                                 Мужской
                             </label>
                             <label>
-                                <input class="value gender-edit" type="radio" name="gender" value="Женский" ${user.gender === 'Женский' && 'checked'}>
+                                <input class="value" type="radio" name="gender-edit" value="Женский" ${user.gender === 'Женский' && 'checked'}>
                                 Женский
                             </label>
                         </div>
@@ -78,7 +78,7 @@ class UserEdit extends Component {
             editName = document.getElementsByClassName('name-edit')[0],
             editCity = document.getElementsByClassName('city-edit')[0],
             editAge = document.getElementsByClassName('age-edit')[0],
-            editGender = document.getElementsByClassName('gender-edit');
+            editGender = document.getElementsByName('gender-edit');
 
         btnSaveUser.addEventListener('click', () => this.editUser(editName, editCity, editAge, editGender));
     }

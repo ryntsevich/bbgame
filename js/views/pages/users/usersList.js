@@ -9,7 +9,8 @@ class UsersList extends Component {
     }
 
     getData() {
-        return new Promise(resolve => this.model.getUsersList().then(users => resolve(users)));
+        return new Promise(resolve => this.model.getUsersList().then(users => resolve(users))
+        );
     }
 
     render(users) {
