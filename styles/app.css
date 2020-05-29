@@ -431,6 +431,9 @@ input:hover {
   margin-bottom: 5px;
   cursor: pointer;
 }
+.user-info__buttons .user-info-buttons__btn-cancelUserPage {
+  margin-bottom: 20px;
+}
 .user-info__buttons .user-info-buttons__btn-saveUserPage,
 .user-info__buttons .user-info-buttons__btn-usersMeetings {
   text-align: center;
@@ -650,8 +653,10 @@ a {
     min-width: 414px;
   }
   .content-container {
+    display: block;
     width: 100%;
     height: 100%;
+    padding: 0 10px;
   }
   .page-title {
     display: none;

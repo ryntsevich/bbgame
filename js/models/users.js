@@ -6,10 +6,17 @@ class Users {
 			xhr.open('GET', 'http://localhost:3000/api/users');
 
 			xhr.onload = () => {
+				try {
 					resolve(JSON.parse(xhr.response));
-			};
+				}
+				catch {
 
+					alert('Error');
+					// this.redirectToError()
+				}
+			};
 			xhr.send();
+
 		});
 	}
 
@@ -79,17 +86,17 @@ class Users {
 	}
 
 	editUser(updatedUser) {
-        return new Promise(resolve => {
-            const xhr = new XMLHttpRequest();
+		return new Promise(resolve => {
+			const xhr = new XMLHttpRequest();
 
-            xhr.open('PUT', `http://localhost:3000/api/users/${updatedUser._id}`);
-            xhr.setRequestHeader('Content-Type', 'application/json');
+			xhr.open('PUT', `http://localhost:3000/api/users/${updatedUser._id}`);
+			xhr.setRequestHeader('Content-Type', 'application/json');
 
-            xhr.onload = () => resolve();
+			xhr.onload = () => resolve();
 
-            xhr.send(JSON.stringify(updatedUser));
-        });
-    }
+			xhr.send(JSON.stringify(updatedUser));
+		});
+	}
 }
 
 export default Users;

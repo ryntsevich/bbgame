@@ -14,6 +14,7 @@ class UserEdit extends Component {
             this.user = user;
             localStorage.setItem('user', JSON.stringify(this.user));
             resolve(user);
+
         }));
     }
 
@@ -42,7 +43,7 @@ class UserEdit extends Component {
                         </div>
                         <div class="user-age item">
                             <div class="name">Возраст</div>
-                            <input class="value age-edit" type ="age" value="${user.age}">
+                            <input class="value age-edit" type="number" value="${user.age}">
                         </div>
                         <div class="user-gender item">
                             <div class="name">Пол</div>
@@ -89,7 +90,25 @@ class UserEdit extends Component {
         this.user.age = editAge.value.trim();
         this.user.gender = this.getValueGender(editGender);
 
-        this.modelUsers.editUser(this.user).then(user => this.redirectToUserInfo(this.user._id));
+
+        try {
+            if (!editCity.value.trim()) {
+                throw 'Заполните поле "Город"';
+            }
+            if (!editName.value.trim()) {
+                throw 'Заполните поле "Имя"';
+            }
+            if (!editAge.value.trim()) {
+                throw 'Заполните поле "Возраст"';
+            }
+
+            this.modelUsers.editUser(this.user).then(user => this.redirectToUserInfo(this.user._id));
+        }
+        catch (e) {
+            alert(e);
+        }
+
+
 
     }
 
