@@ -5,16 +5,8 @@ class Users {
 
 			xhr.open('GET', 'http://localhost:3000/api/users');
 
-			xhr.onload = () => {
-				try {
-					resolve(JSON.parse(xhr.response));
-				}
-				catch {
+			xhr.onload = () => resolve(JSON.parse(xhr.response));
 
-					alert('Error');
-					// this.redirectToError()
-				}
-			};
 			xhr.send();
 
 		});

@@ -20,7 +20,6 @@ import MeetingsList from './views/pages/meetings/meetingsList.js';
 import MeetingAdd from './views/pages/meetings/meetingAdd.js';
 import MeetingEdit from './views/pages/meetings/meetingEdit.js';
 import UserEdit from './views/pages/users/userEdit.js';
-import Error from './views/pages/oops.js';
 
 const Routes = {
     '/': Login,
@@ -34,8 +33,7 @@ const Routes = {
     '/meetings/:id': MeetingInfo,
     '/meetings': MeetingsList,
     '/create': MeetingAdd,
-    '/meetings/:id/edit': MeetingEdit,
-    '/error' : Error
+    '/meetings/:id/edit': MeetingEdit
 };
 
 function router() {

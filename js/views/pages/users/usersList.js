@@ -10,7 +10,14 @@ class UsersList extends Component {
 
     getData() {
         return new Promise(resolve => this.model.getUsersList()
-        .then(users => resolve(users))
+            .then(users => {
+                try {
+                    if (!users.length) throw 'Ошибка получения данных!';
+                    resolve(users);
+                } catch (err) {
+                    alert(err);
+                }
+            })
         );
     }
 
