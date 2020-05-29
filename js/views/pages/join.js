@@ -65,7 +65,6 @@ class SignUp extends Component {
 
   setActions() {
     const btnAddUser = document.getElementsByClassName('btn-signup')[0],
-      addImg = document.getElementsByClassName('form-sign-img')[0],
       addNameUser = document.getElementsByClassName('form-signup-name')[0],
       addLoginUser = document.getElementsByClassName('form-signup-login')[0],
       addEmailUser = document.getElementsByClassName('form-signup-email')[0],
@@ -78,16 +77,12 @@ class SignUp extends Component {
 
 
     formContainer.addEventListener('keyup', () => {
-      this.changeButtonStatus(addNameUser, addLoginUser, addEmailUser, addPasswordUser, addCityUser, addAgeUser, addGenderUser, btnAddUser);
+      this.changeButtonStatus(addNameUser, addLoginUser, addEmailUser, addPasswordUser, addCityUser, addAgeUser, btnAddUser);
     });
 
     btnAddUser.addEventListener('click', () => this.addNewUser(addNameUser, addLoginUser, addEmailUser, addPasswordUser, addCityUser, addAgeUser, addGenderUser));
-    // btnAddUser.addEventListener('click', () => this.addNewImg(addImg));
   }
 
-  // addNewImg(addImg) {
-  //   console.log(addImg.value)
-  // }
   addNewUser(addNameUser, addLoginUser, addEmailUser, addPasswordUser, addCityUser, addAgeUser, addGenderUser) {
     const newUser = {
       name: addNameUser.value.trim(),
@@ -109,7 +104,7 @@ class SignUp extends Component {
 
   changeButtonStatus(addNameUser, addLoginUser, addEmailUser, addPasswordUser, addCityUser, addAgeUser, btnAddUser) {
     const obj = [addNameUser, addLoginUser, addEmailUser, addPasswordUser, addCityUser];
-    btnAddUser.disabled = !(addAgeUser.value.length && obj.every(elem => elem.value.trim()));
+    btnAddUser.disabled = !(obj.every(elem => elem.value.trim()) && addAgeUser.value.length);
   }
 
   redirectToUserInfo(id) {
