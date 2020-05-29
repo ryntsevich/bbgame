@@ -22,7 +22,7 @@ class Header extends Component {
                     </a>
                 </div>
                 <div class="header-user">
-                    <img class ="header-user__img" src="images/avatar.jpg" alt="" width="25px" height="25px">
+                    <img class ="header-user__img" src="${user.img}" alt="" width="25px" height="25px">
                     <a class="header-user__nameUser" href="#/users/${user._id}">${user.username}</a>
                 </div>
             </header>
