@@ -38,39 +38,71 @@ body {
 
 .header-container{
   background: @niagara;
-  height: 40px;
+  height: 50px;
   display: flex;  
   justify-content: center; 
 
   .header {
-    width: 800px;
-    display: flex;  
-    justify-content: space-around;
-    align-items: center;
-    font-size: 16px;
+    background-color: @niagara;
+    box-shadow: 1px 1px 4px 0 rgba(0,0,0,.1);
+    // position: fixed;
+    width: 100%;
+    z-index: 3;
 
-    a {
-      color: white;
+    ul {
+      // width: 600px;
+
+
+      li {
+        float: left;
+        padding: 18px 0;
+  
+        a {
+          padding: 5px 5px;
+          color: white;
+          font-size: 1.2em;
+          }
+      }
     }
 
-    a:hover {
-      color: rgba(0, 0, 0, 0.699);
+
+     
+    .menu {
+      clear: none;
+      float: right;
+      max-height: none;
+      margin-right: 100px;
+    }
+    
+    .menu-icon {
+      display: none;
+    }
+    
+
+    .header-user {
+      width: 200px;
+      float: right;
+      margin-right: 125px;
+
+      .header-user__img {
+        float: left;
+        margin: 10px 10px 10px;  
+      }
+
+      .header-user__nameUser {
+        display: block;
+        float: left;
+        font-size: 1.5em;
+        padding: 10px 0;
+        text-decoration: none;
+        color: white;
+      }
     }
 
-    .header-links {
 
-      .header-links__link {
-        margin-right: 10px;
-      }
-  }
 
-  .header-user {
-    padding: 7px 7px;
-
-    &__img {
-      margin: 0 2px -7px 0;
-      margin-top: -5px;
-      }
+    .menu-btn {
+      display: none;
     }
   }
 }
@@ -632,6 +664,111 @@ a {
 }
 
 
+@media screen and (max-width: 600px) {
+
+  .content-container {
+    padding: 0 10px;
+  }
+
+  .header-container {
+    height: 60px;
+
+    .header {
+
+    .header-user {
+        float: left;
+      
+      .header-user__img {
+        display: none;
+      }
+      .header-user__nameUser {
+        padding-left: 20px;
+      }
+    }
+
+    .menu {
+      clear: both;
+      max-height: 0;
+      transition: max-height .2s ease-out;
+      float: right;
+    }
+
+    .menu-icon {
+      cursor: pointer;
+      display: inline-block;
+      float: right;
+      padding: 28px 20px;
+      position: relative;
+      user-select: none;
+
+      .navicon {
+        background: #333;
+        display: block;
+        height: 2px;
+        position: relative;
+        transition: background .2s ease-out;
+        width: 25px;
+      }
+
+      .navicon:before,
+      .navicon:after {
+        background: #333;
+        content: '';
+        display: block;
+        height: 100%;
+        position: absolute;
+        transition: all .2s ease-out;
+        width: 100%;
+        }
+
+        .navicon:before {
+          top: 5px;
+        }
+
+        .navicon:after {
+          top: -5px;
+        }
+    }
+
+    .menu-btn:checked ~ .menu {
+      max-height: 240px;
+    }
+    .menu-btn:checked ~ .menu-icon .navicon {
+      background: transparent;
+    }
+    .menu-btn:checked ~ .menu-icon .navicon:before {
+      transform: rotate(-45deg);
+    }
+    
+    .menu-btn:checked ~ .menu-icon .navicon:after {
+      transform: rotate(45deg);
+    }
+    .menu-btn:checked ~ .menu-icon:not(.steps) .navicon:before,
+    .menu-btn:checked ~ .menu-icon:not(.steps) .navicon:after {
+      top: 0;
+    }
+
+    ul {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      overflow: hidden;
+      background-color: @niagara;
+
+       li {
+         display: block;
+         width: 100%;
+
+         a {
+        display: block;
+        padding: 0 20px;
+        text-decoration: none;
+       }
+      }
+    }
+    }
+  }
+}
 
 
 @media screen and (max-width: 414px) {
@@ -641,9 +778,9 @@ a {
 
   .content-container {
     display: block;
+    padding: 0 10px;
     width: 100%;
     height: 100%;
-    padding: 0 10px;
   }
 
   .page-title {
@@ -651,32 +788,100 @@ a {
   }
 
   .header-container {
-    display: block;
-    height: 100%;
+    height: 60px;
 
     .header {
-      width: 100%;
-      display: block;
-      font-size: 1.5em;
 
-      .header-links__link {
-        width: 100%;
-        height: 2em;
-        display: block;
-        background-color: @niagara;
-        margin-right: 0;
-        padding: 10px;
-        border-bottom: 1px solid #e6dbdb66;
+    .header-user {      
+      .header-user__img {
+        display: none;
+      }
+      .header-user__nameUser {
+        padding-left: 20px;
       }
     }
-    .header-user {
-      margin-left: 0;
-      a {
-        color: #83effb;
+    .menu {
+      clear: both;
+      max-height: 0;
+      transition: max-height .2s ease-out;
+      float: right;
+    }
+
+    .menu-icon {
+      cursor: pointer;
+      display: inline-block;
+      float: right;
+      padding: 28px 20px;
+      position: relative;
+      user-select: none;
+
+      .navicon {
+        background: #333;
+        display: block;
+        height: 2px;
+        position: relative;
+        transition: background .2s ease-out;
+        width: 25px;
       }
-      &__img {
-      display: none;
+
+      .navicon:before,
+      .navicon:after {
+        background: #333;
+        content: '';
+        display: block;
+        height: 100%;
+        position: absolute;
+        transition: all .2s ease-out;
+        width: 100%;
+        }
+
+        .navicon:before {
+          top: 5px;
+        }
+
+        .navicon:after {
+          top: -5px;
+        }
+    }
+
+    .menu-btn:checked ~ .menu {
+      max-height: 240px;
+    }
+    .menu-btn:checked ~ .menu-icon .navicon {
+      background: transparent;
+    }
+    .menu-btn:checked ~ .menu-icon .navicon:before {
+      transform: rotate(-45deg);
+    }
+    
+    .menu-btn:checked ~ .menu-icon .navicon:after {
+      transform: rotate(45deg);
+    }
+    .menu-btn:checked ~ .menu-icon:not(.steps) .navicon:before,
+    .menu-btn:checked ~ .menu-icon:not(.steps) .navicon:after {
+      top: 0;
+    }
+
+    ul {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      overflow: hidden;
+      background-color: @niagara;
+
+       li {
+         display: block;
+         width: 100%;
+
+
+
+         a {
+        display: block;
+        padding: 0 20px;
+        text-decoration: none;
+       }
       }
+    }
     }
   }
 
@@ -813,7 +1018,6 @@ input[type=radio] {
 
   &__buttons {
     padding: 0 10px;
-    // height: 2em;
     font-size: 1.2em;
     margin-bottom: 20px;
   }
@@ -821,6 +1025,7 @@ input[type=radio] {
 
 .user-info-games {
   width: 100%;
+  margin-bottom: 30px;
 
   .btn-tab {
     width: 100%;

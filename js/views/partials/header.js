@@ -6,26 +6,28 @@ class Header extends Component {
         return new Promise(resolve => {
             const user = JSON.parse(localStorage.getItem('user'));
             resolve(`
-            <header class="header">
-                <div class="header-links">
-                    <a class="header-links__link ${!resource ? 'active' : ''}" href="/#/">
+        <header class="header">
+            <div class ="header-user">
+                <img class ="header-user__img" src="${user.img}" alt="img" width ="23px" heigth="23px">
+                <a class="header-user__nameUser" href="#/users/${user._id}">${user.username}</a>
+            </div>
+            <input class="menu-btn" type="checkbox" id="menu-btn">
+            <label class="menu-icon" for="menu-btn"><span class="navicon"></span></label>
+                <ul class="menu">
+                   <li><a  href="/#/">
                         Sign In
-                    </a>
-                    <a class="header-links__link ${resource === 'games' ? 'active' : ''}" href="/#/games">
+                    </a></li>
+                    <li><a  href="/#/games">
                         Все игры
-                    </a>
-                    <a class="header-links__link ${resource === 'users' ? 'active' : ''}" href="/#/users">
+                    </a></li>
+                    <li><a  href="/#/users">
                         Пользователи
-                    </a>
-                    <a class="header-links__link ${resource === 'meetings' ? 'active' : ''}" href="/#/meetings">
+                    </a></li>
+                    <li><a  href="/#/meetings">
                         Встречи
-                    </a>
-                </div>
-                <div class="header-user">
-                    <img class ="header-user__img" src="${user.img}" alt="" width="25px" height="25px">
-                    <a class="header-user__nameUser" href="#/users/${user._id}">${user.username}</a>
-                </div>
-            </header>
+                    </a></li>
+                </ul>
+        </header>
             `);
         });
     }
