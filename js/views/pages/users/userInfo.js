@@ -36,7 +36,7 @@ class UserInfo extends Component {
                 <h1 class="page-title">${user.username}</h1>
                 <div class="user-info">
                     <div class="user-info__img">
-                        <img src="${user.img}" alt="img" width ="200px" heigth="200px">
+                        <img src="${user.img}" alt="img">
                     </div>
                     <div class="user-info__about">
                         <div class="user-name item">
@@ -145,7 +145,7 @@ class UserInfo extends Component {
         return `
             <div class="game" data-id="${game._id}">
                 <div class="game__img" data-id="${game._id}">
-                    <img class="game__img" data-id="${game._id}" src="${game.img}" alt="namegame" width ="100px" heigth="100px"> 
+                    <img class="game__img img" data-id="${game._id}" src="${game.img}" alt="namegame"> 
                 </div>
             <div class="game__title" data-id="${game._id}">${game.title}</div>
             </div>

@@ -8,7 +8,7 @@ class Header extends Component {
             resolve(`
         <header class="header">
             <div class ="header-user">
-                <img class ="header-user__img" src="${user.img}" alt="img" width ="23px" heigth="23px">
+                <img class ="header-user__img" src="${user.img}" alt="img">
                 <a class="header-user__nameUser" href="#/users/${user._id}">${user.username}</a>
             </div>
             <input class="menu-btn" type="checkbox" id="menu-btn">

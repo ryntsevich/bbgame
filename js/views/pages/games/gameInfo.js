@@ -34,7 +34,7 @@ class GameInfo extends Component {
                 <div class="game-info">
                     <div class="game-info__properties" data-id="${_id}">
                         <div class="properties__img" data-id="${_id}">
-                            <img data-id="${_id}" src="${img}" alt="">
+                            <img data-id="${_id}" src="${img}">
                         </div>
                         <div class="properties">
                             <div class="properties__title ">Характеристики</div>

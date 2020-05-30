@@ -53,7 +53,7 @@ class GamesList extends Component {
         return `
             <div class="game gameList" data-id="${game._id}">
                 <div class="game__img" data-id="${game._id}">
-                    <img class="game__img" data-id="${game._id}" src="${game.img}" alt="">
+                    <img class="game__img" data-id="${game._id}" src="${game.img}" alt="img">
                 </div>
             <div class="game__title" data-id="${game._id}">${game.title}</div>
             </div>

@@ -162,7 +162,7 @@ body {
 }
 .header-container .header ul li {
   float: left;
-  padding: 18px 0;
+  padding: 14px 0;
 }
 .header-container .header ul li a {
   padding: 5px 5px;
@@ -184,6 +184,8 @@ body {
   margin-right: 125px;
 }
 .header-container .header .header-user .header-user__img {
+  width: 23px;
+  height: 23px;
   float: left;
   margin: 10px 10px 10px;
 }
@@ -359,6 +361,10 @@ input:hover {
   width: 400px;
   padding: 0 40px;
 }
+.game-info__properties .properties__img img {
+  width: 200px;
+  height: 200px;
+}
 .game-info__properties .properties {
   width: 400px;
   padding-right: 40px;
@@ -425,6 +431,8 @@ input:hover {
   width: 600px;
 }
 .user-info__img {
+  width: 200px;
+  height: 200px;
   text-align: center;
   padding: 10px 5px;
 }
@@ -494,6 +502,10 @@ input:hover {
 .user-info-games .games {
   border: 1px solid #ccc;
   border-top: none;
+}
+.user-info-games .games img {
+  width: 100px;
+  height: 100px;
 }
 .user-info-games .games .game__img:hover {
   transform: scale(1.125);
