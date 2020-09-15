@@ -12,3 +12,8 @@ Following technologies and tool using:
 - Passport.js
 - MongoDB
 - Multer
+
+
+## Running
+
+Для запуска приложения можно использовать любой Web-server.
